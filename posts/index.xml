@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - cx玄烨0&#39; Blog</title>
+        <link>https://noobmid.github.io/posts/</link>
+        <description>All Posts | cx玄烨0&#39; Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>18959206467@163.com (cx玄烨0)</managingEditor>
+            <webMaster>18959206467@163.com (cx玄烨0)</webMaster><lastBuildDate>Mon, 22 Aug 2022 22:34:00 &#43;0800</lastBuildDate><atom:link href="https://noobmid.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Golang体系</title>
+    <link>https://noobmid.github.io/golang%E4%BD%93%E7%B3%BB/</link>
+    <pubDate>Mon, 22 Aug 2022 22:34:00 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/golang%E4%BD%93%E7%B3%BB/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Golang</title>
+    <link>https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/</link>
+    <pubDate>Sun, 21 Aug 2022 00:38:10 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>
