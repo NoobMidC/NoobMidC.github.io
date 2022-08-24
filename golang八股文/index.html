@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Golang - cx玄烨0&#39; Blog</title><meta name="Description" content="专注于golang, 云原生开发"><meta property="og:title" content="Golang" />
+        <title>Golang八股文 - cx玄烨0&#39; Blog</title><meta name="Description" content="专注于golang, 云原生开发"><meta property="og:title" content="Golang八股文" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" /><meta property="og:image" content="https://noobmid.github.io/logo.png"/><meta property="article:section" content="posts" />
@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://noobmid.github.io/logo.png"/>
 
-<meta name="twitter:title" content="Golang"/>
+<meta name="twitter:title" content="Golang八股文"/>
 <meta name="twitter:description" content=""/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -25,12 +25,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Golang",
+        "headline": "Golang八股文",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/golang%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  2758 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  9645 ,
         "url": "https:\/\/noobmid.github.io\/golang%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-21T00:38:10+08:00","dateModified": "2022-08-21T00:38:10+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -107,10 +107,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-21">2022-08-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2758 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;<span id="/golang%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Golang">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-21">2022-08-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;9645 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;20 minutes&nbsp;<span id="/golang%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Golang八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
@@ -120,26 +120,54 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#基础篇">基础篇</a>
+    <li><a href="#基础数据结构">基础数据结构</a>
       <ul>
         <li><a href="#1-go的指针和c的指针">1. <strong>go的指针和c的指针</strong></a></li>
         <li><a href="#2-string的底层结构">2. String的底层结构</a></li>
         <li><a href="#3slice和array的区别和底层结构">3.slice和array的区别和底层结构</a></li>
         <li><a href="#4-map底层结构">4. Map底层结构</a></li>
-        <li><a href="#4-new-和make的区别">4. new 和make的区别</a></li>
-        <li><a href="#5struct能不能比较">5.struct能不能比较</a></li>
-        <li><a href="#6-defer">6. defer</a></li>
-        <li><a href="#7-init函数">7. init函数</a></li>
-        <li><a href="#8包的循环引用">8.包的循环引用</a></li>
-        <li><a href="#9-select">9. SELECT</a></li>
+        <li><a href="#5-channel-底层结构">5. Channel 底层结构</a></li>
+        <li><a href="#6-interface">6. interface</a></li>
+        <li><a href="#7-reflect">7. reflect</a></li>
+        <li><a href="#8-new-和make的区别">8. new 和make的区别</a></li>
+        <li><a href="#9struct能不能比较">9.struct能不能比较</a></li>
+        <li><a href="#10-defer">10. defer</a></li>
+        <li><a href="#11-init函数">11. init函数</a></li>
+        <li><a href="#12包的循环引用">12.包的循环引用</a></li>
+        <li><a href="#13-select">13. SELECT</a></li>
       </ul>
     </li>
-    <li><a href="#进阶">进阶</a></li>
+    <li><a href="#进阶原理">进阶原理</a>
+      <ul>
+        <li><a href="#1-gmp模型和golang调度原理">1. GMP模型和golang调度原理</a></li>
+        <li><a href="#2-垃圾回收gc">2. 垃圾回收(GC)</a>
+          <ul>
+            <li><a href="#垃圾回收常用方法">垃圾回收常用方法</a></li>
+            <li><a href="#golang的gc策略">GOLANG的GC策略</a>
+              <ul>
+                <li><a href="#三色标记清扫法">三色标记清扫法</a></li>
+                <li><a href="#没有stw的三色标记法">没有STW的三色标记法</a></li>
+                <li><a href="#屏障保护">屏障保护</a></li>
+              </ul>
+            </li>
+            <li><a href="#gc触发机制">GC触发机制</a></li>
+            <li><a href="#gc细节">GC细节</a>
+              <ul>
+                <li><a href="#并发垃圾收集">并发垃圾收集</a></li>
+              </ul>
+            </li>
+            <li><a href="#gc-如何调优"><strong>GC</strong> 如何调优</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-内存模型和内存管理">3. 内存模型和内存管理</a></li>
+        <li><a href="#4-并发和sync包">4. 并发和sync包</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="golang-八股文">Golang 八股文</h1>
 <hr>
-<h2 id="基础篇">基础篇</h2>
+<h2 id="基础数据结构">基础数据结构</h2>
 <h3 id="1-go的指针和c的指针">1. <strong>go的指针和c的指针</strong></h3>
 <p>​		相同点:</p>
 <ul>
@@ -148,7 +176,7 @@
 <p>​		不同点:</p>
 <ul>
 <li>
-<p>​	 数组名和数组首地址. <strong>c语言</strong>中arr、&amp;arr[0]为数组的首个<strong>元素</strong>地址,单位偏移量为元素大小; &amp;arr为<strong>数组</strong>的首地址,单位偏移量为数组大小. <strong>golang</strong>中&amp;arr[0]和&amp;arr与c语言中相同, 但是arr表示为整个数组的值.</p>
+<p>数组名和数组首地址. <strong>c语言</strong>中arr、&amp;arr[0]为数组的首个<strong>元素</strong>地址,单位偏移量为元素大小; &amp;arr为<strong>数组</strong>的首地址,单位偏移量为数组大小. <strong>golang</strong>中&amp;arr[0]和&amp;arr与c语言中相同, 但是arr表示为整个数组的值.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -167,7 +195,9 @@
 </div>
 </div></li>
 <li>
-<p>​    指针运算.   <strong>c语言</strong>中指针本质为无符号整数,代表内存地址, 可以进行加减运算.    <strong>Golang</strong>中指针为 <code>*uint32</code>类型非数字,不可以加减运算.</p>
+<p>指针运算.   <strong>c语言</strong>中指针本质为无符号整数,代表内存地址, 可以进行加减运算.    <strong>Golang</strong>中指针为 <code>*uint32</code>类型非数字,不可以加减运算.</p>
+</li>
+</ul>
 <blockquote>
 <p>Go 标准库中提供了一个 <code>unsafe</code> 包用于编译阶段绕过 Go 语言的类型系统，直接操作内存</p>
 <p><code>uintptr</code> : Go 的内置类型。是一个无符号整数，用来存储地址，支持数学运算。常与 <code>unsafe.Pointer</code> 配合做指针运算</p>
@@ -175,8 +205,9 @@
 <p><code>unsafe.Sizeof</code> : 返回操作数在内存中的字节大小，参数可以是任意类型的表达式，例如 fmt.Println(unsafe.Sizeof(uint32(0)))的结果为 4</p>
 <p><code>unsafe.Offsetof</code> : 函数的参数必须是一个字段 x.f，然后返回 f 字段相对于 x 起始地址的偏移量，用于计算结构体成员的偏移量</p>
 </blockquote>
-</li>
-</ul>
+<blockquote>
+<p>golang中<strong>不</strong>能被寻址的类型:(不可变的，临时结果和不安全的。)  常量、字符串、函数或方法、map中的元素&hellip;</p>
+</blockquote>
 <h3 id="2-string的底层结构">2. String的底层结构</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -200,6 +231,7 @@
         data-sizes="auto"
         alt="https://raw.githubusercontent.com/noobmid/pics/main/string%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84.png"
         title="string底层结构" /></p>
+<p>本质为byte类型的数组</p>
 <h3 id="3slice和array的区别和底层结构">3.slice和array的区别和底层结构</h3>
 <p>​	array 为定长数组, slice为不定长数组</p>
 <ul>
@@ -243,10 +275,34 @@
 <p>函数传递</p>
 <p>当切片和数组作为参数在函数（func）中传递时，数组传递的是值，而切片传递的是指针。因此当传入的切片在函数中被改变时，函数外的切片也会同时改变。相同的情况，函数外的数组则不会发生任何变化。</p>
 </li>
+<li>
+<p>nil切片和空切片最大的区别在于<strong>指向的数组引用地址是不一样的</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/640.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/640.png, https://raw.githubusercontent.com/noobmid/pics/main/640.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/640.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/640.png"
+        title="图片" /></p>
+<ul>
+<li>
+<p><strong>所有的空切片指向的数组引用地址都是一样的</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824105030840.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824105030840.png, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824105030840.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824105030840.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824105030840.png"
+        title="图片" /></p>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="4-map底层结构">4. Map底层结构</h3>
-<p>用于存储一系列无序的键值对</p>
-<p>Go语言采用的是哈希查找表，并且使用链表解决哈希冲突</p>
+<p>用于存储一系列无序的键值对,<strong>hashmap</strong>作为底层实现</p>
+<p>基本数据结构:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -283,8 +339,8 @@
 </span><span class="c1"></span><span class="kd">type</span> <span class="nx">hmap</span> <span class="kd">struct</span> <span class="p">{</span>
  <span class="nx">count</span>     <span class="kt">int</span>       <span class="c1">//元素个数
 </span><span class="c1"></span> <span class="nx">flags</span>     <span class="kt">uint8</span>     <span class="c1">//标记位
-</span><span class="c1"></span> <span class="nx">B</span>         <span class="kt">uint8</span>     <span class="c1">//buckets的对数 log_2
-</span><span class="c1"></span> <span class="nx">noverflow</span> <span class="kt">uint16</span>    <span class="c1">//overflow的bucket的近似数
+</span><span class="c1"></span> <span class="nx">B</span>         <span class="kt">uint8</span>     <span class="c1">//buckets的对数, 说明包含2^B个bucket
+</span><span class="c1"></span> <span class="nx">noverflow</span> <span class="kt">uint16</span>    <span class="c1">//溢出的bucket的个数
 </span><span class="c1"></span> <span class="nx">hash0</span>     <span class="kt">uint32</span>    <span class="c1">//hash种子
 </span><span class="c1"></span> <span class="nx">buckets</span>    <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">//指向buckets数组的指针，数组个数为2^B
 </span><span class="c1"></span> <span class="nx">oldbuckets</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">//扩容时使用，buckets长度是oldbuckets的两倍
@@ -295,13 +351,13 @@
 <span class="c1">//当map的key和value都不是指针，并且size都小于128字节的情况下，会把 bmap 标记为不含指针，这样可以避免gc时扫描整个hmap。但是，我们看bmap其实有一个overflow的字段，是指针类型的，破坏了bmap不含指针的设想，这时会把overflow移动到extra字段来。
 </span><span class="c1"></span><span class="kd">type</span> <span class="nx">mapextra</span> <span class="kd">struct</span> <span class="p">{</span>
  <span class="nx">overflow</span>    <span class="o">*</span><span class="p">[]</span><span class="o">*</span><span class="nx">bmap</span>
- <span class="nx">oldoverflow</span> <span class="o">*</span><span class="p">[]</span><span class="o">*</span><span class="nx">bmap</span>
- <span class="nx">nextOverflow</span> <span class="o">*</span><span class="nx">bmapx</span>
-<span class="p">}</span>
+ <span class="nx">oldoverflow</span> <span class="o">*</span><span class="p">[]</span><span class="o">*</span><span class="nx">bmap</span>  <span class="c1">//用于扩容
+</span><span class="c1"></span> <span class="nx">nextOverflow</span> <span class="o">*</span><span class="nx">bmapx</span>  <span class="c1">//prealloc的地址
+</span><span class="c1"></span><span class="p">}</span>
 
 <span class="c1">// bucket
 </span><span class="c1"></span><span class="kd">type</span> <span class="nx">bmap</span> <span class="kd">struct</span> <span class="p">{</span>
- <span class="nx">tophash</span> <span class="p">[</span><span class="nx">bucketCnt</span><span class="p">]</span><span class="kt">uint8</span> <span class="c1">//bucketCnt = 8
+ <span class="nx">tophash</span> <span class="p">[</span><span class="nx">bucketCnt</span><span class="p">]</span><span class="kt">uint8</span> <span class="c1">//bucketCnt = 8,用于记录8个key哈希值的高8位，这样在寻找对应key的时候可以更快，不必每次都对key做全等判断
 </span><span class="c1"></span> <span class="c1">// keys     [8]keytype
 </span><span class="c1"></span> <span class="c1">// values   [8]valuetype
 </span><span class="c1"></span> <span class="c1">// pad      uintptr
@@ -309,7 +365,377 @@
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="4-new-和make的区别">4. new 和make的区别</h3>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg, https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg"
+        title="img" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg, https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg"
+        title="img" /></p>
+<p>​																				hmap结构图</p>
+<ul>
+<li>如何扩容</li>
+</ul>
+<p>​		触发条件: 1. 装填因子大于6.5(装填因子为2^B); 2. overflow bucket 太多</p>
+<p>​		解决办法:</p>
+<ol>
+<li>
+<p>双倍扩容:扩容采取了一种称为“渐进式”地方式，原有的 key 并不会一次性搬迁完毕，每次最多只会搬迁2 个 bucket.(条件1)</p>
+</li>
+<li>
+<p>等量扩容:重新排列，极端情况下，重新排列也解决不了，map成了链表，性能大大降低，此时哈希种子 hash0 的设置，可以降低此类极端场景的发生。(条件2)</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>赋值操作</p>
+<ol>
+<li>
+<p>在查找key之前，会做异常检测，校验map是否未初始化，或正在并发写操作，如果存在，则抛出异常：（这就是为什么map 并发写回panic的原因）</p>
+</li>
+<li>
+<p>需要计算key 对应的hash 值，如果buckets 为空（初始化的时候小于一定长度的map 不会初始化数据）还需要初始化一个bucket</p>
+</li>
+<li>
+<p>通过hash 值，获取对应的bucket。如果map 还在迁移数据，还需要在oldbuckets中找对应的bucket，并搬迁到新的bucket。</p>
+</li>
+<li>
+<p>拿到bucket之后，还需要按照链表方式一个一个查，找到对应的key， 可能是已经存在的key，也可能需要新增。</p>
+</li>
+<li>
+<p>插入数据前，会先检查数据太多了，需要扩容，如果需要扩容，那就从第③开始拿到新的bucket，并查找对应的位置。</p>
+</li>
+<li>
+<p>如果没有空的位置，那就需要在链表后追加一个bucket，拿到kv</p>
+</li>
+<li>
+<p>最后更新tophash 和 key 的字面值, 并解除hashWriting 约束</p>
+</li>
+</ol>
+</li>
+<li>
+<p>数据迁移</p>
+<ol>
+<li>先要判断当前bucket是不是已经转移。 (oldbucket 标识需要搬迁的bucket 对应的位置)</li>
+<li>如果没有被转移，那就要迁移数据了。数据迁移时，可能是迁移到大小相同的buckets上，也可能迁移到2倍大的buckets上。这里xy 都是标记目标迁移位置的标记：x 标识的是迁移到相同的位置，y 标识的是迁移到2倍大的位置上。</li>
+<li>确定bucket位置后，需要按照kv 一条一条做迁移。（目的就是清除空闲的kv）</li>
+</ol>
+</li>
+<li>
+<p>数据查找</p>
+</li>
+</ul>
+<p>​	Go语言中 map采用的是<strong>哈希查找表</strong>，由一个 key 通过哈希函数得到哈希值，64 位系统中就生成一个64bit 的哈希值，由这个哈希值将 key 对应到不同的桶bucket中，当有多个哈希映射到相同的的桶中时，使用链表解决哈希冲突。key 经过 hash 后共64 位，根 据 hmap中 B的值，计算它到底要落在哪个桶时，桶的数量为2^B，如 B=5，那么用64 位最后5 位表示第几号桶，在用 hash 值的高8 位确定在 bucket 中的存储位置，当前 bmap中的 bucket 未找到，则查询对应的 overflow bucket，对应位置有数据则对比完整的哈希值，确定是否是要查找的数据。如果两个不同的 key 落在的同一个桶上，hash 冲突使用链表法接近，遍历 bucket 中的 key ;如果当前处于 map进 行了扩容，处于数据搬移状态，则优先从 oldbuckets 查找。</p>
+<ol>
+<li>根据key计算出hash值。</li>
+<li>如果存在old table, 首先在old table中查找，如果找到的bucket已经evacuated，转到步骤3。 反之，返回其对应的value。</li>
+<li>在new table中查找对应的value。</li>
+</ol>
+<h3 id="5-channel-底层结构">5. Channel 底层结构</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">hchan</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">qcount</span>   <span class="kt">uint</span>           <span class="c1">// 队列中的数据个数
+</span><span class="c1"></span>  <span class="nx">dataqsiz</span> <span class="kt">uint</span>           <span class="c1">// 环形队列的大小，channel本身是一个环形队列
+</span><span class="c1"></span>  <span class="nx">buf</span>      <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// 存放实际数据的指针，用unsafe.Pointer存放地址，为了避免gc
+</span><span class="c1"></span>  <span class="nx">elemsize</span> <span class="kt">uint16</span> 
+  <span class="nx">closed</span>   <span class="kt">uint32</span> <span class="c1">// 标识channel是否关闭
+</span><span class="c1"></span>  <span class="nx">elemtype</span> <span class="o">*</span><span class="nx">_type</span> <span class="c1">// 数据 元素类型
+</span><span class="c1"></span>  <span class="nx">sendx</span>    <span class="kt">uint</span>   <span class="c1">// send的 index
+</span><span class="c1"></span>  <span class="nx">recvx</span>    <span class="kt">uint</span>   <span class="c1">// recv 的 index
+</span><span class="c1"></span>  <span class="nx">recvq</span>    <span class="nx">waitq</span>  <span class="c1">// 阻塞在 recv 的队列
+</span><span class="c1"></span>  <span class="nx">sendq</span>    <span class="nx">waitq</span>  <span class="c1">// 阻塞在 send 的队列
+</span><span class="c1"></span>  <span class="nx">lock</span> <span class="nx">mutex</span>  <span class="c1">// 锁 
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>channel本身是一个<strong>环形缓冲区</strong>，数据存放到堆上面，channel的同步是通过锁实现的，并不是想象中的lock-free的方式，channel中有两个队列，一个是发送阻塞队列，一个是接收阻塞队列。当向一个已满的channel发送数据会被阻塞，此时发送协程会被添加到sendq中，同理，当向一个空的channel接收数据时，接收协程也会被阻塞，被置入recvq中。</p>
+</blockquote>
+<p>​					 		<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png"
+        title="ringbuf 实现" /></p>
+<ol>
+<li>创建channel
+<ol>
+<li>
+<p>缓冲区大小为0: 只需要分配hchansize大小的内存就ok;</p>
+</li>
+<li>
+<p>缓冲区大小不为0，且channel的类型不包含指针:   buf为hchanSize+元素大小*元素个数的连续内存</p>
+</li>
+<li>
+<p>缓冲区大小不为0，且channel的类型包含指针，则不能简单的根据元素的大小去申请内存，需要通过mallocgc去分配内存(即内存逃逸)</p>
+</li>
+<li>
+<p>channel特性</p>
+<pre><code>      1. 给一个 nil channel 发送数据，造成永远阻塞
+      2. 从一个 nil channel 接收数据，造成永远阻塞
+      3. 关闭一个 nil channel 将会发生 panic
+      4. 给一个已经关闭的 channel 发送数据，引起 panic
+</code></pre>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png"
+        title="图片" /></p>
+<ul>
+<li>
+<p>当 <code>c.closed != 0</code> 则为通道关闭，此时执行写，源码提示直接 panic，输出的内容就是上面提到的 <code>&quot;send on closed channel&quot;</code>。</p>
+<pre><code>    1. 从一个已经关闭的 channel 接收数据，如果缓冲区中为空，则返回一个零值
+</code></pre>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png"
+        title="图片" /></p>
+<ul>
+<li>
+<p><code>c.closed != 0 &amp;&amp; c.qcount == 0</code> 指通道已经关闭，且缓存为空的情况下（已经读完了之前写到通道里的值）</p>
+</li>
+<li>
+<p>如果接收值的地址 <code>ep</code> 不为空</p>
+</li>
+<li>
+<ul>
+<li>
+<p>那接收值将获得是一个<strong>该类型的零值</strong></p>
+</li>
+<li>
+<p><code>typedmemclr</code> 会<strong>根据类型清理</strong>相应地址的内存</p>
+</li>
+<li>
+<p>这就解释了上面代码为什么关闭的 <code>chan</code> 会返回对应类型的零值</p>
+<pre><code>  1. 无缓冲的 channel 是同步的，而有缓冲的 channel 是非同步的
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="6-interface">6. interface</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// interface 分为空接口和非空接口，分别用eface 和 iface实现。
+</span><span class="c1">// eface
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">eface</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">_type</span> <span class="o">*</span><span class="nx">_type</span>
+    <span class="nx">data</span>  <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">//指向数据的数据指针
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">//_type 定义
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">_type</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">size</span>       <span class="kt">uintptr</span>  <span class="c1">// 类型的大小
+</span><span class="c1"></span>    <span class="nx">ptrdata</span>    <span class="kt">uintptr</span>  <span class="c1">// size of memory prefix holding all pointers
+</span><span class="c1"></span>    <span class="nx">hash</span>       <span class="kt">uint32</span>   <span class="c1">// 类型的Hash值
+</span><span class="c1"></span>    <span class="nx">tflag</span>      <span class="nx">tflag</span>    <span class="c1">// 类型的Tags 
+</span><span class="c1"></span>    <span class="nx">align</span>      <span class="kt">uint8</span>    <span class="c1">// 结构体内对齐
+</span><span class="c1"></span>    <span class="nx">fieldalign</span> <span class="kt">uint8</span>    <span class="c1">// 结构体作为field时的对齐
+</span><span class="c1"></span>    <span class="nx">kind</span>       <span class="kt">uint8</span>    <span class="c1">// 类型编号 定义于runtime/typekind.go
+</span><span class="c1"></span>    <span class="nx">alg</span>        <span class="o">*</span><span class="nx">typeAlg</span> <span class="c1">// 类型元方法 存储hash和equal两个操作。map key便使用key的_type.alg.hash(k)获取hash值
+</span><span class="c1"></span>    <span class="nx">gcdata</span>     <span class="o">*</span><span class="kt">byte</span>    <span class="c1">// GC相关信息
+</span><span class="c1"></span>    <span class="nx">str</span>        <span class="nx">nameOff</span>  <span class="c1">// 类型名字的偏移    
+</span><span class="c1"></span>    <span class="nx">ptrToThis</span>  <span class="nx">typeOff</span>
+<span class="p">}</span>
+
+<span class="c1">// iface
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">iface</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">tab</span>  <span class="o">*</span><span class="nx">itab</span>
+    <span class="nx">data</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+<span class="p">}</span>
+<span class="c1">// 非空接口的类型信息
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">itab</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">inter</span>  <span class="o">*</span><span class="nx">interfacetype</span>    <span class="c1">// 接口定义的类型信息
+</span><span class="c1"></span>    <span class="nx">_type</span>  <span class="o">*</span><span class="nx">_type</span>            <span class="c1">// 接口实际指向值的类型信息
+</span><span class="c1"></span>    <span class="nx">link</span>   <span class="o">*</span><span class="nx">itab</span>  
+    <span class="nx">bad</span>    <span class="kt">int32</span>
+    <span class="nx">inhash</span> <span class="kt">int32</span>
+    <span class="nx">fun</span>    <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="kt">uintptr</span>       <span class="c1">// 接口方法实现列表，即函数地址列表，按字典序排序
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">// 非空接口类型，接口定义，包路径等。
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">interfacetype</span> <span class="kd">struct</span> <span class="p">{</span>
+   <span class="nx">typ</span>     <span class="nx">_type</span>
+   <span class="nx">pkgpath</span> <span class="nx">name</span>
+   <span class="nx">mhdr</span>    <span class="p">[]</span><span class="nx">imethod</span>      <span class="c1">// 接口方法声明列表，按字典序排序
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">// 接口的方法声明 
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">imethod</span> <span class="kd">struct</span> <span class="p">{</span>
+   <span class="nx">name</span> <span class="nx">nameOff</span>          <span class="c1">// 方法名
+</span><span class="c1"></span>   <span class="nx">ityp</span> <span class="nx">typeOff</span>         <span class="c1">// 描述方法参数返回值等细节
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>非空interface与eface不同的，所有空interface的结构是一样的，而非空interface每个都不一样，因为彼此定义的方法可以不一样的，所以相对eface，iface的定义复杂多。</p>
+</blockquote>
+<h3 id="7-reflect">7. reflect</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">t</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">stru</span><span class="p">).</span><span class="nf">Elem</span><span class="p">()</span>
+<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">t</span><span class="p">.</span><span class="nf">NumField</span><span class="p">();</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+  			<span class="c1">// 获取Tag
+</span><span class="c1"></span>        <span class="nx">t</span><span class="p">.</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Tag</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;json&#34;</span><span class="p">),</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Tag</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;otherTag&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">//reflect.TypeOf(stru).Elem()获取指针指向的值对应的结构体内容。
+</span><span class="c1">//NumField()可以获得该结构体的含有几个字段。
+</span><span class="c1">//遍历结构体内的字段，通过t.Field(i).Tag.Get(&#34;json&#34;)可以获取到tag为json的字段。
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><code>json</code>包里不能导出私有变量的<code>tag</code>是因为<code>json</code>包里认为私有变量为不可导出的<code>Unexported</code>，所以<strong>跳过获取</strong>名为<code>json</code>的<code>tag</code>的内容</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//1. 类型识别
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">data</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">=</span> <span class="s">&#34;hello&#34;</span>
+<span class="nx">strValue</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s is string type\n&#34;</span><span class="p">,</span> <span class="nx">strValue</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">//2. 类型获取
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">str</span> <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;hello&#34;</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span>
+
+<span class="c1">//3. 类型判断
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">typeJudge</span><span class="p">(</span><span class="nx">x</span> <span class="kd">interface</span><span class="p">{})</span>  <span class="p">{</span>
+	<span class="k">switch</span> <span class="nx">x</span><span class="p">.(</span><span class="kd">type</span><span class="p">){</span>
+	<span class="k">case</span> <span class="kt">int</span><span class="p">,</span><span class="kt">int8</span><span class="p">,</span><span class="kt">int64</span><span class="p">,</span><span class="kt">int16</span><span class="p">,</span><span class="kt">int32</span><span class="p">,</span><span class="kt">uint</span><span class="p">,</span><span class="kt">uint8</span><span class="p">,</span><span class="kt">uint16</span><span class="p">,</span><span class="kt">uint32</span><span class="p">,</span><span class="kt">uint64</span><span class="p">:</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;整型变量&#34;</span><span class="p">)</span>
+	<span class="k">case</span> <span class="kt">float32</span><span class="p">,</span><span class="kt">float64</span><span class="p">:</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;浮点型变量&#34;</span><span class="p">)</span>
+	<span class="k">case</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">,[]</span><span class="kt">rune</span><span class="p">,</span><span class="kt">string</span><span class="p">:</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;字符串变量&#34;</span><span class="p">)</span>
+	<span class="k">default</span><span class="p">:</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;不清楚...&#34;</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="8-new-和make的区别">8. new 和make的区别</h3>
 <ul>
 <li>
 <p>new(T) 返回的是 T 的指针：new(T) 为一个 T 类型新值分配空间并将此空间初始化为 T 的零值，返回的是新值的地址，也就是 T 类型的指针 *T，该指针指向 T 的新分配的零值。</p>
@@ -321,7 +747,7 @@
 <p>make 分配空间后，会进行初始化</p>
 </li>
 </ul>
-<h3 id="5struct能不能比较">5.struct能不能比较</h3>
+<h3 id="9struct能不能比较">9.struct能不能比较</h3>
 <p>​	go中的struct能不能比较<strong>取决于struct内部存储的数据</strong>，如果struct中的字段都是可比较的，那么该struct就是可比较的，如果其中的字段是不可比较的，那么该struct不可比较。slice,map就无法比较。</p>
 <ul>
 <li>
@@ -342,13 +768,36 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="6-defer">6. defer</h3>
+<h3 id="10-defer">10. defer</h3>
 <ul>
 <li>defer关键字定义的函数是在调用函数返回之后执行，而不是在代码块退出之后执行。defer的执行顺序是先创建的后执行。看做是一个 <code>FILO</code>(First In Last Out) 栈.</li>
 <li>所有传入defer函数的参数都是在创建的时候立即计算处理的，而不是调用函数退出的时候计算的</li>
 <li>defer等到包含它的程序返回时(包含它的函数执行了return语句、运行到函数结尾自动返回、对应的goroutine panic）defer函数才会被执行。通常用于资源释放、打印日志、异常捕获等</li>
 </ul>
-<h3 id="7-init函数">7. init函数</h3>
+<h3 id="11-init函数">11. init函数</h3>
+<ul>
+<li>
+<p>整个golang程序初始化顺序</p>
+<p>先调用osinit，再调用schedinit，创建就绪队列并新建一个G，接着就是mstart</p>
+<p>即设置好本地线程存储，设置好main函数参数，根据环境变量GOMAXPROCS设置好使用的procs，初始化调度器和内存管理等等。</p>
+</li>
+<li>
+<p>main.main之前的准备</p>
+</li>
+</ul>
+<ol>
+<li><strong>sysmon</strong> :Go语言的runtime库会初始化一些后台任务，其中一个任务就是sysmon. 它由物理线程运行.主要处理两个事件：对于网络的epoll以及抢占式调度的检测.</li>
+</ol>
+<ul>
+<li>释放闲置超过5 分钟的 span 物理内存;</li>
+<li>如果超过2 分钟没有垃圾回收，强制执行;</li>
+<li>将长时间未处理的 netpoll 添加到全局队列;</li>
+<li>向长时间运行的 G 任务发出抢占调度(超过10ms的 g，会进行 retake);</li>
+<li>收回因 syscall 长时间阻塞的 P;</li>
+</ul>
+<ol>
+<li><strong>scavenger</strong>: 只是由goroutine运行.用于执行heap的内存回收给os</li>
+</ol>
 <p>​	先于main函数执行，实现包级别的一些初始化操作</p>
 <p>​	主要作用:</p>
 <ul>
@@ -368,12 +817,12 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5bCP6I-c6bih5pys6I-c%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png"
-        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5bCP6I-c6bih5pys6I-c%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png, https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5bCP6I-c6bih5pys6I-c%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5bCP6I-c6bih5pys6I-c%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png, https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5bCP6I-c6bih5pys6I-c%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png"
-        title="在这里插入图片描述" /></p>
-<h3 id="8包的循环引用">8.包的循环引用</h3>
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png"
+        title="image-20220824111732112" /></p>
+<h3 id="12包的循环引用">12.包的循环引用</h3>
 <ul>
 <li>
 <p>为什么不允许循环引用</p>
@@ -388,17 +837,12 @@
 </code></pre>
 </li>
 </ul>
-<h3 id="9-select">9. SELECT</h3>
+<h3 id="13-select">13. SELECT</h3>
 <ol>
-<li>
-<p>select可以用来等待多个channel的可读可写，其中select中的case表达式必须都是channel的读写操作。</p>
-</li>
-<li>
-<p>当存在default时，select执行的就是非阻塞收发，当不存在时，必须等待某一个channel可读或可写。</p>
-</li>
-<li>
-<p>当多个channel都可读可写时，会随机选择一个分支。</p>
-</li>
+<li>select可以用来等待多个channel的可读可写，其中select中的case表达式必须都是channel的读写操作。</li>
+<li>当存在default时，select执行的就是非阻塞收发，当不存在时，必须等待某一个channel可读或可写。</li>
+<li>当多个channel都可读可写时，会随机选择一个分支。</li>
+<li>如果有一个channel已关闭,则每次都执行到这个case; 如果只有一个case,则出现死循环.</li>
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -438,8 +882,262 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<h2 id="进阶">进阶</h2></div><div class="post-footer" id="post-footer">
+</div><ol start="5">
+<li>x, ok := &lt;-ch,如果ch已经关闭,则ok为false,置ch为nil,则可以继续阻塞.</li>
+</ol>
+<hr>
+<h2 id="进阶原理">进阶原理</h2>
+<h3 id="1-gmp模型和golang调度原理">1. GMP模型和golang调度原理</h3>
+<p>​		go中调度采用GMP算法，G表示一个goroutine，M表示machine一个真实的线程，P表示processor表示一个调度器</p>
+<ul>
+<li>P由启动时环境变量 $GOMAXPROCS 或者是由 runtime 的方法 GOMAXPROCS() 决定。这意味着在程序执行的任意时刻都只有 $GOMAXPROCS 个 goroutine 在同时运行。最大256</li>
+<li>M的最大限制是10000个，但是内核很难支持这么多的线程数，所以这个限制可以忽略; 一般为CPU数</li>
+<li>在P没有足够的M绑定运行时,则会创建一个M;每次创建一个M都会同步创建一个G0，它负责调度其它的G，每个M都有一个G0</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png"
+        title="截屏2022-08-24 下午6.18.32" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png"
+        title="截屏2022-08-24 下午6.18.54" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png"
+        title="截屏2022-08-24 下午6.24.44" /></p>
+<ul>
+<li>
+<p>每个 P有个局部队列，局部队列保存待执行的 goroutine(流程2)，当 M绑定的 P的的局部队列已经满了之后就 会把 goroutine 放到全局队列(流程2-1)</p>
+</li>
+<li>
+<p>每个 P和一个 M绑定，M是真正的执行 P中 goroutine 的实体(流程3)，M 从绑定的 P中的局部队列获取 G来 执行</p>
+</li>
+<li>
+<p>当 M绑定的 P的局部队列为空时，M会从全局队列获取到本地队列来执行 G(流程3.1)，当从全局队列中没有获取到可执行的 G时候，M会从其他 P 的局部队列中偷取 G来执行(流程3.2)，这种从其他 P偷的方式称为 <strong>work stealing</strong></p>
+</li>
+<li>
+<p>当 G因系统调用(syscall)阻塞时会阻塞 M，此时 P会和 M解绑即 <strong>hand off</strong>，并寻找新的 idle 的 M，若没有 idle 的 M就会新建一个 M(流程5.1)。</p>
+</li>
+<li>
+<p>当 G因 channel 或者 network I/O 阻塞时，不会阻塞 M，M会寻找其他 runnable 的 G;当阻塞的 G恢复后会重新进入 runnable 进入 P队列等待执行(流程5.3)</p>
+</li>
+</ul>
+<ol>
+<li>Work stealing</li>
+</ol>
+<p>​				当本线程无可运行的 G 时，尝试从其他线程绑定的 P 偷取 G，而不是销毁线程。</p>
+<ol start="2">
+<li>
+<p>Hand off</p>
+<p>本线程因为 G 进行系统调用阻塞时，线程释放绑定的 P，把 P 转移给其他空闲的线程执行。</p>
+<p>利用并行：GOMAXPROCS 设置 P 的数量，最多有 GOMAXPROCS 个线程分布在多个 CPU 上同时运行。GOMAXPROCS 也限制了并发的程度，比如 GOMAXPROCS = 核数/2，则最多利用了一半的 CPU 核进行并行。</p>
+<p>抢占：在 coroutine 中要等待一个协程主动让出 CPU 才执行下一个…在 Go 中，一个 goroutine 最多占用 CPU 10ms，防止其他 goroutine 被饿死，这就是 goroutine 不同于 coroutine 的一个地方。</p>
+</li>
+<li>
+<p>如果没有P或怎样?</p>
+<p>调度器把 G都分配到 M上，不同的 G在不同的 M并发运行时，都需要向系统申请资源，比如堆栈内存等，因为资源 是全局的，就会因为资源竞争照成很多性能损耗。</p>
+</li>
+<li>
+<p><strong>GMP</strong> 调度过程中存在哪些阻塞</p>
+</li>
+</ol>
+<ul>
+<li>I/O, select</li>
+<li>block on <strong>syscall</strong> channel</li>
+<li>等待锁</li>
+<li>runtime.Gosched()</li>
+</ul>
+<ol start="5">
+<li>
+<p>抢占式调度</p>
+<p>sysmon。这个函数会周期性地做epoll操作，同时它还会检测每个P是否运行了较长时间。如果检测到某个P状态处于syscall超过了一个sysmon的时间周期(20us)，并且还有其它可运行的任务，则切换P。</p>
+<p>如果检测到某个P的状态为running，并且它已经运行了超过10ms，则会将P的当前的G的stackguard设置为StackPreempt。这个操作其实是相当于加上一个标记，通知这个G在合适时机进行调度。</p>
+</li>
+</ol>
+<h3 id="2-垃圾回收gc">2. 垃圾回收(GC)</h3>
+<h4 id="垃圾回收常用方法">垃圾回收常用方法</h4>
+<pre><code>1. 引用计数(reference counting) 
+</code></pre>
+<p>​			如C++中的智能指针:shard_ptr;</p>
+<ul>
+<li>
+<p>优点：简单直接，回收速度快</p>
+</li>
+<li>
+<p>缺点：需要额外的空间存放计数，无法处理循环引用的情况；</p>
+</li>
+</ul>
+<ol start="2">
+<li>标记-清除(mark and sweep)</li>
+</ol>
+<p>​			标记出所有不需要回收的对象，在标记完成后统一回收掉所有未被标记的对象。</p>
+<ul>
+<li>
+<p>优点：简单直接，速度快，适合可回收对象不多的场景</p>
+</li>
+<li>
+<p>缺点：会造成不连续的内存空间（内存碎片），导致有大的对象创建的时候，明明内存中总内存是够的，但是空间不是连续的造成对象无法分配；</p>
+</li>
+</ul>
+<ol start="3">
+<li>分代搜集(generation)</li>
+</ol>
+<p>​		java的jvm 就使用的分代回收的思路。在面向对象编程语言中，绝大多数对象的生命周期都非常短。分代收集的基 本思想是，将堆划分为两个或多个称为代(generation)的空间。新创建的对象存放在称为新生代(young generation)中(一般来说，新生代的大小会比 老年代小很多)，随着垃圾回收的重复执行，生命周期较⻓的对 象会被提升(promotion)到老年代中(这里用到了一个分类的思路，这个是也是科学思考的一个基本思路)。</p>
+<p>​		因此，新生代垃圾回收和老年代垃圾回收两种不同的垃圾回收方式应运而生，分别用于对各自空间中的对象执行垃
+圾回收。新生代垃圾回收的速度非常快，比老年代快几个数量级，即使新生代垃圾回收的频率更高，执行效率也仍
+然比老年代垃圾回收强，这是因为大多数对象的生命周期都很短，根本无需提升到老年代。</p>
+<h4 id="golang的gc策略">GOLANG的GC策略</h4>
+<p>​	golang采用无分代（对象没有代际之分）、不整理（回收过程中不对对象进行移动与整理）、并发（与用户代码并发执行）的三色标记清扫算法。</p>
+<p>​	原因:</p>
+<ol>
+<li>
+<p>golang的内存分配算法tcmalloc，基本上不会造成内存碎片，因此不需要使用对象整理。</p>
+</li>
+<li>
+<p>golang对于存活时间短的对象直接分配在栈上面，go程死亡后栈会被回收，不需要gc的参与。</p>
+</li>
+</ol>
+<p>Go 以 STW 为界限，可以将 GC 划分为五个阶段：：<strong>栈扫描</strong>（开始时STW）;<strong>第一次标记</strong>（并发）;<strong>第二次标记</strong>（STW）;<strong>清除</strong>（并发）,归还</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png"
+        title="截屏2022-08-24 下午7.11.32" /></p>
+<h5 id="三色标记清扫法">三色标记清扫法</h5>
+<p>white，grep，black;白色为需要清理的数据，黑色则不要清理。从根对象（全局变量、执行栈、寄存器(主要是指针)）开始循环，能访问到的标记为灰色，然后从灰色队列开始遍历，自身变成黑色。后续没有访问到的直接清理掉。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/test.gif"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/test.gif, https://raw.githubusercontent.com/noobmid/pics/main/test.gif 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/test.gif 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/test.gif"
+        title="test" /></p>
+<h5 id="没有stw的三色标记法">没有STW的三色标记法</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        title="img" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        title="img" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        title="img" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        title="img" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        title="img" /></p>
+<ul>
+<li>条件1: 一个白色对象被黑色对象引用 <strong>(白色被挂在黑色下)</strong></li>
+<li>条件2: 灰色对象与它之间的可达关系的白色对象遭到破坏 <strong>(灰色同时丢了该白色)</strong></li>
+</ul>
+<p>当以上两个条件同时满足时, 就会出现对象丢失现象!</p>
+<h5 id="屏障保护">屏障保护</h5>
+<p>为了减少STW的影响,又防止三色标记法出现对象丢失现象,出现屏障保护技术;</p>
+<ol>
+<li>插入写屏障</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        title="img" /></p>
+<p>​		垃圾收集器将根对象指向 A 对象标记成黑色并将 A 对象指向的对象 B 标记成灰色；用户程序修改 A 对象的指针，将原本指向 B 对象的指针指向 C 对象，这时触发写屏障将 C 对象标记成灰色；一种相对保守的屏障技术，它会将有存活可能的对象都标记成灰色以满足强三色不变性.</p>
+<p>​		写屏障只会针对堆进行限制.</p>
+<ol start="2">
+<li>删除写屏障</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        title="img" /></p>
+<p>​		垃圾收集器将根对象指向 A 对象标记成黑色并将 A 对象指向的对象 B 标记成灰色；用户程序将 A 对象原本指向 B 的指针指向 C，触发删除写屏障，但是因为 B 对象已经是灰色的，所以不做改变；用户程序将 B 对象原本指向 C 的指针删除，触发删除写屏障，白色的 C 对象被涂成灰色；</p>
+<p>​		缺点是开始收集器时需要STW快照全局对象</p>
+<ol start="3">
+<li>混合写屏障</li>
+</ol>
+<p>操作流程:</p>
+<p>​	1、GC开始将栈上的对象全部扫描并标记为黑色(之后不再进行第二次重复扫描，无需STW)，</p>
+<p>​	2、GC期间，任何在栈上创建的新对象，均为黑色。</p>
+<p>​	3、被删除的对象标记为灰色。(删除写屏障)</p>
+<p>​	4、被添加的对象标记为灰色。(插入写屏障)</p>
+<p><strong>该写屏障会将被覆盖的对象标记成灰色并在当前栈没有扫描时将新对象也标记成灰色;</strong>  只需要针对堆内存扫描即可.</p>
+<h4 id="gc触发机制">GC触发机制</h4>
+<ol>
+<li>主动: 通过调用 runtime.GC 来触发 GC，此调用阻塞式地等待当前 GC 运行完毕。</li>
+<li>被动:
+<ul>
+<li>使用系统监控(sysmon)，当超过两分钟没有产生任何 GC 时，强制触发 GC。</li>
+<li>使用步调（Pacing）算法，其核心思想是控制内存增长的比例。(步调算法可以通过gogc传参设置量控制gc的时间。也是go中唯一对外开放的配置gc的参数。默认值为100，也就是达到百分百后触发gc机制)</li>
+</ul>
+</li>
+</ol>
+<h4 id="gc细节">GC细节</h4>
+<pre><code>##### 增量垃圾收集
+</code></pre>
+<p>​		增量地标记和清除垃圾，降低应用程序暂停的最长时间；</p>
+<p>​		传统的垃圾收集算法会在垃圾收集的执行期间暂停应用程序，一旦触发垃圾收集，垃圾收集器会抢占 CPU 的使用权占据大量的计算资源以完成标记和清除工作，然而很多追求实时的应用程序无法接受长时间的 STW。增量式（Incremental）的垃圾收集是减少程序最长暂停时间的一种方案，它可以将原本时间较长的暂停时间切分成多个更小的 GC 时间片，虽然从垃圾收集开始到结束的时间更长了，但是这也减少了应用程序暂停的最大时间。</p>
+<h5 id="并发垃圾收集">并发垃圾收集</h5>
+<p>​		利用多核的计算资源，在用户程序执行时并发标记和清除垃圾；</p>
+<h4 id="gc-如何调优"><strong>GC</strong> 如何调优</h4>
+<p>通过 go tool pprof 和 go tool trace 等工具</p>
+<ul>
+<li>控制内存分配的速度，限制 goroutine 的数量，从而提高赋值器对 CPU 的利用率。</li>
+<li>减少并复用内存，例如使用 sync.Pool 来复用需要频繁创建临时对象，例如提前分配足够的内存来降低多余的 拷贝。</li>
+<li>需要时，增大 GOGC 的值，降低 GC 的运行频率。</li>
+</ul>
+<h3 id="3-内存模型和内存管理">3. 内存模型和内存管理</h3>
+<h3 id="4-并发和sync包">4. 并发和sync包</h3></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -450,7 +1148,7 @@
                             <a class="link-to-markdown" href="/golang%E5%85%AB%E8%82%A1%E6%96%87/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Golang"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Golang"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Golang"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Golang" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Golang八股文"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Golang八股文"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Golang八股文"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Golang八股文" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
