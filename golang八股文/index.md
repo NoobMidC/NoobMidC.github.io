@@ -205,33 +205,34 @@ type hchan struct {
 
 1. 创建channel
    1. 缓冲区大小为0: 只需要分配hchansize大小的内存就ok;
+   
    2. 缓冲区大小不为0，且channel的类型不包含指针:   buf为hchanSize+元素大小*元素个数的连续内存
+
    3. 缓冲区大小不为0，且channel的类型包含指针，则不能简单的根据元素的大小去申请内存，需要通过mallocgc去分配内存(即内存逃逸)
 
    2. channel特性
-
-      			1. 给一个 nil channel 发送数据，造成永远阻塞
-      			2. 从一个 nil channel 接收数据，造成永远阻塞
-      			3. 关闭一个 nil channel 将会发生 panic
-      			4. 给一个已经关闭的 channel 发送数据，引起 panic
+   
+      		> 1. 给一个 nil channel 发送数据，造成永远阻塞
+      > 2. 从一个 nil channel 接收数据，造成永远阻塞
+      > 3. 关闭一个 nil channel 将会发生 panic
+      > 4. 给一个已经关闭的 channel 发送数据，引起 panic
 
       ![图片](https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png)
 
       - 当 `c.closed != 0` 则为通道关闭，此时执行写，源码提示直接 panic，输出的内容就是上面提到的 `"send on closed channel"`。
 
-      			1. 从一个已经关闭的 channel 接收数据，如果缓冲区中为空，则返回一个零值
-
-      ![图片](https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png)
-
-      - `c.closed != 0 && c.qcount == 0` 指通道已经关闭，且缓存为空的情况下（已经读完了之前写到通道里的值）
-
+      
+   > 5. 从一个已经关闭的 channel 接收数据，如果缓冲区中为空，则返回一个零值
+      
+   ![图片](https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png)
+      
+   - `c.closed != 0 && c.qcount == 0` 指通道已经关闭，且缓存为空的情况下（已经读完了之前写到通道里的值）
       - 如果接收值的地址 `ep` 不为空
-
-      - - 那接收值将获得是一个**该类型的零值**
+   - - 那接收值将获得是一个**该类型的零值**
         - `typedmemclr` 会**根据类型清理**相应地址的内存
         - 这就解释了上面代码为什么关闭的 `chan` 会返回对应类型的零值
-
-      			1. 无缓冲的 channel 是同步的，而有缓冲的 channel 是非同步的
+      
+   > 6. 无缓冲的 channel 是同步的，而有缓冲的 channel 是非同步的
 
 ### 6. interface
 
@@ -303,6 +304,8 @@ for i := 0; i < t.NumField(); i++ {
 
 > `json`包里不能导出私有变量的`tag`是因为`json`包里认为私有变量为不可导出的`Unexported`，所以**跳过获取**名为`json`的`tag`的内容
 
+#### 动态类型判断: 类型开关是在运行时检查变量类型的最佳方式
+
 ```go
 //1. 类型识别
 var data interface{} = "hello"
@@ -358,8 +361,9 @@ func typeJudge(x interface{})  {
 ### 10. defer
 
 -  defer关键字定义的函数是在调用函数返回之后执行，而不是在代码块退出之后执行。defer的执行顺序是先创建的后执行。看做是一个 `FILO`(First In Last Out) 栈.
-- 所有传入defer函数的参数都是在创建的时候立即计算处理的，而不是调用函数退出的时候计算的
+- 所有传入defer函数的参数都是在创建的时候预先计算处理的，而不是调用函数退出的时候计算的
 - defer等到包含它的程序返回时(包含它的函数执行了return语句、运行到函数结尾自动返回、对应的goroutine panic）defer函数才会被执行。通常用于资源释放、打印日志、异常捕获等
+- `defer` 关键字对应的 `runtime.deferproc` 会将延迟调用函数与调用方所在 Goroutine 进行关联。所以当程序发生崩溃时只会调用当前 Goroutine 的延迟调用函数
 
 
 
@@ -446,6 +450,62 @@ select {
 ```
 
 5. x, ok := <-ch,如果ch已经关闭,则ok为false,置ch为nil,则可以继续阻塞.
+
+
+
+### 14. for range 循环
+
+```go
+{
+    for_temp := slice1
+    len_temp := len(for_temp)
+    for index_temp := 0; index_temp < len_temp; index_temp++ { 
+        value_temp := for_temp[index_temp] 
+        // index = index_temp 
+         // value = value_temp 
+        // origin body
+     }
+} // 新的语句块结束
+```
+
+
+
+### 15. Panic和Recover
+
+	#### panic
+
+​	panic的作用是制造一次宕机，宕机就代表程序运行终止，但是已经“生效”的(当前 Goroutine )延迟函数仍会执行（即已经压入栈的defer延迟函数，panic之前的）。
+
+```go
+// 嵌套崩溃
+func main() {
+	defer fmt.Println("in main")
+	defer func() {
+		defer func() {
+			panic("panic again and again")
+		}()
+		panic("panic again")
+	}()
+
+	panic("panic once")
+}
+
+$ go run main.go
+in main
+panic: panic once
+	panic: panic again
+	panic: panic again and again
+
+goroutine 1 [running]:
+...
+exit status 2
+```
+
+
+
+#### recover
+
+​		`recover` 只有在发生 `panic` 之后调用才会生效。然而在上面的控制流中，`recover` 是在 `panic` 之前调用的，并不满足生效的条件，所以需要在 `defer` 中使用 `recover` 关键字。
 
 
 
@@ -645,18 +705,490 @@ white，grep，black;白色为需要清理的数据，黑色则不要清理。�
 
 
 
-
-
-
-
 ### 3. 内存模型和内存管理
 
+#### 内存逃逸
+
+​		`golang程序变量`会携带有一组校验数据，用来证明它的整个生命周期是否在运行时完全可知。如果变量通过了这些校验，它就可以在`栈上`分配。否则就说它 `逃逸` 了，必须在`堆上分配`
+
+- 内存逃逸的情况:
+
+  1. **在方法内把局部变量指针返回**
+  2. **发送指针或带有指针的值到 channel 中**
+  3. **在一个切片上存储指针或带指针的值**
+  4. **slice 的背后数组被重新分配了，因为 append 时可能会超出其容量( cap )**;slice 初始化的地方在编译时是可以知道的，它最开始会在栈上分配。如果切片背后的存储要基于运行时的数据进行扩充，就会在堆上分配。
+  5. **在 interface 类型上调用方法。**在 interface 类型上调用方法都是动态调度的 —— 方法的真正实现只能在运行时知道。
+
+- 查看内存逃逸的情况:
+
+  ```go
+  go build -gcflags=-m main.go
+  ```
+
+- 避免内存逃逸
+
+  Noescape函数, 可以在逃逸分析中**隐藏一个指针**。让这个指针在逃逸分析中**不会被检测为逃逸**。 
+
+  ```go
+  func noescape(p unsafe.Pointer) unsafe.Pointer {
+       x := uintptr(p)
+       return unsafe.Pointer(x ^ 0)
+  }
+  ```
+
+  - `noescape()` 函数的作用是遮蔽输入和输出的依赖关系。使编译器不认为 `p` 会通过 `x` 逃逸， 因为 `uintptr()` 产生的引用是编译器无法理解的。
+  - 内置的 `uintptr` 类型是一个真正的指针类型，但是在编译器层面，它只是一个存储一个 `指针地址` 的 `int` 类型。代码的最后一行返回 `unsafe.Pointer` 也是一个 `int`。
+
+- 闭包
+
+  闭包是由函数及其相关引用环境组合而成的实体(即：闭包=函数+引用环境)。
+
+  ```go
+  func f(i int) func() int {
+      return func() int {
+          i++
+          return i
+      }
+  }
+  ```
+
+  不可在栈上分配:  变量i是函数f中的局部变量，假设这个变量是在函数f的栈中分配的，是不可以的。因为函数f返回以后，对应的栈就失效了，f返回的那个函数中变量i就引用一个失效的位置了。所以闭包的环境中引用的变量不能够在栈上分配。
+
+  因此以上代码在汇编中就类似于:
+
+  ```go
+  type Closure struct {
+      F func()() 
+      i *int
+  }
+  ```
+
+  在堆中创建结构体, 将函数地址赋值给F, 闭包环境的局部变量在堆上开辟空间,写值后再将地址赋值给i;
+
+  返回闭包时并不是单纯返回一个函数，而是返回了一个结构体，记录下函数返回地址和引用的环境中的变量地址
+
+#### 栈空间管理
+
+​		Go语言的运行环境(runtime)会在goroutine需要的时候动态地分配栈空间，而不是给每个goroutine分配固定大小的内存空间。这样就避免了需要程序员来决定栈的大小。当创建一个goroutine的时候，它会分配一个8KB的内存空间来给goroutine的栈使用。
+
+##### 分段栈
+
+​		当检测到函数需要更多栈时，分配一块新栈，旧栈和新栈使用指针连接起来，函数返回就释放。
+
+1. 每个Go函数的开头都有一小段检测代码。这段代码会检查我们是否已经用完了分配的栈空 间。如果是的话，它会调用 morestack 函数。 morestack 函数分配一块新的内存作为栈空间，并且在这块栈空间 的底部填入各种信息(包括之前的那块栈地址)。在分配了这块新的栈空间之后，它会重试刚才造成栈空间不足的函数。这个过程叫做栈分裂(stack split).
+
+		2.	在新分配的栈底有个lessstack的函数指针; 当我们从那个函数返回时，它会跳转到 lessstack 。 lessstack 函 数会查看在栈底部存放的数据结构里的信息，然后调整栈指针(stack pointer)。这样就完成了从新的栈块到老的 栈块的跳转。接下来，新分配的这个块栈空间就可以被释放掉了。
+
+问题:
+
+- 多次循环调用同一个函数会出现“hot split”问题, 即如果函数产生的返回在一个循环或者递归中, 会频繁的alloc/free,导致严重性能问题
+- 每次分配和释放都要额外消耗
+
+##### 连续栈
+
+连续栈的实现方式：当检测到需要更多栈时，分配一块比原来大一倍的栈，把旧栈数据copy到新栈，释放旧栈
+
+![img](https://raw.githubusercontent.com/noobmid/pics/main/dGeih5.png)
+
+1. 栈的扩缩容何时触发?
+
+   goroutine运行并用完栈空间的时候，与之前的方法一样，栈溢出检查会被 触发
+
+   
+
+2. 栈的扩缩容大小
+
+   扩容为原来的两倍,缩容为原来的1/2
+
+   
+
+3. 栈的扩缩容过程中做了哪些事?
+
+   重新申请一块新栈，然后把旧栈的数据复制到新栈。协程占用的物理内存完全被替换了，而Go在运行时会把指针保存到内存里面，例如：`gp.sched.ctxt` ，`gp._defer` ，`gp._panic`，包括函数里的指针。这部分指针值会被转换成整数型`uintptr`，然后 `+ delta`进行调整
+
+    如果栈空间发现不够用，会调用`stackalloc`分配一块新的栈，大小比原来大一倍进行扩容 ;栈的缩容主要是发生在GC期间.
 
 
 
+#### 内存泄漏
+
+1. **字符串截取**:   
+
+   解决办法: string和[]byte 转化
+
+   
+
+2. **切片截取**
+
+   解决办法:  append
+
+   
+
+3. **没有重置丢失的子切片元素中的指针:** 原切片元素为指针类型，原切片被截取后，丢失的子切片元素中的指针元素未被置空，导致内存泄漏
+
+   解决办法:元素置空 
+
+   
+
+4. **函数数组传参**: 由于数组为值类型,赋值和函数传参会复制整个数组; 如果数组较大,短时间内传递多次,会消耗大量内存又来不及gc,就会产生临时性的内存泄漏
+
+   解决办法:采用指针传递、使用切片
+
+   
+
+5. **gorouting**  :有些编码不当的情况下，goroutine被长期挂住，导致该协程中的内存也无法被释放，就会造成永久性的内存泄漏。例如协程结束时协程中的channel没有关闭，导致一直阻塞；例如协程中有死循环
+
+   可见并发和sync包的使用
+
+   
+
+6. 定时器: 定时器未到触发时间，该定时器不会被gc回收，从而导致临时性的内存泄漏，而如果定时器一直在创建，那么就造成了永久性的内存泄漏了
+
+   解决办法:创建timer定时器，每次需要启动定时器的时候，使用Reset方法重置定时器
+
+   
+
+#### 内存泄漏实例
+
+```go
+func main() {
+   num := 6
+   for index := 0; index < num; index++ {
+      resp, _ := http.Get("https://www.baidu.com")
+      _, _ = ioutil.ReadAll(resp.Body)
+   }
+   fmt.Printf("此时goroutine个数= %d\n", runtime.NumGoroutine())
+}// 没有执行resp.Body.Close(), 一共泄漏了3个goroutine
+```
+
+> - 虽然执行了 `6` 次循环，而且每次都没有执行 `Body.Close()` ,就是因为执行了`ioutil.ReadAll()`把内容都读出来了，连接得以复用，因此只泄漏了一个`读goroutine`和一个`写goroutine`，最后加上`main goroutine`，所以答案就是`3个goroutine`
+> - 正常情况下我们的代码都会执行 `ioutil.ReadAll()`，但如果此时忘了 `resp.Body.Close()`，确实会导致泄漏。但如果你**调用的域名一直是同一个**的话，那么只会泄漏一个 `读goroutine` 和一个`写goroutine`，**这就是为什么代码明明不规范但却看不到明显内存泄漏的原因**。
+
+
+
+
+
+#### 内存对齐
+
+> **一个非空结构体包含有尾部size为0的变量(字段)，如果不给它分配内存，那么该变量(字段)的指针地址将指向一个超出该结构体内存范围的内存空间。这可能会导致内存泄漏，或者在内存垃圾回收过程中，程序crash掉。**
+
+![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg)
+
+- 为什么对齐?
+
+  操作系统并非一个字节一个字节访问内存，而是按`2, 4, 8`这样的字长来访问。当被访问的数据长度为 `n` 字节且该数据地址为`n`字节对齐，那么操作系统就可以高效地一次定位到数据，无需多次读取、处理对齐运算等额外操作.
+
+- struct 的对齐是：如果类型 t 的对齐保证是 n，那么类型 t 的每个值的**地址**在运行时必须是 n 的倍数。
+- struct 内字段如果填充过多，可以尝试重排，使字段排列更紧密，减少内存浪费
+- 零大小字段要避免作为 struct 最后一个字段，会有内存浪费(零大小也会补一个对齐保证的长度,防止指针错误,内存泄漏)
+
+对齐规则:
+
+- 对于任意类型的变量 x ，unsafe.Alignof(x) 至少为 1。
+- 对于 struct 结构体类型的变量 x，计算 x 每一个字段 f 的 unsafe.Alignof(x.f)，unsafe.Alignof(x) 等于其中的最大值。
+- 对于 array 数组类型的变量 x，unsafe.Alignof(x) 等于构成数组的元素类型的对齐倍数。
+- 没有任何字段的空 struct{} 和没有任何元素的 array 占据的内存空间大小为 0，不同的大小为 0 的变量可能指向同一块地址。
 
 
 
 ### 4. 并发和sync包
 
+#### Data Race
+
+​		同步访问共享数据是处理数据竞争的一种有效的方法. 可以使用 go run - race 或者 go build -race来进行静态检测。其在内部的实现是,开启多个协程执行同一个命令， 并且记录下每个变 量的状态.
+
+```go
+go test -race mypkg // 测试包
+go run -race mysrc.go // 编译和运行程序 
+go build -race mycmd // 构建程序
+go install -race mypkg // 安装程序
+```
+
+解决数据竞争的方法: 
+
+- 互斥锁: sync.Mutex、sync.WaitGroup
+- 通道: channel ,channel的效率是高于互斥锁的
+
+
+
+#### 并发模型
+
+- 通过channel通知实现并发控制
+
+- 通过sync包中的WaitGroup实现并发控制
+
+  a. 	Add(), 可以添加或减少 goroutine的数量.
+
+  b. 	Done(), 相当于Add(-1).
+  c. 	Wait(), 执行后会堵塞主线程，直到WaitGroup 里的值减至0.
+
+  > 注意,在 WaitGroup 第一次使用后，不能被拷贝
+  >
+  > ```go
+  >  func main(){
+  >  wg := sync.WaitGroup{}
+  >     for i := 0; i < 5; i++ {
+  >         wg.Add(1)
+  >         go func(wg sync.WaitGroup, i int) {
+  >             fmt.Printf("i:%d", i)
+  >             wg.Done()
+  > }(wg, i) }
+  > wg.Wait()
+  >     fmt.Println("exit")
+  > } // error: all goroutines are asleep - deadlock!
+  > ```
+  >
+  > 因为 wg 给拷⻉传递到了 goroutine 中，导致只有 Add 操作，其实 Done操作是在 wg 的副本执行的。
+  >
+  > 可以将 传入类型改为 *sync.WaitGroup, 或者使用闭包
+
+- Context 上下文
+
+  context 包主要是用来处理多个 goroutine 之间共享数据，及多个 goroutine 的管理。Context 对象是线程安全的，你可以把一个 Context 对象传递给任意个数的 gorotuine，对它执行 取消 操作时， 所有 goroutine 都会接收到取消信号。
+
+#### CAS
+
+ Compare And Swap，直译就是比较交换;是一种实现并发算法时常用到的技术.
+
+作用是让 CPU先进行比较两 个值是否相等，然后原子地更新某个位置的值，其实现方式是给予硬件平台的汇编指令，
+
+```go
+func CompareAndSwapUint32(addr *uint32, old, new uint32) (swapped bool)
+```
+
+![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg)
+
+缺陷: 
+
+1. CAS在共享资源竞争比较激烈的时候，每个goroutine会容易处于自旋状态，影响效率，在竞争激烈的时候推荐使用锁。
+
+2. 无法解决ABA问题
+   ABA问题是无锁结构实现中常见的一种问题，可基本表述为：
+
+   > 进程P1读取了一个数值A
+   > P1被挂起(时间片耗尽、中断等)，进程P2开始执行
+   > P2修改数值A为数值B，然后又修改回A
+   > P1被唤醒，比较后发现数值A没有变化，程序继续执行。
+
+
+
+#### Sync包
+
+##### 互斥锁: sync.Mutex
+
+```go
+ //Mutex 是互斥锁， 零值是解锁的互斥锁， 首次使用后不得复制互斥锁。 
+type Mutex struct {
+	state int32
+	sema  uint32 
+}
+
+//Locker表示可以锁定和解锁的对象。 type Locker interface {
+Lock()
+Unlock() }
+//锁定当前的互斥量 //如果锁已被使用，则调用goroutine //阻塞直到互斥锁可用。
+func (m *Mutex) Lock()
+//对当前互斥量进行解锁 
+//如果在进入解锁时未锁定m，则为运行时错误。 
+//锁定的互斥锁与特定的goroutine无关。 
+//允许一个goroutine锁定Mutex然后安排另一个goroutine来解锁它。 
+func (m *Mutex) Unlock()
+```
+
+- Mutex的几种状态:	mutexLocked —表示互斥锁的锁定状态;	mutexWoken —表示从正常模式被从唤醒;	mutexStarving —当前的互斥锁进入饥饿状态;	
+
+- Mutex的正常模式和饥饿模式:
+
+  1. 正常模式**(**非公平锁): 	正常模式下，所有等待锁的 goroutine 按照 FIFO(先进先出)顺序等待。唤醒的 goroutine 不会直接拥有锁，而是会 和新请求锁的 goroutine 竞争锁的拥有。但是和正在使用cpu的goroutine相比很大可能失败.
+
+  2. 饥饿模式**(**公平锁):      一个等待的 goroutine 超过1ms没有获取锁,或者当前队列只剩下一个 g 的时候那么它将会把锁转 变为饥饿模式。
+
+     ​		饥饿模式下，直接由 unlock 把锁交给等待队列中排在第一位的 G(队头)，同时，饥饿模式下，新进来的 G不会参与 抢锁也不会进入自旋状态，会直接进入等待队列的尾部,这样很好的解决了老的 g 一直抢不到锁的场景
+
+  3. 自旋锁: 循环等待锁的释放,一直处于内核态,不进行内核态和用户态切换.
+
+     	1. 锁已被占用，并且锁不处于饥饿模式
+     	1. 积累的自旋次数小于最大自旋次数(active_spin=4)。
+     	1.  cpu 核数大于1。
+     	1. 有空闲的 P
+     	1. 当前 goroutine 所挂载的 P下，本地待运行队列为空。
+
+     ​		
+
+
+
+##### 读写锁: sync.RWMutex
+
+1 多个写操作之间是互斥的 
+
+2 写操作与读操作之间也是互斥的
+
+ 3 多个读操作之间不是互斥的
+
+```go
+// RWMutex是一个读/写互斥锁，可以由任意数量的读操作或单个写操作持有。
+// RWMutex的零值是未锁定的互斥锁。
+//首次使用后，不得复制RWMutex。 
+//如果goroutine持有RWMutex进行读取而另一个goroutine可能会调用Lock，那么在释放初始读锁之前， goroutine不应该期望能够获取读锁定。
+//特别是，这种禁止递归读锁定。 这是为了确保锁最终变得可用; 阻止的锁定会阻止新读操作获取锁定。
+type RWMutex struct {
+  		w 					Mutex	//如果有待处理的写操作就持有 uint32 
+      writerSem		int32	// 写操作等待读操作完成的信号量 
+      readerSem		uint32 //读操作等待写操作完成的信号量
+      readerCount int32		// 待处理的读操作数量
+      readerWait  int32  // number of departing readers
+}
+ 
+//对读操作的锁定
+func (rw *RWMutex) RLock() //对读操作的解锁
+func (rw *RWMutex) RUnlock() //对写操作的锁定
+func (rw *RWMutex) Lock() //对写操作的解锁
+func (rw *RWMutex) Unlock()
+//返回一个实现了sync.Locker接口类型的值，实际上是回调rw.RLock and rw.RUnlock. func (rw *RWMutex) RLocker() Locker
+```
+
+​		通过记录 readerCount 读锁的数量来进行控制，当有一个写锁的时候，会将读锁数量设置为负数1<<30。目的是让 新进入的读锁等待写锁之后释放通知读锁。同样的写锁也会等等待之前的读锁都释放完毕，才会开始进行后续的操 作。而等写锁释放完之后，会将值重新加上1<<30,并通知刚才新进入的读锁(rw.readerSem)，两者互相限制。
+
+> RWMutex 的读锁不要用于递归调用，比较容易产生死锁。
+>
+> 写锁被解锁后，所有因操作锁定读锁而被阻塞的 goroutine 会被唤醒，并都可以成功锁定读锁。
+>
+> 读锁被解锁后，在没有被其他读锁锁定的前提下，所有因操作锁定写锁而被阻塞的 goroutine，其中等待时间 最⻓的一个 goroutine 会被唤醒。	
+
+
+
+##### 安全锁: Sync.Map
+
+golang中的sync.Map是并发安全的，其实也就是sync包中golang自定义的一个名叫Map的结构体。它通过空间换时间的方式，使用 read 和 dirty 两个 map 来进行读写分离，降低锁时间来提高效率。
+
+![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg)
+
+```go
+type Map struct {
+    mu Mutex	// 该锁用来保护dirty
+    read atomic.Value // readOnly// 存读的数据，因为是atomic.value类型，只读类型，所以它的读是并发安全的
+    dirty map[interface{}]*entry	//包含最新的写入的数据，并且在写的时候，会把read中未被删除的数据拷⻉到该dirty中，因为是普通的map存在并发安全问题，需要用到上面的mu字段。
+    misses int	// 从read读数据失败的时候，会将该字段+1，当等于len(misses)的时候，会将dirty拷⻉到read中(从而提升读的性能)。
+}
+
+func (m *Map) Delete(key interface{}) // 删除元素
+func (m *Map) Store(key, value interface{}) //添加元素
+func (m *Map) Load(key interface{})// 查找key的值
+func (m *Map) LoadOrStore(key, value interface{})
+func (m *Map) Range(f func(key, value interface{}) bool)便利
+```
+
+   1. store() 流程
+
+      ​	a. 如果在 read 里能够找到待存储的 key，并且对应的 entry 的 p 值不为 expunged，也就是没被删除时，直接更新对应的 entry 即可
+
+      ​	b. 第一步没有成功：要么 read 中没有这个 key，要么 key 被标记为删除。则先加锁，再进行后续的操作
+
+      ​	c. 再次在 read 中查找是否存在这个 key，也就是 double check 一下;如果 read 中存在该 key，但 `p == expunged`,说明 m.dirty != nil 并且 m.dirty 中不存在该 key 值 此时: a. 将 p 的状态由 expunged 更改为 nil；b. dirty map 插入 key。然后，直接更新对应的 value。(删除老key,新值写入dirty中)
+
+      ​	d. 如果 read 中没有此 key，那就查看 dirty 中是否有此 key，如果有，则直接更新对应的 value，这时 read 中还是没有此 key
+
+      ​	e. 如果 read 和 dirty 中都不存在该 key，则：a. 如果 dirty 为空，则需要创建 dirty，并从 read 中拷贝未被删除的元素；b. 更新 amended 字段，标识 dirty map 中存在 read map 中没有的 key；c. 将 k-v 写入 dirty map 中，read.m 不变。最后，更新此 key 对应的 value。
+
+2. Load()
+
+   ​	a. 直接在 read 中找，如果找到了直接调用 entry 的 load 方法，取出其中的值。
+
+   ​	b. 如果 read 中没有这个 key，且 amended 为 fase，说明 dirty 为空，那直接返回 空和 false。
+
+   ​	c. 如果 read 中没有这个 key，且 amended 为 true，说明 dirty 中可能存在我们要找的 key。当然要先上锁，再尝试去 dirty 中查找。在这之前，仍然有一个 double check 的操作。若还是没有在 read 中找到，那么就从 dirty 中找。不管 dirty 中有没有找到，都要"记一笔"，因为在 dirty 被提升为 read 之前，都会进入这条路径
+
+3. Delete()
+
+​					a. 现在read里找, 找到了则将p 设置为nil
+
+​					b.  如果 read 中没有这个 key，且 dirty map 不为空,则在dirty中找.在 dirty中直接删除这个key
+
+
+
+##### sync.WaitGroup
+
+```go
+type WaitGroup struct {
+    noCopy noCopy
+    // 64-bit value: high 32 bits are counter, low 32 bits are waiter count.
+    // 64-bit atomic operations require 64-bit alignment, but 32-bit
+    // compilers do not ensure it. So we allocate 12 bytes and then use
+    // the aligned 8 bytes in them as state, and the other 4 as storage
+    // for the sema.
+    state1 [3]uint32
+}
+```
+
+- WaitGroup 主要维护了2 个计数器，一个是请求计数器 v，一个是等待计数器 w，二者组成一个64bit 的值， 请求计数器占高32bit，等待计数器占低32bit。
+-  每次 Add执行，请求计数器 v 加1，Done方法执行，请求计数器减1，v 为0 时通过信号量唤醒 Wait()。
+
+
+
+##### sync.Once
+
+```go
+type Once struct {
+	// done indicates whether the action has been performed.
+	// It is first in the struct because it is used in the hot path.
+	// The hot path is inlined at every call site.
+	// Placing done first allows more compact instructions on some architectures (amd64/x86),
+	// and fewer instructions (to calculate offset) on other architectures.
+	done uint32
+	m    Mutex
+}
+
+func (o *Once) Do(f func()) {
+	// Note: Here is an incorrect implementation of Do:
+	//
+	//	if atomic.CompareAndSwapUint32(&o.done, 0, 1) {
+	//		f()
+	//	}
+	//  Do 保证当它返回时，f 已完成。此实现不会实现该保证：给定两个同时调用，cas的获胜者将调用f，第二个将立即返回，而无需等待第一个对 f 的调用完成。这就是为什么慢速路径回落到mutex，以及为什么atomic.StoreUint32必须延迟到 f 返回之后。
+
+	if atomic.LoadUint32(&o.done) == 0 {
+		// Outlined slow-path to allow inlining of the fast-path.
+		o.doSlow(f)
+	}
+}
+
+func (o *Once) doSlow(f func()) {
+	o.m.Lock()
+	defer o.m.Unlock()
+	if o.done == 0 {
+		defer atomic.StoreUint32(&o.done, 1)
+		f()
+	}
+}
+```
+
+`done`是标识位，用来判断方法`f`是否被执行完，其初始值为0，当`f`执行结束时，`done`被设为1
+
+- Once 可以用来执行且仅仅执行一次动作，常常用于**单例对象**的初始化场景。
+-  Once 常常用来初始化单例资源，或者并发访问只需初始化一次的共享资源，或者在测试的时候初始化一次测 试资源。
+-  sync.Once 只暴露了一个方法 Do，你可以多次调用 Do 方法，但是只有第一次调用 Do 方法时 f 参数才会执 行，这里的 f 是一个无参数无返回值的函数。
+- 不可嵌套,否则死锁 
+
+
+
+##### sync.Pool
+
+```go
+// Local per-P Pool appendix.
+type poolLocalInternal struct {
+	private interface{}   // Can be used only by the respective P.
+	shared  []interface{} // Can be used by any P.
+	Mutex                 // Protects shared.
+}
+
+type poolLocal struct {
+	poolLocalInternal
+
+	// Prevents false sharing on widespread platforms with
+	// 128 mod (cache line size) = 0 .
+	pad [128 - unsafe.Sizeof(poolLocalInternal{})%128]byte
+}
+```
+
+作用:	对于很多需要重复分配、回收内存的地方，sync.Pool 是一个很好的选择。频繁地分配、回收内存会给 GC 带来一 定的负担，严重的时候会引起 CPU 的毛刺，而 sync.Pool 可以将暂时不用的对象缓存起来，待下次需要的时候直 接使用，不用再次经过内存分配，复用对象的内存，减轻 GC 的压力，提升系统的性能。
 
