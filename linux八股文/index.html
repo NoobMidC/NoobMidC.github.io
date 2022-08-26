@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Linux八股文 - cx玄烨0&#39; Blog</title><meta name="Description" content="专注于golang, 云原生开发"><meta property="og:title" content="Linux八股文" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/" /><meta property="og:image" content="https://noobmid.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-26T10:01:58+08:00" />
+<meta property="article:modified_time" content="2022-08-26T10:01:58+08:00" /><meta property="og:site_name" content="cx玄烨0&#39;s Blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://noobmid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Linux八股文"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/" /><link rel="prev" href="https://noobmid.github.io/golang%E4%BD%93%E7%B3%BB/" /><link rel="next" href="https://noobmid.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux八股文",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/noobmid.github.io\/linux%E5%85%AB%E8%82%A1%E6%96%87\/"
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  3691 ,
+        "url": "https:\/\/noobmid.github.io\/linux%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-26T10:01:58+08:00","dateModified": "2022-08-26T10:01:58+08:00","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/noobmid.github.io\/images\/avatar.png",
+                    "width":  2838 ,
+                    "height":  2716 
+                }},"author": {
+                "@type": "Person",
+                "name": "cx玄烨0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="normal" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cx玄烨0&#39; Blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/noobmid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cx玄烨0&#39; Blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/noobmid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux八股文</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-26">2022-08-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3691 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;<span id="/linux%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Linux八股文">
+                        <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础命令">基础命令</a>
+      <ul>
+        <li><a href="#1-怎么查看当前进程怎么执行退出怎么查看当前路径">1. 怎么查看当前进程？怎么执行退出？怎么查看当前路径？</a></li>
+        <li><a href="#2-查看当前用户id">2. 查看当前用户id</a></li>
+        <li><a href="#3-建立软链接和硬链接">3. 建立软链接和硬链接</a></li>
+        <li><a href="#4-查看文件命令">4. 查看文件命令</a></li>
+        <li><a href="#5统计文件内容命令">5.统计文件内容命令</a></li>
+        <li><a href="#6-grep搜索命令">6. grep搜索命令</a></li>
+        <li><a href="#7-后台运行命令">7. 后台运行命令</a></li>
+        <li><a href="#8-查看所有进程">8. 查看所有进程</a></li>
+        <li><a href="#9-查看后台任务">9. 查看后台任务</a></li>
+        <li><a href="#10-把后台任务调到前台执行使用什么命令把停下的后台任务在后台执行起来用什么命令">10. 把后台任务调到前台执行使用什么命令?把停下的后台任务在后台执行起来用什么命令?</a></li>
+        <li><a href="#11-终止进程用什么命令">11. 终止进程用什么命令?</a></li>
+        <li><a href="#12-搜索文件的命令">12. 搜索文件的命令</a></li>
+        <li><a href="#13-使用什么命令查看磁盘使用空间">13. 使用什么命令查看磁盘使用空间？</a></li>
+        <li><a href="#14-查看网络">14. 查看网络</a></li>
+        <li><a href="#15-对命令取别名">15. 对命令取别名</a></li>
+        <li><a href="#16-awk">16. awk</a></li>
+        <li><a href="#17-列出所有支持的命令">17. 列出所有支持的命令</a></li>
+        <li><a href="#18-不重启机器的条件下有什么方法可以把所有正在运行的进程移除呢">18. 不重启机器的条件下，有什么方法可以把所有正在运行的进程移除呢？</a></li>
+        <li><a href="#19-定时任务">19. 定时任务</a></li>
+        <li><a href="#20-查看路由表">20. 查看路由表</a></li>
+        <li><a href="#21-查看系统资源占用">21. 查看系统资源占用</a></li>
+      </ul>
+    </li>
+    <li><a href="#22-查看物理cpu和cpu核数">22. 查看物理CPU和CPU核数</a></li>
+    <li><a href="#23-查看内存信息">23. 查看内存信息</a></li>
+    <li><a href="#24网络修改">24.网络修改</a></li>
+    <li><a href="#系统管理">系统管理</a></li>
+    <li><a href="#1-终端是哪个文件夹下的哪个文件黑洞文件是哪个文件夹下的哪个命令">1. 终端是哪个文件夹下的哪个文件？黑洞文件是哪个文件夹下的哪个命令？</a></li>
+    <li><a href="#2-linux-中进程有哪几种状态在-ps-显示出来的信息中分别用什么符号表示的">2. Linux 中进程有哪几种状态？在 ps 显示出来的信息中，分别用什么符号表示的？</a></li>
+    <li><a href="#3-进程管理">3. 进程管理</a></li>
+    <li><a href="#4-内存管理">4. 内存管理</a></li>
+    <li><a href="#5-epoll原理">5. Epoll原理</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="linux八股文">Linux八股文</h1>
+<h2 id="基础命令">基础命令</h2>
+<h3 id="1-怎么查看当前进程怎么执行退出怎么查看当前路径">1. 怎么查看当前进程？怎么执行退出？怎么查看当前路径？</h3>
+<p>​	查看当前进程：ps、执行退出：exit、查看当前路径：pwd</p>
+<h3 id="2-查看当前用户id">2. 查看当前用户id</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@cx-ali ~<span class="o">]</span><span class="c1"># id</span>
+<span class="nv">uid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span>  <span class="c1"># 用户id、组id、所属附加群组的id</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="3-建立软链接和硬链接">3. 建立软链接和硬链接</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">ln -s  src dist
+ln src dist
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="4-查看文件命令">4. 查看文件命令</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">vi filename <span class="c1">#编辑方式查看，可修改</span>
+cat filename <span class="c1">#显示全部文件内容</span>
+more filename <span class="c1">#分页显示文件内容</span>
+less filename <span class="c1">#与 more 相似，更好的是可以往前翻页</span>
+tail filename <span class="c1">#仅查看尾部，还可以指定行数</span>
+head filename <span class="c1">#仅查看头部,还可以指定行数</span>
+
+<span class="c1"># 一页一页查看大文件命令</span>
+cat filename <span class="p">|</span> more
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="5统计文件内容命令">5.统计文件内容命令</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@cx-ali ~<span class="o">]</span><span class="c1"># wc -c -l -w .viminfo </span>
+<span class="m">47</span> <span class="m">148</span> <span class="m">770</span> .viminfo		<span class="c1"># -c 统计字节数 -l 统计行数 -w 统计字数</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="6-grep搜索命令">6. grep搜索命令</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">grep -i <span class="s2">&#34;error&#34;</span>   <span class="c1">#忽略大小写区分</span>
+grep -v <span class="s2">&#34;grep&#34;</span>  <span class="c1">#忽略grep命令本身，在文档中过滤掉包含有grep字符的行</span>
+grep <span class="o">[</span>^string<span class="o">]</span> filename <span class="c1">#正则表达式搜索</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="7-后台运行命令">7. 后台运行命令</h3>
+<p>​	使用 &amp; 在命令结尾来让程序自动运行。</p>
+<h3 id="8-查看所有进程">8. 查看所有进程</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">ps -ef <span class="c1"># system v 输出</span>
+ps -aux <span class="c1"># bsd 格式输出</span>
+ps -ef <span class="p">|</span> grep pid
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="9-查看后台任务">9. 查看后台任务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">jobs</span> -l
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="10-把后台任务调到前台执行使用什么命令把停下的后台任务在后台执行起来用什么命令">10. 把后台任务调到前台执行使用什么命令?把停下的后台任务在后台执行起来用什么命令?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">fg</span> <span class="c1"># 把后台任务调到前台执行</span>
+<span class="nb">bg</span> <span class="c1"># 把停下的后台任务在后台执行起来</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="11-终止进程用什么命令">11. 终止进程用什么命令?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># kill [-s &lt;信息名称或编号&gt;][程序] 或 kill [-l &lt;信息编号&gt;]</span>
+<span class="nb">kill</span> -9 pid
+<span class="nb">kill</span> -l <span class="c1"># 查看系统支持的所有信号</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="12-搜索文件的命令">12. 搜索文件的命令</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># find &lt;指定目录&gt; &lt;指定条件&gt; &lt;指定动作&gt;</span>
+<span class="c1"># find 直接搜索磁盘，较慢。</span>
+find / -name <span class="s2">&#34;string*&#34;</span>
+
+locate 只加文件名
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">whereis 
+<span class="c1"># whereis [-bfmsu][-B &lt;目录&gt;...][-M &lt;目录&gt;...][-S &lt;目录&gt;...][文件...]</span>
+<span class="c1">#-b 只查找二进制文件。</span>
+<span class="c1">#-B&lt;目录&gt; 只在设置的目录下查找二进制文件。-f 不显示文件名前的路径名称。</span>
+<span class="c1">#-m 只查找说明文件。</span>
+<span class="c1">#-M&lt;目录&gt; 只在设置的目录下查找说明文件。-s 只查找原始代码文件。</span>
+<span class="c1">#-S&lt;目录&gt; 只在设置的目录下查找原始代码文件。-u 查找不包含指定类型的文件。</span>
+<span class="c1">#which 指令会在 PATH 变量指定的路径中，搜索某个系统命令的位置，并且返回第一个搜索结果。</span>
+<span class="c1">#-n 指定文件名长度，指定的长度必须大于或等于所有文件中最长的文件名。</span>
+<span class="c1">#-p 与-n 参数相同，但此处的包括了文件的路径。-w 指定输出时栏位的宽度。</span>
+<span class="c1">#-V 显示版本信息</span>
+
+<span class="c1">#which 只能查可执行文件</span>
+<span class="c1">#whereis 只能查二进制文件、说明文档，源文件等</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="13-使用什么命令查看磁盘使用空间">13. 使用什么命令查看磁盘使用空间？</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>root@cx-ali ~<span class="o">]</span><span class="c1"># df -hl</span>
+Filesystem      Size  Used Avail Use% Mounted on    <span class="c1"># 文件系统 容量 已用 可用 已用% 挂载点</span>
+devtmpfs        1.8G     <span class="m">0</span>  1.8G   0% /dev
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># du 和 df 的定义，以及区别？</span>
+<span class="c1"># du 显示目录或文件的大小</span>
+<span class="c1"># df 显示每个&lt;文件&gt;所在的文件系统的信息，默认是显示所有文件系统。</span>
+<span class="c1"># df 命令获得真正的文件系统数据，而 du 命令只查看文件系统的部分情况。</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="14-查看网络">14. 查看网络</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">netstat 
+netstat -nlpt <span class="c1"># 查看tcp的网络信息</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="15-对命令取别名">15. 对命令取别名</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">alias</span> <span class="nv">la</span><span class="o">=</span><span class="s1">&#39;ls -a&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="16-awk">16. awk</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">cat /etc/passwd <span class="p">|</span>awk -F <span class="s1">&#39;:&#39;</span> <span class="s1">&#39;{print $1&#34;\t&#34;$7}&#39;</span> <span class="c1"># -F 的意思是以&#39;:&#39;分隔</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="17-列出所有支持的命令">17. 列出所有支持的命令</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">compgen</span> -c
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="18-不重启机器的条件下有什么方法可以把所有正在运行的进程移除呢">18. 不重启机器的条件下，有什么方法可以把所有正在运行的进程移除呢？</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">disown</span> -r
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="19-定时任务">19. 定时任务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">crontab <span class="o">[</span>-u username<span class="o">]</span>　　　　<span class="c1">#省略用户表表示操作当前用户的crontab</span>
+    -e      <span class="o">(</span>编辑工作表<span class="o">)</span>
+    -l      <span class="o">(</span>列出工作表里的命令<span class="o">)</span>
+    -r      <span class="o">(</span>删除工作作<span class="o">)</span>
+
+<span class="c1"># 实例</span>
+* * * * * myCommand   <span class="c1"># 每分钟执行</span>
+3,15 8-11 * * * myCommand <span class="c1"># 在上午8点到11点的第3和第15分钟执行</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="20-查看路由表">20. 查看路由表</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">route -n
+nestat -rn
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="21-查看系统资源占用">21. 查看系统资源占用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">top <span class="c1"># top 命令</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-26%20%E4%B8%8B%E5%8D%8812.08.46.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-26%20%E4%B8%8B%E5%8D%8812.08.46.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-26%20%E4%B8%8B%E5%8D%8812.08.46.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-26%20%E4%B8%8B%E5%8D%8812.08.46.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-26%20%E4%B8%8B%E5%8D%8812.08.46.png"
+        title="截屏2022-08-26 下午12.08.46" /></p>
+<blockquote>
+<p><strong>第一行 — 任务队列信息</strong>: top - 20:45:10 up 10:08,  1 user,  load average: 0.00, 0.01, 0.05</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">内容</th>
+<th style="text-align:left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">20:45:10</td>
+<td style="text-align:left">当前时间</td>
+</tr>
+<tr>
+<td style="text-align:left">up 10:08</td>
+<td style="text-align:left">系统运行时间（10小时08分钟）</td>
+</tr>
+<tr>
+<td style="text-align:left">1 user</td>
+<td style="text-align:left">当前登录用户数</td>
+</tr>
+<tr>
+<td style="text-align:left">load average: 0.00, 0.01, 0.05</td>
+<td style="text-align:left">系统负载（任务队列的平均长度），分别是1分钟、5分钟、15分钟到现在的平均值</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>第二行 — 进程信息</strong>: Tasks: 105 total,   1 running, 104 sleeping,   0 stopped,   0 zombie</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">内容</th>
+<th style="text-align:left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">105 total</td>
+<td style="text-align:left">进程总数</td>
+</tr>
+<tr>
+<td style="text-align:left">1 running</td>
+<td style="text-align:left">正在运行的进程数</td>
+</tr>
+<tr>
+<td style="text-align:left">104 sleeping</td>
+<td style="text-align:left">睡眠进程数</td>
+</tr>
+<tr>
+<td style="text-align:left">0 stopped</td>
+<td style="text-align:left">停止进程数</td>
+</tr>
+<tr>
+<td style="text-align:left">0 zombie</td>
+<td style="text-align:left">僵尸进程数</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>第三行 — CPU信息</strong>: Cpu(s):  0.0%us,  0.1%sy,  0.0%ni, 99.9%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">内容</th>
+<th style="text-align:left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0.0%us</td>
+<td style="text-align:left">用户空间占CPU百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.1%sy</td>
+<td style="text-align:left">内核空间占CPU百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0%ni</td>
+<td style="text-align:left">用户进程空间内改变过优先级的进程占用CPU百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">99.9%id</td>
+<td style="text-align:left">空闲CPU百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0%wa</td>
+<td style="text-align:left">等待输入输出的CPU时间百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0%hi</td>
+<td style="text-align:left">硬件中断占CPU时间百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0%si</td>
+<td style="text-align:left">软件终端占CPU时间百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0%st</td>
+<td style="text-align:left">提供给虚拟化环境执行占CPU时间百分比</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>第四行 — 内存信息</strong>: Mem:    288428k total,   257956k used,    30472k free,    40160k buffers</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">内容</th>
+<th style="text-align:left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">288428k total</td>
+<td style="text-align:left">物理内存总量</td>
+</tr>
+<tr>
+<td style="text-align:left">257956k used</td>
+<td style="text-align:left">使用的物理内存总量</td>
+</tr>
+<tr>
+<td style="text-align:left">30472k free</td>
+<td style="text-align:left">空闲内存总量</td>
+</tr>
+<tr>
+<td style="text-align:left">40160k buffers</td>
+<td style="text-align:left">用作内核缓存的内存量</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>第五行 — 内存交换区信息</strong>: Swap:  1046524k total,     3856k used,  1042668k free,    82000k cached</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">内容</th>
+<th style="text-align:left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1046524k total</td>
+<td style="text-align:left">交换区总容量</td>
+</tr>
+<tr>
+<td style="text-align:left">3856k used</td>
+<td style="text-align:left">使用交换区的总量</td>
+</tr>
+<tr>
+<td style="text-align:left">1042668k free</td>
+<td style="text-align:left">空闲交换区总量</td>
+</tr>
+<tr>
+<td style="text-align:left">82000k cached</td>
+<td style="text-align:left">缓冲交换区总量</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>进程信息:</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>PID</th>
+<th>进程ID</th>
+<th>S</th>
+<th>进程状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USER</td>
+<td>进程所有者用户名</td>
+<td>%CPU</td>
+<td>CPU 时间占用百分比</td>
+</tr>
+<tr>
+<td>PR</td>
+<td>优先级</td>
+<td>%MEM</td>
+<td>进程使用物理内存百分比</td>
+</tr>
+<tr>
+<td>NI</td>
+<td>nice值,负数表示高优先级</td>
+<td>TIME+</td>
+<td>进程使用的CPU时间总计</td>
+</tr>
+<tr>
+<td>VIRT</td>
+<td>进程使用虚拟内存总量（以KB为单位） VIRT=SWAP+RES</td>
+<td>COMMAND</td>
+<td>命令名/命令行</td>
+</tr>
+<tr>
+<td>RES</td>
+<td>进程使用的未被换出的物理内存大小（以KB为单位） RES=CODE+DATA</td>
+<td>SHR</td>
+<td>共享内存总大小</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>lsof</li>
+</ul>
+<p>​			 <strong>lsof</strong>表示文件列表，我们可以知道哪个进程打开了哪个文件。</p>
+<ul>
+<li>
+<p>查看系统负载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>root@cx-ali ~<span class="o">]</span><span class="c1"># w</span>
+ 12:57:02 up <span class="m">27</span> days, 22:54,  <span class="m">1</span> user,  load average: 0.01, 0.02, 0.05
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+root     pts/0    113.246.112.27   11:35    6.00s  0.06s  0.00s w
+<span class="o">[</span>root@cx-ali ~<span class="o">]</span><span class="c1"># uptime </span>
+ 12:57:34 up <span class="m">27</span> days, 22:55,  <span class="m">1</span> user,  load average: 0.00, 0.02, 0.05
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="22-查看物理cpu和cpu核数">22. 查看物理CPU和CPU核数</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">cat /proc/cpuinfo<span class="p">|</span>grep -c <span class="s1">&#39;physical id&#39;</span> <span class="c1"># CPU数</span>
+cat /proc/cpuinfo<span class="p">|</span>grep -c <span class="s1">&#39;processor&#39;</span>   <span class="c1"># 核数</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="23-查看内存信息">23. 查看内存信息</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>root@centos6 ~ 10:57 <span class="c1">#39]# vmstat</span>
+procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
+r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+<span class="m">0</span>  <span class="m">0</span>      <span class="m">0</span> <span class="m">1783964</span>  <span class="m">13172</span> <span class="m">106056</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">29</span>     <span class="m">7</span>   <span class="m">15</span>   <span class="m">11</span>  <span class="m">0</span>  <span class="m">0</span> <span class="m">99</span>  <span class="m">0</span>  <span class="m">0</span>
+
+<span class="o">[</span>root@cx-ali ~<span class="o">]</span><span class="c1"># free</span>
+              total        used        free      shared  buff/cache   available
+Mem:        <span class="m">3733516</span>     <span class="m">1493136</span>      <span class="m">196568</span>         <span class="m">616</span>     <span class="m">2043812</span>     <span class="m">1960704</span>
+Swap:             <span class="m">0</span> 
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>r即running，表示正在跑的任务数; b即blocked，表示被阻塞的任务数; si表示有多少数据从交换分区读入内存; so表示有多少数据从内存写入交换分区; bi表示有多少数据从磁盘读入内存; bo表示有多少数据从内存写入磁盘</p>
+</blockquote>
+<h2 id="24网络修改">24.网络修改</h2>
+<ul>
+<li>
+<p>编辑/etc/sysconfig/network-scripts/ifcft-eth0 文件。重启网络服务service network restart</p>
+</li>
+<li>
+<p>给一个网卡配置多个ip, 新建一个ifcfg-eth0:1文件,将DEVICE名称改为eth0:1 ,修改ip,重启网络服务即可</p>
+</li>
+<li>
+<p>在文件 /etc/resolv.conf 中设置DNS</p>
+</li>
+</ul>
+<h2 id="系统管理">系统管理</h2>
+<h2 id="1-终端是哪个文件夹下的哪个文件黑洞文件是哪个文件夹下的哪个命令">1. 终端是哪个文件夹下的哪个文件？黑洞文件是哪个文件夹下的哪个命令？</h2>
+<p>终端	/dev/tty				黑洞文件 /dev/null</p>
+<h2 id="2-linux-中进程有哪几种状态在-ps-显示出来的信息中分别用什么符号表示的">2. Linux 中进程有哪几种状态？在 ps 显示出来的信息中，分别用什么符号表示的？</h2>
+<ul>
+<li>不可中断状态：进程处于睡眠状态，但是此刻进程是不可中断的。不可中断， 指进程不响应异步信号</li>
+<li>暂停状态/跟踪状态：向进程发送一个 SIGSTOP 信号，它就会因响应该信号 而进入 TASK_STOPPED 状态;当进程正在被跟踪时，它处于 TASK_TRACED 这个特殊的状态。“正在被跟踪”指的是进程暂停下来，等待跟踪它的进程对它进行操作</li>
+<li>就绪状态：</li>
+<li>运行状态：在 run_queue 队列里的状态</li>
+<li>可中断睡眠状态：处于这个状态的进程因为等待某某事件的发生（比如等待 socket 连接、等待信号量），而被挂起</li>
+<li>zombie 状态（僵尸）：父亲没有通过 wait 系列的系统调用会顺便将子进程的尸体（task_struct）也释放掉</li>
+<li>退出状态</li>
+</ul>
+<blockquote>
+<p>D 不可中断 Uninterruptible（usually IO）
+R 正在运行，或在队列中的进程
+S 处于休眠状态
+T 停止或被追踪
+Z 僵尸进程
+W 进入内存交换（从内核 2.6 开始无效）
+X 死掉的进程</p>
+</blockquote>
+<h2 id="3-进程管理">3. 进程管理</h2>
+<ul>
+<li>
+<p>父子进程通信</p>
+<p>父进程通过使用管道，套接字，消息队列等与子进程进行通信。</p>
+</li>
+<li>
+<p>僵尸进程</p>
+<p>这是一个执行已完成但进程表中甚至存在信息的进程。由于父进程需要读取子进程的状态，因此发生在父进程中。一旦使用wait系统调用完成了该任务，则僵尸进程将从进程表中删除。这被称为僵尸进程。</p>
+</li>
+<li>
+<p>异步和非阻塞的区别</p>
+<ol>
+<li>异步:调用在发出之后，这个调用就直接返回，不管有无结果;异步是过程。</li>
+<li>非阻塞:关注的是程序在等待调用结果(消息，返回值)时的状态，指在不能立刻得到结果之前，该调用不会阻塞当前线程。</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-内存管理">4. 内存管理</h2>
+<ul>
+<li>
+<p>buffer和cache如何区分?</p>
+<p>​	**Cache是加速“读”，**而buffer是缓冲“写</p>
+<p>​	buffer和cache都是内存中的一块区域，当需要写数据到磁盘时，由于磁盘速度比较慢，所以CPU先把数据存进buffer，然后CPU去执行其他任务，buffer中的数据会定期写入磁盘；当需要从磁盘读入数据时，由于磁盘速度比较慢，可以把即将用到的数据提前存入cache，CPU直接从Cache中拿数据要快的多。</p>
+</li>
+<li>
+<p>Swap空间</p>
+<p>交换空间的主要功能是当全部的 RAM 被占用并且需要更多内存时，用磁盘空间代替 RAM 内存。Linux 计算机中的内存总量是 RAM + 交换分区，交换分区被称为虚拟内存.</p>
+</li>
+</ul>
+<h2 id="5-epoll原理">5. Epoll原理</h2>
+<p>IO多路复用技术,可以非常高效的处理数以百万计的Socket句柄.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int epoll_create(int size);
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
+int epoll_wait(int epfd, struct epoll_event *events,int maxevents, int timeout);
+</code></pre></td></tr></table>
+</div>
+</div><p>​	使用起来很清晰，首先要调用 epoll_create 建立一个epoll对象。参数size是内核保证能够正确处理的最大句柄 数，多于这个最大数时内核可不保证效果。 epoll_ctl可以操作上面建立的epoll，例如，将刚建立的 socket 加入到 epoll中让其监控，或者把 epoll正在监控的某个socket句柄移出epoll，不再监控它等等。</p>
+<p>epoll_wait 在调用时，在给定的timeout时间内，当在监控的所有句柄中有事件发生时，就返回用户态的进程。</p>
+<p>调用 epoll_wait 时就相当于以往调用select/poll，但是这时却不 用传递socket句柄给内核，因为内核已经在epoll_ctl中拿到了要监控的句柄列表。</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-08-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/linux%E5%85%AB%E8%82%A1%E6%96%87/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Linux八股文"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Linux八股文"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Linux八股文"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/" data-title="Linux八股文" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/golang%E4%BD%93%E7%B3%BB/" class="prev" rel="prev" title="Golang体系"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Golang体系</a>
+            <a href="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="next" rel="next" title="操作系统">操作系统<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.87.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/noobmid" target="_blank">cx玄烨0</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.5.0/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@14.0.0/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"en","pageSize":10,"placeholder":"Your comment ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"data":{"id-1":"cx玄烨0's Blog","id-2":"cx玄烨0's Blog"},"lightgallery":true,"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
