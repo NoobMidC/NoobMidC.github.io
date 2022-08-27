@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/golang%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  18226 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  18224 ,
         "url": "https:\/\/noobmid.github.io\/golang%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-21T00:38:10+08:00","dateModified": "2022-08-21T00:38:10+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,7 +109,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-21">2022-08-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;18226 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-21">2022-08-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;18224 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;37 minutes&nbsp;<span id="/golang%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Golang八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
@@ -156,6 +156,7 @@
         <li><a href="#14-for-range-循环">14. for range 循环</a></li>
         <li><a href="#15-panic和recover">15. Panic和Recover</a>
           <ul>
+            <li><a href="#panic">panic</a></li>
             <li><a href="#recover">recover</a></li>
           </ul>
         </li>
@@ -179,6 +180,7 @@
             <li><a href="#gc触发机制">GC触发机制</a></li>
             <li><a href="#gc细节">GC细节</a>
               <ul>
+                <li><a href="#增量垃圾收集">增量垃圾收集</a></li>
                 <li><a href="#并发垃圾收集">并发垃圾收集</a></li>
               </ul>
             </li>
@@ -1037,8 +1039,7 @@
 </span></code></pre></td></tr></table>
 </div>
 </div><h3 id="15-panic和recover">15. Panic和Recover</h3>
-<pre><code>#### panic
-</code></pre>
+<h4 id="panic">panic</h4>
 <p>​	panic的作用是制造一次宕机，宕机就代表程序运行终止，但是已经“生效”的(当前 Goroutine )延迟函数仍会执行（即已经压入栈的defer延迟函数，panic之前的）。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1355,8 +1356,7 @@
 </li>
 </ol>
 <h4 id="gc细节">GC细节</h4>
-<pre><code>##### 增量垃圾收集
-</code></pre>
+<h5 id="增量垃圾收集">增量垃圾收集</h5>
 <p>​		增量地标记和清除垃圾，降低应用程序暂停的最长时间；</p>
 <p>​		传统的垃圾收集算法会在垃圾收集的执行期间暂停应用程序，一旦触发垃圾收集，垃圾收集器会抢占 CPU 的使用权占据大量的计算资源以完成标记和清除工作，然而很多追求实时的应用程序无法接受长时间的 STW。增量式（Incremental）的垃圾收集是减少程序最长暂停时间的一种方案，它可以将原本时间较长的暂停时间切分成多个更小的 GC 时间片，虽然从垃圾收集开始到结束的时间更长了，但是这也减少了应用程序暂停的最大时间。</p>
 <h5 id="并发垃圾收集">并发垃圾收集</h5>
