@@ -4,7 +4,63 @@
         <link>https://noobmid.github.io/posts/</link>
         <description>All Posts | cx玄烨0&#39; Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>18959206467@163.com (cx玄烨0)</managingEditor>
-            <webMaster>18959206467@163.com (cx玄烨0)</webMaster><lastBuildDate>Fri, 26 Aug 2022 13:52:02 &#43;0800</lastBuildDate><atom:link href="https://noobmid.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>18959206467@163.com (cx玄烨0)</webMaster><lastBuildDate>Sun, 28 Aug 2022 12:50:37 &#43;0800</lastBuildDate><atom:link href="https://noobmid.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>容器技术</title>
+    <link>https://noobmid.github.io/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/</link>
+    <pubDate>Sun, 28 Aug 2022 12:50:37 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>GRPC</title>
+    <link>https://noobmid.github.io/grpc/</link>
+    <pubDate>Sun, 28 Aug 2022 12:50:23 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/grpc/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Kafka</title>
+    <link>https://noobmid.github.io/kafka/</link>
+    <pubDate>Sun, 28 Aug 2022 12:50:11 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/kafka/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Elasticsearch</title>
+    <link>https://noobmid.github.io/elasticsearch/</link>
+    <pubDate>Sun, 28 Aug 2022 12:50:05 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/elasticsearch/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Redis八股文</title>
+    <link>https://noobmid.github.io/redis%E5%85%AB%E8%82%A1%E6%96%87/</link>
+    <pubDate>Sun, 28 Aug 2022 12:49:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/redis%E5%85%AB%E8%82%A1%E6%96%87/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Mysql八股文</title>
+    <link>https://noobmid.github.io/mysql%E5%85%AB%E8%82%A1%E6%96%87/</link>
+    <pubDate>Sun, 28 Aug 2022 12:49:28 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/mysql%E5%85%AB%E8%82%A1%E6%96%87/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>计算机网络八股文</title>
+    <link>https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/</link>
+    <pubDate>Sun, 28 Aug 2022 12:49:05 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>操作系统八股文</title>
     <link>https://noobmid.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%85%AB%E8%82%A1%E6%96%87/</link>
     <pubDate>Fri, 26 Aug 2022 13:52:02 &#43;0800</pubDate>
@@ -26,14 +82,6 @@
     <pubDate>Mon, 22 Aug 2022 22:34:00 &#43;0800</pubDate>
     <author>Author</author>
     <guid>https://noobmid.github.io/golang%E4%BD%93%E7%B3%BB/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Golang八股文</title>
-    <link>https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/</link>
-    <pubDate>Sun, 21 Aug 2022 00:38:10 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

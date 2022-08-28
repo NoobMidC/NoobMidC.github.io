@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>计算机网络八股文 - cx玄烨0&#39; Blog</title><meta name="Description" content="专注于golang, 云原生开发"><meta property="og:title" content="计算机网络八股文" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/" /><meta property="og:image" content="https://noobmid.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-28T12:49:05+08:00" />
+<meta property="article:modified_time" content="2022-08-28T12:49:05+08:00" /><meta property="og:site_name" content="cx玄烨0&#39;s Blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://noobmid.github.io/logo.png"/>
+
+<meta name="twitter:title" content="计算机网络八股文"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/" /><link rel="prev" href="https://noobmid.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%85%AB%E8%82%A1%E6%96%87/" /><link rel="next" href="https://noobmid.github.io/mysql%E5%85%AB%E8%82%A1%E6%96%87/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "计算机网络八股文",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/noobmid.github.io\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87\/"
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  11456 ,
+        "url": "https:\/\/noobmid.github.io\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-28T12:49:05+08:00","dateModified": "2022-08-28T12:49:05+08:00","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/noobmid.github.io\/images\/avatar.png",
+                    "width":  2838 ,
+                    "height":  2716 
+                }},"author": {
+                "@type": "Person",
+                "name": "cx玄烨0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="normal" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cx玄烨0&#39; Blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/noobmid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cx玄烨0&#39; Blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/noobmid" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">计算机网络八股文</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;11456 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;23 minutes&nbsp;<span id="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="计算机网络八股文">
+                        <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么要对网络协议分层">为什么要对网络协议分层？</a></li>
+    <li><a href="#路由器和交换机的区别">路由器和交换机的区别？</a></li>
+    <li><a href="#协议模型">协议模型</a></li>
+    <li><a href="#应用层http协议">[应用层]HTTP协议</a>
+      <ul>
+        <li><a href="#http-状态码">HTTP 状态码</a></li>
+        <li><a href="#http版本">HTTP版本</a></li>
+        <li><a href="#http方法">HTTP方法</a>
+          <ul>
+            <li><a href="#get和post的区别">GET和POST的区别</a></li>
+          </ul>
+        </li>
+        <li><a href="#http和https的区别">HTTP和HTTPS的区别</a></li>
+        <li><a href="#https的加密过程">HTTPS的加密过程</a></li>
+      </ul>
+    </li>
+    <li><a href="#应用层dns协议">[应用层]DNS协议</a></li>
+    <li><a href="#传输层tcpudp协议详解">[传输层]TCP/UDP协议详解</a>
+      <ul>
+        <li><a href="#tcp">TCP</a>
+          <ul>
+            <li><a href="#数据结构">数据结构</a></li>
+            <li><a href="#tcp可靠传输">TCP可靠传输</a></li>
+            <li><a href="#tcp三次握手在这里插入图片描述httpsrawgithubusercontentcomnoobmidpicsmainwatermark252ctype_d3f5lxplbmhlaq252cshadow_50252ctext_q1netiba5zgl5zad5zcw252csize_20252ccolor_ffffff252ct_70252cg_se252cx_16png">TCP三次握手<img src="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png" alt="在这里插入图片描述"></a></li>
+            <li><a href="#tcp四次挥手imghttpsrawgithubusercontentcomnoobmidpicsmainwatermark252ctype_d3f5lxplbmhlaq252cshadow_50252ctext_q1netiba5zgl5zad5zcw252csize_20252ccolor_ffffff252ct_70252cg_se252cx_16-20220828202309378png">TCP四次挥手<img src="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16-20220828202309378.png" alt="img"></a></li>
+            <li><a href="#问题-如果已经建立了tcp连接但是客户端突然出现故障了怎么办">问题: 如果已经建立了TCP连接，但是客户端突然出现故障了怎么办？</a></li>
+          </ul>
+        </li>
+        <li><a href="#udp">UDP</a>
+          <ul>
+            <li><a href="#数据结构-1">数据结构</a></li>
+            <li><a href="#tcp和udp对比">TCP和UDP对比</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#网络层arp协议">[网络层]ARP协议</a></li>
+    <li><a href="#网络层ip协议">[网络层]IP协议</a>
+      <ul>
+        <li><a href="#tcp分段和ip分片">TCP分段和IP分片</a></li>
+        <li><a href="#有了ip地址为什么还要用mac地址">有了IP地址，为什么还要用MAC地址？</a></li>
+      </ul>
+    </li>
+    <li><a href="#网络层icmp协议">[网络层]ICMP协议</a></li>
+    <li><a href="#jwt">JWT</a>
+      <ul>
+        <li><a href="#sessioncookie和token的主要区别">Session、Cookie和Token的主要区别</a></li>
+        <li><a href="#客户端禁止-cookie-能实现-session-还能用吗">客户端禁止 cookie 能实现 session 还能用吗</a></li>
+      </ul>
+    </li>
+    <li><a href="#nat">NAT</a></li>
+    <li><a href="#uri-和url的区别">URI 和URL的区别</a></li>
+    <li><a href="#路由器和交换机的区别-1">路由器和交换机的区别？</a></li>
+    <li><a href="#在浏览器中输url地址到显示主页的过程">在浏览器中输⼊url地址到显示主页的过程</a></li>
+    <li><a href="#一个主机可以建立多少连接">一个主机可以建立多少连接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="计算机网络">计算机网络</h1>
+<h2 id="为什么要对网络协议分层">为什么要对网络协议分层？</h2>
+<p>​	网络协议是计算机在通信过程中要遵循的一些约定好的规则。</p>
+<p>​	网络分层的原因：</p>
+<ul>
+<li>
+<p>易于实现和维护，因为各层之间是独立的，层与层之间不会收到影响。</p>
+</li>
+<li>
+<p>有利于标准化的制定</p>
+</li>
+</ul>
+<h2 id="路由器和交换机的区别">路由器和交换机的区别？</h2>
+<h2 id="协议模型">协议模型</h2>
+<p>OSI七层协议模型包括: 应用-表示-会话-传输-网络-数据链路-物理层</p>
+<p>五层协议模型包括: 应用-传输-网络-数据链路-物理层</p>
+<ul>
+<li>
+<p>物理层</p>
+<p>​		主要解决两台物理机之间的通信，通过二进制比特流的传输来实现，二进制数据表现为电流电压上的强弱，到达目的地再转化为二进制机器码。网卡、集线器工作在这一层。</p>
+</li>
+<li>
+<p>数据链路层</p>
+<p>​		在不可靠的物理介质上提供可靠的传输，接收来自物理层的位流形式的数据，并封装成帧，传送到上一层;同样，也将来自上层的数据帧，拆装为位流形式的数据转发到物理层。这一层在物理层提供的比特流的基础上，通过<strong>差错控制</strong>、<strong>流量控制</strong>方法，使有差错的物理线路变为无差错的数据链路。提供物理地址寻址功能。交换机工作在这一层。</p>
+</li>
+<li>
+<p>网络层</p>
+<p>​		将网络地址翻译成对应的物理地址，并决定如何将数据从发送方路由到接收方，通过路由选择算法为分组通过通信子网选择最佳路径。路由器工作在这一层。常见的协议有IP协议，ARP协议、ICMP协议。</p>
+</li>
+<li>
+<p>传输层</p>
+<p>​		传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节，使应用程序看起来像是在两个传输层实体之间有一条端到端的逻辑通信信道。主要协议为TCP、UDP协议</p>
+</li>
+<li>
+<p>会话层</p>
+<ol>
+<li>建立会话:身份验证，权限鉴定等;</li>
+<li>保持会话:对该会话进行维护，在会话维持期间两者可以随时使用这条会话传输数据;</li>
+<li>断开会话:当应用程序或应用层规定的超时时间到期后，OSI会话层才会释放这条会话。</li>
+</ol>
+</li>
+<li>
+<p>表示层</p>
+<p>​		对数据格式进行编译，对收到或发出的数据根据应用层的特征进行处理，如处理为文字、图片、音频、视频、文档等，还可以对压缩文件进行解压缩、对加密文件进行解密等。</p>
+</li>
+<li>
+<p>应用层</p>
+</li>
+</ul>
+<p>​		应用层的任务是通过应用进程之间的交互来完成特定的网络作用，常见的应用层协议有DNS，HTTP、FTP协议等。</p>
+<h2 id="应用层http协议">[应用层]HTTP协议</h2>
+<h3 id="http-状态码">HTTP 状态码</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类别</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1xx</td>
+<td style="text-align:center">信息性状态码</td>
+</tr>
+<tr>
+<td style="text-align:left">2xx</td>
+<td style="text-align:center">成功状态码</td>
+</tr>
+<tr>
+<td style="text-align:left">3xx</td>
+<td style="text-align:center">重定向状态码</td>
+</tr>
+<tr>
+<td style="text-align:left">4xx</td>
+<td style="text-align:center">客户端错误状态码</td>
+</tr>
+<tr>
+<td style="text-align:left">5xx</td>
+<td style="text-align:center">服务端错误状态码</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>1xx</p>
+<p>100 Continue：表示正常，客户端可以继续发送请求</p>
+<p>101 Switching Protocols：切换协议，服务器根据客户端的请求切换协议。</p>
+</li>
+<li>
+<p>2xx</p>
+<p>200 OK：请求成功</p>
+<p>201 Created：已创建，表示成功请求并创建了新的资源</p>
+<p>202 Accepted：已接受，已接受请求，但未处理完成。</p>
+<p>204 No Content：无内容，服务器成功处理，但未返回内容。</p>
+<p>205 Reset Content：重置内容，服务器处理成功，客户端应重置文档视图。</p>
+<p>206 Partial Content：表示客户端进行了范围请求，响应报文应包含Content-Range指定范围的实体内容</p>
+</li>
+<li>
+<p>3xx</p>
+<p>301 Moved Permanently：永久性重定向</p>
+<p>302 Found：临时重定向</p>
+<p>303 See Other：和301功能类似，但要求客户端采用get方法获取资源</p>
+<p>304 Not Modified：所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。</p>
+<p>305 Use Proxy：所请求的资源必须通过代理访问</p>
+<p>307 Temporary Redirect： 临时重定向，与302类似，要求使用get请求重定向。</p>
+</li>
+<li>
+<p>4xx</p>
+<p>400 Bad Request：客户端请求的语法错误，服务器无法理解。</p>
+<p>401 Unauthorized：表示发送的请求需要有认证信息。</p>
+<p>403 Forbidden：服务器理解用户的请求，但是拒绝执行该请求</p>
+<p>404 Not Found：服务器无法根据客户端的请求找到资源。</p>
+<p>405 Method Not Allowed：客户端请求中的方法被禁止</p>
+<p>406 Not Acceptable：服务器无法根据客户端请求的内容特性完成请求</p>
+<p>408 Request Time-out：服务器等待客户端发送的请求时间过长，超时</p>
+</li>
+<li>
+<p>5xx</p>
+<p>500 Internal Server Error：服务器内部错误，无法完成请求</p>
+<p>501 Not Implemented：服务器不支持请求的功能，无法完成请求</p>
+</li>
+</ul>
+<h3 id="http版本">HTTP版本</h3>
+<ul>
+<li>
+<p>HTTP1.0</p>
+<p>​		HTTP1.0 使用的是非持久连接，主要缺点是<strong>客户端必须为每一个待请求的对象建立并维护一个新的连接</strong>，即每请求一个文档就要有两倍RTT 的开销。因为同一个页面可能存在多个对象，所以非持久连接可能使一个页面的下载变得十分缓慢，而且这种 短连接增加了网络传输的负担。</p>
+<blockquote>
+<p>RTT(Round Trip Time)：一个连接的往返时间，即数据发送时刻到接收到确认的时刻的差值；</p>
+</blockquote>
+</li>
+<li>
+<p>HTTP1.1</p>
+<ol>
+<li>支持长连接。</li>
+<li>在HTTP1.0的基础上引入了更多的缓存控制策略。</li>
+<li>引入了请求范围设置，优化了带宽。</li>
+<li>在错误通知管理中新增了错误状态响应码。</li>
+<li>增加了Host头处理，可以传递主机名（hostname）</li>
+</ol>
+</li>
+<li>
+<p>HTTP1.X优化（SPDY）</p>
+<p>​		SPDY 并不是新的一种协议，而是在 HTTP 之前做了一层会话层。为了达到减少页面加载时间的目标，SPDY 引入了一个新的二进制分帧数据层，以实现优先次序、最小化及消除不必要的网络延迟，目的是更有效地利用底层 TCP 连接。</p>
+<ol>
+<li>多路复用，为多路复用设立了请求优先级。</li>
+<li>对header部分进行了压缩。</li>
+<li>引入了HTTPS加密传输。</li>
+<li>客户端可以在缓存中取到之前请求的内容。</li>
+</ol>
+</li>
+<li>
+<p>HTTP2.0（SPDY的升级版）</p>
+<ol>
+<li>HTTP2.0支持明文传输，而HTTP 1.X强制使用SSL/TLS加密传输。</li>
+<li>和HTTP 1.x使用的header<strong>压缩方法</strong>不同。</li>
+<li>HTTP2.0 基于二进制格式进行解析，而HTTP 1.x基于文本格式进行解析。增加二进程的传输方式，相对于文本传输更加安全.</li>
+<li><strong>多路复用</strong>，HTTP1.1是多个请求串行化单线程处理，HTTP 2.0是并行执行，一个请求超时并不会影响其他请求。</li>
+<li>请求划分优先级</li>
+</ol>
+</li>
+<li>
+<p>HTTP 3.0 (QUIC)</p>
+<p>QUIC (Quick UDP Internet Connections), 快速 UDP 互联网连接。QUIC是基于UDP协议的。两个主要特性：</p>
+<ol>
+<li>
+<p>线头阻塞(HOL)问题的解决更为彻底：</p>
+<p>​		基于TCP的HTTP/2，尽管从逻辑上来说，不同的流之间相互独立，不会相互影响，但在实际传输方面，数据还是要一帧一帧的发送和接收，一旦某一个流的数据有丢包，则同样会阻塞在它之后传输的流数据传输。而基于UDP的QUIC协议则可以更为彻底地解决这样的问题，让不同的流之间真正的实现相互独立传输，互不干扰。</p>
+</li>
+<li>
+<p>切换网络时的连接保持</p>
+<p>​		当前移动端的应用环境，用户的网络可能会经常切换，比如从办公室或家里出门，WiFi断开，网络切换为3G或4G。基于TCP的协议，由于切换网络之后，IP会改变，因而之前的连接不可能继续保持。而基于UDP的QUIC协议，则可以内建与TCP中不同的连接标识方法，从而在网络完成切换之后，恢复之前与服务器的连接。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="http方法">HTTP方法</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td style="text-align:center">获取资源</td>
+</tr>
+<tr>
+<td>POST</td>
+<td style="text-align:center">传输实体主体</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td style="text-align:center">上传文件</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td style="text-align:center">删除文件</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td style="text-align:center">和GET方法类似，但只返回报文首部，不返回报文实体主体部分</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td style="text-align:center">对资源进行部分修改</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td style="text-align:center">查询指定的URL支持的方法</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td style="text-align:center">要求用隧道协议连接代理</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td style="text-align:center">服务器会将通信路径返回给客户端</td>
+</tr>
+</tbody>
+</table>
+<p>为了方便记忆，可以将PUT、DELETE、POST、GET理解为客户端对服务端的增删改查。</p>
+<ul>
+<li>PUT：上传文件，向服务器添加数据，可以看作增</li>
+<li>DELETE：删除文件</li>
+<li>POST：传输数据，向服务器提交数据，对服务器数据进行更新。</li>
+<li>GET：获取资源，查询服务器资源</li>
+</ul>
+<h4 id="get和post的区别">GET和POST的区别</h4>
+<ul>
+<li>作用GET用于获取资源，POST用于传输实体主体</li>
+<li>参数位置GET的参数放在URL中，POST的参数存储在实体主体中，并且GET方法提交的请求的URL中的数据做多是2048字节，POST请求没有大小限制。</li>
+<li>安全性GET方法因为参数放在URL中，安全性相对于POST较差一些</li>
+<li>幂等性GET方法是具有幂等性的，而POST方法不具有幂等性。这里幂等性指客户端连续发出多次请求，收到的结果都是一样的.</li>
+</ul>
+<h3 id="http和https的区别">HTTP和HTTPS的区别</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">HTTP</th>
+<th style="text-align:center">HTTPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>端口</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">443</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td style="text-align:center">无加密</td>
+<td style="text-align:center">有加密机制、安全性较高</td>
+</tr>
+<tr>
+<td>资源消耗</td>
+<td style="text-align:center">较少</td>
+<td style="text-align:center">由于加密处理，资源消耗更多</td>
+</tr>
+<tr>
+<td>是否需要证书</td>
+<td style="text-align:center">不需要</td>
+<td style="text-align:center">需要</td>
+</tr>
+<tr>
+<td>协议</td>
+<td style="text-align:center">运行在TCP协议之上</td>
+<td style="text-align:center">运行在SSL协议之上，SSL运行在TCP协议之上</td>
+</tr>
+</tbody>
+</table>
+<h3 id="https的加密过程">HTTPS的加密过程</h3>
+<ul>
+<li>HTTPS使用的是对称加密和非对称加密的混合加密算法。具体做法就是使用非对称加密来传输对称密钥来保证安全性，使用对称加密来保证通信的效率。</li>
+<li>简化的工作流程：服务端生成一对非对称密钥，将公钥发给客户端。客户端生成对称密钥，用服务端发来的公钥进行加密，加密后发给服务端。服务端收到后用私钥进行解密，得到客户端发送的对称密钥。通信双方就可以通过对称密钥进行高效地通信了。</li>
+</ul>
+<p>HTTPS的详细加密过程：</p>
+<ol>
+<li>客户端向服务端发起第一次握手请求，告诉服务端客户端所支持的SSL的指定版本、加密算法及密钥长度等信息。</li>
+<li>服务端将自己的公钥发给数字证书认证机构，数字证书认证机构利用自己的私钥对服务器的公钥进行数字签名，并给服务器颁发公钥证书。</li>
+<li>服务端将证书发给客服端。</li>
+<li>客服端利用数字认证机构的公钥，向数字证书认证机构验证公钥证书上的数字签名，确认服务器公开密钥的真实性。</li>
+<li>客服端使用服务端的公钥加密自己生成的对称密钥，发给服务端。</li>
+<li>服务端收到后利用私钥解密信息，获得客户端发来的对称密钥。</li>
+<li>通信双方可用对称密钥来加密解密信息。<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.27.18.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.27.18.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.27.18.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.27.18.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.27.18.png"
+        title="截屏2022-08-28 下午9.27.18" /></li>
+</ol>
+<h2 id="应用层dns协议">[应用层]DNS协议</h2>
+<p>DNS : 域名系统；DNS系统采用的是分布式的层次数据数据库模式，还有缓存的机制。</p>
+<p>​	工作流程</p>
+<ol>
+<li>主机向本地域名服务器的查询一般是采用递归查询，而本地域名服务器向根域名的查询一般是采用迭代查询
+<ol>
+<li>递归查询，是服务器向上级服务器发送请求报文，返回给你ip地址</li>
+<li>迭代查询，是服务器通知你，需要向哪个上级服务器发请求报文，请求ip.</li>
+</ol>
+</li>
+<li>实例:
+<ul>
+<li>在浏览器中输入百度域名，操作系统会先检查自己本地的hosts文件是否有这个域名的映射关系，如果有，就先调用这个IP地址映射，完成域名解析。</li>
+<li>如果hosts文件中没有，则查询本地DNS解析器缓存，如果有，则完成地址解析。</li>
+<li>如果本地DNS解析器缓存中没有，则去查找本地DNS服务器，如果查到，完成解析。</li>
+<li>如果没有，则本地服务器会向根域名服务器发起查询请求。根域名服务器会告诉本地域名服务器去查询哪个顶级域名服务器。</li>
+<li>本地域名服务器向顶级域名服务器发起查询请求，顶级域名服务器会告诉本地域名服务器去查找哪个权限域名服务器。</li>
+<li>本地域名服务器向权限域名服务器发起查询请求，权限域名服务器告诉本地域名服务器百度所对应的IP地址。</li>
+<li>本地域名服务器告诉主机百度所对应的IP地址。</li>
+</ul>
+</li>
+</ol>
+<h2 id="传输层tcpudp协议详解">[传输层]TCP/UDP协议详解</h2>
+<h3 id="tcp">TCP</h3>
+<h4 id="数据结构">数据结构</h4>
+<p>​		TCP头部: 前20个字节是固定的，后面有4n个字节是根据需而增加的选项，所以TCP首部最小长度为20字节。<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.19.14.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.19.14.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.19.14.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.19.14.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.19.14.png"
+        title="截屏2022-08-28 下午2.19.14" /></p>
+<ul>
+<li>
+<p>序号：seq，占32位，用来标识从发送端到接收端发送的字节流。(一般来说在0 - 2^32-1之间)</p>
+</li>
+<li>
+<p>确认号：ack，占32位，只有ACK标志位为1时，确认序号字段才有效，ack=seq+1。</p>
+</li>
+<li>
+<p>标志位：</p>
+<ol>
+<li>
+<p>SYN：发起一个新连接。</p>
+</li>
+<li>
+<p>FIN：释放一个连接。</p>
+</li>
+<li>
+<p>ACK：确认序号有效。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="tcp可靠传输">TCP可靠传输</h4>
+<blockquote>
+<p>主要有校验和、序列号、超时重传、流量控制及拥塞避免等几种方法。</p>
+</blockquote>
+<ul>
+<li>
+<p>校验和: 	在发送端和接收端分别计算数据的校验和，如果两者不一致，则说明数据在传输过程中出现了差错，TCP将丢弃和不确认此报文段。</p>
+</li>
+<li>
+<p>序列号:     TCP会对每一个发送的字节进行编号，接收方接到数据后，会对发送方发送确认应答(ACK报文)，并且这个ACK报文中带有相应的确认编号，告诉发送方，下一次发送的数据从编号多少开始发。如果发送方发送相同的数据，接收端也可以通过序列号判断出，直接将数据丢弃.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.28.48.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.28.48.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.28.48.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.28.48.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%882.28.48.png"
+        title="截屏2022-08-28 下午2.28.48" /></p>
+</li>
+<li>
+<p>超时重传:    在上面说了序列号的作用，但如果发送方在发送数据后一段时间内（可以设置重传计时器规定这段时间）没有收到确认序号ACK，那么发送方就会重新发送数据。</p>
+<p>这里发送方没有收到ACK可以分两种情况：</p>
+<ol>
+<li>如果是发送方发送的数据包丢失了，接收方收到发送方重新发送的数据包(序列号大于了丢失的数据的序列号)后会马上重新给发送方发送(原丢失数据的)ACK；</li>
+<li>如果是接收方之前接收到了发送方发送的数据包，而返回给发送方的ACK丢失了，这种情况，发送方重传后，接收方会直接丢弃发送方重传的数据包，然后再次发送ACK响应报文。如果数据被重发之后还是没有收到接收方的确认应答，则进行再次发送。此时，等待确认应答的时间将会以2倍、4倍的指数函数延长，直到最后关闭连接。</li>
+</ol>
+</li>
+<li>
+<p>流量控制: 如果发送端发送的数据太快，接收端来不及接收就会出现丢包问题。</p>
+<p>​		为了解决这个问题，TCP协议利用了<strong>滑动窗口</strong>进行了流量控制。在TCP首部有一个16位字段大小的窗口，窗口的大小就是接收端接收数据缓冲区的剩余大小。接收端会在收到数据包后发送ACK报文时，将自己的窗口大小填入ACK中，发送方会根据<strong>ACK报文中的窗口大小</strong>进而控制发送速度。如果窗口大小为零，发送方会停止发送数据。</p>
+</li>
+<li>
+<p>拥塞控制:   如果网络出现拥塞，则会产生丢包等问题，这时发送方会将丢失的数据包继续重传，网络拥塞会更加严重，所以在网络出现拥塞时应注意控制发送方的发送数据，降低整个网络的拥塞程度。</p>
+<p>拥塞控制主要有四部分组成：<strong>慢开始、拥塞避免、快重传、快恢复</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.40.02.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.40.02.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.40.02.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.40.02.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.40.02.png"
+        title="截屏2022-08-28 下午5.40.02" /></p>
+<p>（这里的发送方会维护一个拥塞窗口的状态变量，它和流量控制的滑动窗口是不一样的，滑动窗口是根据<strong>接收方数据缓冲区大小</strong>确定的，而<strong>拥塞窗口</strong>是根据网络的拥塞情况动态确定的，一般来说发送方真实的发送窗口为滑动窗口和拥塞窗口中的最小值）</p>
+<ol>
+<li>慢开始:   为了避免一开始发送大量的数据而产生网络阻塞，会先初始化cwnd为1，当收到ACK后到下一个传输轮次，cwnd为2，以此类推成指数形式增长。</li>
+<li>拥塞避免:   因为cwnd的数量在慢开始是指数增长的，为了防止cwnd数量过大而导致网络阻塞，会设置一个慢开始的门限值ssthresh，当cwnd&gt;=ssthresh时，进入到拥塞避免阶段，cwnd每个传输轮次加1。但网络出现超时，会将门限值ssthresh变为出现超时cwnd数值的一半，cwnd重新设置为1，如上图，在第12轮出现超时后，cwnd变为1，ssthresh变为12。</li>
+<li>快重传：在网络中如果出现超时或者阻塞，则按慢开始和拥塞避免算法进行调整。但如果只是丢失某一个报文段，如下图，则使用快重传算法。</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.48.56.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.48.56.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.48.56.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.48.56.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%885.48.56.png"
+        title="截屏2022-08-28 下午5.48.56" /></p>
+<blockquote>
+<p>但是根据快重传算法，要求在这种情况下，需要快速向发送端发送M2的确认报文，在发送方收到三个M2的确认报文后，无需等待重传计时器所设置的时间，可直接进行M3的重传，这就是快重传。</p>
+</blockquote>
+<ol start="4">
+<li>快恢复:   当发送收到三个重复的ACK，会进行快重传和快恢复。快恢复是指将ssthresh设置为发生快重传时的cwnd数量的一半，而cwnd不是设置为1而是设置为为门限值ssthresh，并开始拥塞避免阶段。</li>
+</ol>
+</li>
+</ul>
+<h4 id="tcp三次握手在这里插入图片描述httpsrawgithubusercontentcomnoobmidpicsmainwatermark252ctype_d3f5lxplbmhlaq252cshadow_50252ctext_q1netiba5zgl5zad5zcw252csize_20252ccolor_ffffff252ct_70252cg_se252cx_16png">TCP三次握手<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png, https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png"
+        title="在这里插入图片描述" /></h4>
+<p>发送端状态：CLOSED、SYN-SENT、ESTABLISHED</p>
+<p>接收端状态：LISTEN、SYN-RCVD、ESTABLISHED</p>
+<blockquote>
+<p>对于客户端而言,第二次握手就已经确定了建立链接,因此第三次握手实际上也算是数据传输的一次, 所以第一个数据包序列号为x+1</p>
+</blockquote>
+<ul>
+<li>
+<p>TCP连接队列</p>
+<ol>
+<li>半连接队列: 服务端收到客户端发起的 SYN 请求后，内核会把该连接存储到半连接队列（SYN队列），并向客户端响应 SYN+ACK.</li>
+<li>全连接队列: 服务端收到第三次握手的ACK后，内核会把连接从半连接队列移除，然后创建新的完全的连接，并将其添加到accept队列，等待进程调用accept 函数时把连接取出来。</li>
+</ol>
+</li>
+<li>
+<p>为什么握手需要三次?</p>
+<ol>
+<li>假设建立TCP连接仅需要两次握手，那么如果第二次握手时，服务端返回给客户端的确认报文丢失了，客户端这边认为服务端没有和他建立连接，而服务端却以为已经和客户端建立了连接，并且可能服务端已经开始向客户端发送数据，但客户端并不会接收这些数据，浪费了资源。如果是三次握手，不会出现双方连接还未完全建立成功就开始发送数据的情况。</li>
+<li>如果服务端接收到了一个早已失效的来自客户端的连接请求报文，会向客户端发送确认报文同意建立TCP连接。但因为客户端并不需要向服务端发送数据，所以此次TCP连接没有意义并且浪费了资源。</li>
+<li>如果是一次握手,则退化成了UDP</li>
+</ol>
+</li>
+<li>
+<p>SYN洪泛攻击，以及解决策略是什么?</p>
+<p>​        因为服务器端的资源分配是在二次握手时分配的，而客户端的资源是在完成三次握手时分配的，所以服务器容易受到SYN洪泛攻击。</p>
+<ol>
+<li>
+<p>洪泛攻击:    SYN攻击就是Client在短时间内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server则回复确认包，并等待Client确认，由于源地址不存在，因此Server需要不断重发直至超时，这些伪造的SYN包将长时间占用半连接队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络拥塞甚至系统资源被占用完而瘫痪。SYN 攻击是一种典型的 DoS/DDoS 攻击</p>
+</li>
+<li>
+<p>查看检测 SYN 攻击非常的方便，当你在服务器上看到大量的半连接状态时，特别是源IP地址是随机的，基本上可以断定这是一次SYN攻击。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">netstat -n -p TCP <span class="p">|</span> grep SYN_RECV
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>常见的解决办法:</p>
+<ol>
+<li>
+<p>缩短超时（SYN Timeout）时间</p>
+</li>
+<li>
+<p>增加最大半连接数: 可以保存更多的半连接数,防止丢弃新连接</p>
+</li>
+<li>
+<p>增加过滤网关防护</p>
+</li>
+<li>
+<p>SYN cookies技术: 可以在不使用SYN半连接队列的情况下成功建立连接;</p>
+<p>​	原理是，在TCP服务器接收到TCP SYN包并返回TCP SYN + ACK包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值。这个cookie作为将要返回的SYN ACK包的初始序列号。当客户端返回一个ACK包时，根据包头信息计算cookie，与返回的确认序列号(初始序列号 + 1)进行对比，如果相同，则是一个正常连接，然后，分配资源，建立连接。</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_ZHJvaWRzYW5zZmFsbGJhY2s%252Cshadow_50%252Ctext_Q1NETiBASmFja2V5czAwNw%253D%253D%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_ZHJvaWRzYW5zZmFsbGJhY2s%252Cshadow_50%252Ctext_Q1NETiBASmFja2V5czAwNw%253D%253D%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png, https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_ZHJvaWRzYW5zZmFsbGJhY2s%252Cshadow_50%252Ctext_Q1NETiBASmFja2V5czAwNw%253D%253D%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_ZHJvaWRzYW5zZmFsbGJhY2s%252Cshadow_50%252Ctext_Q1NETiBASmFja2V5czAwNw%253D%253D%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_ZHJvaWRzYW5zZmFsbGJhY2s%252Cshadow_50%252Ctext_Q1NETiBASmFja2V5czAwNw%253D%253D%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png"
+        title="SYNcookies" /></p>
+<h4 id="tcp四次挥手imghttpsrawgithubusercontentcomnoobmidpicsmainwatermark252ctype_d3f5lxplbmhlaq252cshadow_50252ctext_q1netiba5zgl5zad5zcw252csize_20252ccolor_ffffff252ct_70252cg_se252cx_16-20220828202309378png">TCP四次挥手<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16-20220828202309378.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16-20220828202309378.png, https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16-20220828202309378.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16-20220828202309378.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16-20220828202309378.png"
+        title="img" /></h4>
+<p>客户端状态：ESTABLISHED、FIN-WAIT-1、FIN-WAIT-2、TIME-WAIT、CLOSED</p>
+<p>服务器状态：ESTABLISHED、CLOSE-WAIT、LAST-ACK、CLOSED</p>
+<ul>
+<li>
+<p>为什么要time_wait状态, 以及等待2MSL的时间?</p>
+<p>​     MSL(Maximum Segment LifeTime)是报文最大生成时间，它是任何报文在网络上存在的最长时间，超过这个时间的报文将被丢弃。可以从两方面考虑：</p>
+<ol>
+<li>
+<p>客户端发送第四次挥手中的报文后，再经过2MSL，可使本次TCP连接中的所有报文全部消失，不会出现在下一个TCP连接中。</p>
+</li>
+<li>
+<p>考虑丢包问题，如果第四挥手发送的报文在传输过程中丢失了，那么服务端没收到确认ack报文就会重发第三次挥手的报文。如果客户端发送完第四次挥手的确认报文后直接关闭，而这次报文又恰好丢失，则会造成服务端无法正常关闭。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>TIME_WAIT和CLOSE_WAIT的区别在哪?</p>
+<ol>
+<li>CLOSE_WAIT是被动关闭形成的，当客户端发送FIN报文，服务端返回ACK报文后进入CLOSE_WAIT。</li>
+<li>TIME__WAIT_是主动关闭形成的，当第四次挥手完成后，客户端进入TIME_WAIT状态</li>
+</ol>
+</li>
+<li>
+<p>TCP中的timewait状态过多会怎样?</p>
+<ol>
+<li>占用过多的系统资源,占用服务器端口,导致无法使用, 建立链接失败</li>
+<li>解决timewait状态过多的方法 :
+<ol>
+<li>允许timewait状态的端口被重用</li>
+<li>减小timewait的时长</li>
+<li>客户端头部设置keep-alive</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>出现了大量的CLOSE_WAIT状态怎么解决?</p>
+<p>​		大量 CLOSE_WAIT 表示程序出现了问题，对方的 socket 已经关闭连接，而我方忙于读或写没有及时关闭连接，需 要检查代码，特别是释放资源的代码，或者是处理请求的线程配置。</p>
+</li>
+<li>
+<p>为什么挥手需要四次?</p>
+<p>​        由于TCP的**半关闭(half-close)**造成的。半关闭是指：TCP提供了连接的一方在结束它的发送后还能接受来自另一端数据的能力。通俗来说，就是不能发送数据，但是还可以接受数据。</p>
+<p>​         当服务端发送完数据后还需要向客户端发送释放连接请求，客户端返回确认报文，TCP连接彻底关闭。所以断开TCP连接需要客户端和服务端分别通知对方并分别收到确认报文，一共需要四次。</p>
+</li>
+</ul>
+<h4 id="问题-如果已经建立了tcp连接但是客户端突然出现故障了怎么办">问题: 如果已经建立了TCP连接，但是客户端突然出现故障了怎么办？</h4>
+<p>​		如果TCP连接已经建立，在通信过程中，客户端突然故障，那么服务端不会一直等下去，过一段时间就关闭连接了。</p>
+<p>​		TCP有一个保活机制，主要用在服务器端，用于检测已建立TCP链接的客户端的状态，防止因客户端崩溃或者客户端网络不可达，而服务器端一直保持该TCP链接，占用服务器端的大量资源(因为Linux系统中可以创建的总TCP链接数是有限制的)。</p>
+<p>​		保活机制原理:  在TCP链接超过保活时间没有任何数据交互时，发送保活探测报文；在每次的保活探测报文都没有回复的时候, 则关闭连接.</p>
+<h3 id="udp">UDP</h3>
+<h4 id="数据结构-1">数据结构</h4>
+<p>UDP的首部只有8个字节，源端口号、目的端口号、长度和校验和各两个字节。<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%888.47.16.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%888.47.16.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%888.47.16.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%888.47.16.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%888.47.16.png"
+        title="截屏2022-08-28 下午8.47.16" /></p>
+<h4 id="tcp和udp对比">TCP和UDP对比</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:left">是否面向连接</th>
+<th>可靠性</th>
+<th>传输形式</th>
+<th>传输效率</th>
+<th>资源消耗</th>
+<th>应用场景</th>
+<th>首部字节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP</td>
+<td style="text-align:left">是</td>
+<td>可靠</td>
+<td>字节流</td>
+<td>慢</td>
+<td>多</td>
+<td>文件/邮件传输</td>
+<td>20-60</td>
+</tr>
+<tr>
+<td>UDP</td>
+<td style="text-align:left">否</td>
+<td>不可靠</td>
+<td>数据报文段</td>
+<td>快</td>
+<td>少</td>
+<td>语音/视频</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<h2 id="网络层arp协议">[网络层]ARP协议</h2>
+<p>​		主要作用是实现从IP地址转换为MAC地址。</p>
+<p>​		网络层实现的是主机之间的通信，而链路层实现的是链路之间的通信，所以从下图可以看出，在数据传输过程中，IP数据报的源地址(IP1)和目的地址(IP2)是一直不变的，而MAC地址(硬件地址)却一直随着链路的改变而改变。<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.52.26.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.52.26.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.52.26.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.52.26.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-28%20%E4%B8%8B%E5%8D%889.52.26.png"
+        title="截屏2022-08-28 下午9.52.26" /></p>
+<p>ARP的工作流程:</p>
+<ol>
+<li>在局域网内，主机A要向主机B发送IP数据报时，首先会在主机A的ARP缓存表中查找是否有IP地址及其对应的MAC地址，如果有，则将MAC地址写入到MAC帧的首部，并通过局域网将该MAC帧发送到MAC地址所在的主机B。</li>
+<li>如果主机A的ARP缓存表中没有主机B的IP地址及所对应的MAC地址，主机A会在局域网内广播发送一个ARP请求分组。局域网内的所有主机都会收到这个ARP请求分组。</li>
+<li>主机B在看到主机A发送的ARP请求分组中有自己的IP地址，会向主机A以单播的方式发送一个带有自己MAC地址的响应分组。</li>
+<li>主机A收到主机B的ARP响应分组后，会在ARP缓存表中写入主机B的IP地址及其IP地址对应的MAC地址。</li>
+<li>如果主机A和主机B不在同一个局域网内，即使知道主机B的MAC地址也是不能直接通信的，必须通过路由器转发到主机B的局域网才可以通过主机B的MAC地址找到主机B。并且主机A和主机B已经可以通信的情况下，主机A的ARP缓存表中存的并不是主机B的IP地址及主机B的MAC地址，而是主机B的IP地址及该通信链路上的下一跳路由器的MAC地址。这就是上图中的源IP地址和目的IP地址一直不变，而MAC地址却随着链路的不同而改变。</li>
+<li>如果主机A和主机B不在同一个局域网，参考上图中的主机H1和主机H2，这时主机H1需要先广播找到路由器R1的MAC地址，再由R1广播找到路由器R2的MAC地址，最后R2广播找到主机H2的MAC地址，建立起通信链路。</li>
+</ol>
+<h2 id="网络层ip协议">[网络层]IP协议</h2>
+<h3 id="tcp分段和ip分片">TCP分段和IP分片</h3>
+<p>分段分片的目的，都是为了能够传输上层交付的、数据量超过本层传输能力上限的数据，不得已才做的数据切分.</p>
+<p>​	最大传输单元(Maximum Transmission Unit)，即MTU，为数据链路层的最大载荷上限。</p>
+<p>​	最大报文段长度(Maximum Segment Size)，即MSS，为TCP传输层的最大载荷上限(即应用层数据最大长度)</p>
+<p>MTU = MSS + TCP首部长度 + IP首部长度</p>
+<ul>
+<li>
+<p>分片发生在IP层，分段发生在tcp层</p>
+</li>
+<li>
+<p>IP层分片的原因是mtu的限制，tcp层分段的原因是mss的限制</p>
+</li>
+<li>
+<p>udp不进行分段会在ip层进行分片</p>
+</li>
+</ul>
+<h3 id="有了ip地址为什么还要用mac地址">有了IP地址，为什么还要用MAC地址？</h3>
+<p>​		标识网络中的一台计算机，比较常用的就是IP地址和MAC地址，但计算机的IP地址可由用户自行更改，管理起来相对困难，而MAC地址不可更改，所以一般会把IP地址和MAC地址组合起来使用。</p>
+<p>​		随着网络中的设备越来越多，整个路由过程越来越复杂，便出现了子网的概念。对于目的地址在其他子网的数据包，路由只需要将数据包送到那个子网即可，这个过程就是上面说的ARP协议。</p>
+<p>​		如果只是用MAC地址,路由器则需要记住每个MAC地址在哪个子网，这需要路由器有极大的存储空间，是无法实现的。如果只是用IP地址,没办法标志多个子网中唯一的设备.</p>
+<p>​		IP地址可以比作为地址，MAC地址为收件人，在一次通信过程中，两者是缺一不可的</p>
+<h2 id="网络层icmp协议">[网络层]ICMP协议</h2>
+<p>​		网络层协议，主要是实现 IP 协议中未实现的部分功能，是一种网络层协议。该协议并不传输数据，只传输控制信息来辅助网络层通信.</p>
+<p>应用:</p>
+<ol>
+<li>
+<p>ping</p>
+<p>ping的作用是测试两个主机的连通性。工作过程:</p>
+<ol>
+<li>
+<p>向目的主机发送多个ICMP回送请求报文</p>
+</li>
+<li>
+<p>根据目的主机返回的回送报文的时间和成功响应的次数估算出数据包往返时间及丢包率。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>TraceRoute</p>
+<p>​		其主要用来跟踪一个分组从源点耗费最少 TTL 到达目的地的路径。TraceRoute 通过逐渐增大 TTL 值并重复发送数据报来实现其功能.(TTL, Time To live生存时间)</p>
+<ol>
+<li>首先，TraceRoute 会发送一个 TTL 为 1 的 IP 数据报到目的地，当路径上的第一个路由器收到这个数据报时，它将 TTL 的值减 1，此时 TTL = 0，所以路由器会将这个数据报丢掉，并返回一个差错报告报文，</li>
+<li>之后源主机会接着发送一个 TTL 为 2 的数据报，并重复此过程，直到数据报能够刚好到达目的主机。此时 TTL = 0，因此目的主机要向源主机发送 ICMP 终点不可达差错报告报文，之后源主机便知道了到达目的主机所经过的路由器 IP 地址以及到达每个路由器的往返时间。</li>
+</ol>
+</li>
+</ol>
+<h2 id="jwt">JWT</h2>
+<h3 id="sessioncookie和token的主要区别">Session、Cookie和Token的主要区别</h3>
+<ul>
+<li>Cookie</li>
+</ul>
+<p>​	Cookie是保存在客户端一个小数据块，其中包含了用户信息。当客户端向服务端发起请求，服务端会像客户端浏览器发送一个Cookie，客户端会把Cookie存起来，当下次客户端再次请求服务端时，会携带上这个Cookie，服务端会通过这个Cookie来确定身份。</p>
+<ul>
+<li>Session</li>
+</ul>
+<p>​	Session是通过Cookie实现的，和Cookie不同的是，Session是存在服务端的。当客户端浏览器第一次访问服务器时，服务器会为浏览器创建一个sessionid，将sessionid放到Cookie中，存在客户端浏览器。比如浏览器访问的是购物网站，将一本《图解HTTP》放到了购物车，当浏览器再次访问服务器时，服务器会取出Cookie中的sessionid，并根据sessionid获取会话中的存储的信息，确认浏览器的身份是上次将《图解HTTP》放入到购物车那个用户。</p>
+<ul>
+<li>Token</li>
+</ul>
+<p>​	客户端在浏览器第一次访问服务端时，服务端生成的一串字符串作为Token发给客户端浏览器，下次浏览器在访问服务端时携带token即可无需验证用户名和密码，省下来大量的资源开销。</p>
+<h3 id="客户端禁止-cookie-能实现-session-还能用吗">客户端禁止 cookie 能实现 session 还能用吗</h3>
+<p>​	可以，Session的作用是在服务端来保持状态，通过sessionid来进行确认身份，但sessionid一般是通过Cookie来进行传递的。如果Cooike被禁用了，可以通过在<strong>URL中传递sessionid</strong>。</p>
+<h2 id="nat">NAT</h2>
+<p>​	NAT（Network Address Translation），即网络地址转换，它是一种把内部私有网络地址翻译成公有网络 IP 地址的技术。</p>
+<p>​	该技术不仅能解决 IP 地址不足的问题，而且还能隐藏和保护网络内部主机，从而避免来自外部网络的攻击。</p>
+<p>NAT 的实现方式主要有三种：</p>
+<ul>
+<li>
+<p>静态转换：内部私有 IP 地址和公有 IP 地址是一对一的关系，并且不会发生改变。通过静态转换，可以实现外部网络对内部网络特定设备的访问，这种方式原理简单，但当某一共有 IP 地址被占用时，跟这个 IP 绑定的内部主机将无法访问 Internet。</p>
+</li>
+<li>
+<p>动态转换：采用动态转换的方式时，私有 IP 地址每次转化成的公有 IP 地址是不唯一的。当私有 IP 地址被授权访问 Internet 时会被随机转换成一个合法的公有 IP 地址。当 ISP 通过的合法 IP 地址数量略少于网络内部计算机数量时，可以采用这种方式。</p>
+</li>
+<li>
+<p>端口多路复用：该方式将外出数据包的源端口进行端口转换，通过端口多路复用的方式，实现内部网络所有主机共享一个合法的外部 IP 地址进行 Internet 访问，从而最大限度地节约 IP 地址资源。同时，该方案可以隐藏内部网络中的主机，从而有效避免来自 Internet 的攻击。</p>
+</li>
+</ul>
+<h2 id="uri-和url的区别">URI 和URL的区别</h2>
+<ul>
+<li>
+<p>URI(Uniform Resource Identifier)：中文全称为统一资源标志符，主要作用是唯一标识一个资源。</p>
+</li>
+<li>
+<p>URL(Uniform Resource Location)：中文全称为统一资源定位符，主要作用是提供资源的路径。</p>
+</li>
+</ul>
+<h2 id="路由器和交换机的区别-1">路由器和交换机的区别？</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">所属网络模型的层级</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路由器</td>
+<td style="text-align:center">网络层</td>
+<td style="text-align:center">识别IP地址并根据IP地址转发数据包，维护数据表并基于数据表进行最佳路径选择</td>
+</tr>
+<tr>
+<td>交换机</td>
+<td style="text-align:center">数据链库层</td>
+<td style="text-align:center">识别MAC地址并根据MAC地址转发数据帧</td>
+</tr>
+</tbody>
+</table>
+<h2 id="在浏览器中输url地址到显示主页的过程">在浏览器中输⼊url地址到显示主页的过程</h2>
+<ol>
+<li>
+<p>对输入到浏览器的url进行DNS解析，将域名转换为IP地址。</p>
+</li>
+<li>
+<p>和目的服务器建立TCP连接</p>
+</li>
+<li>
+<p>向目的服务器发送HTTP请求</p>
+</li>
+<li>
+<p>服务器处理请求并返回HTTP报文</p>
+</li>
+<li>
+<p>浏览器解析并渲染页面</p>
+</li>
+</ol>
+<h2 id="一个主机可以建立多少连接">一个主机可以建立多少连接</h2>
+<ul>
+<li>客户端</li>
+</ul>
+<p>​		每一个ip可建立的TCP连接理论受限于ip_local_port_range参数，也受限于65535。但可以通过配置多ip的方式来加大自己的建立连接的能力。</p>
+<ul>
+<li>服务器</li>
+</ul>
+<p>​		每一个监听的端口虽然理论值很大，但这个数字没有实际意义。最大并发数取决你的内存大小，每一条静止状态的TCP连接大约需要吃3.3K的内存</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-08-28</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/" data-title="计算机网络八股文"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/" data-title="计算机网络八股文"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/" data-title="计算机网络八股文"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/" data-title="计算机网络八股文" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%85%AB%E8%82%A1%E6%96%87/" class="prev" rel="prev" title="操作系统八股文"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>操作系统八股文</a>
+            <a href="/mysql%E5%85%AB%E8%82%A1%E6%96%87/" class="next" rel="next" title="Mysql八股文">Mysql八股文<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.87.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/noobmid" target="_blank">cx玄烨0</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.5.0/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@14.0.0/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"en","pageSize":10,"placeholder":"Your comment ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"data":{"id-1":"cx玄烨0's Blog","id-2":"cx玄烨0's Blog"},"lightgallery":true,"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
