@@ -324,7 +324,9 @@ DNS : 域名系统；DNS系统采用的是分布式的层次数据数据库模�
 
 
 
-#### TCP三次握手![在这里插入图片描述](https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png)
+#### TCP三次握手
+
+![三次握手图](https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png)
 
 发送端状态：CLOSED、SYN-SENT、ESTABLISHED
 
@@ -371,9 +373,11 @@ DNS : 域名系统；DNS系统采用的是分布式的层次数据数据库模�
 
         ​	原理是，在TCP服务器接收到TCP SYN包并返回TCP SYN + ACK包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值。这个cookie作为将要返回的SYN ACK包的初始序列号。当客户端返回一个ACK包时，根据包头信息计算cookie，与返回的确认序列号(初始序列号 + 1)进行对比，如果相同，则是一个正常连接，然后，分配资源，建立连接。
 
-![SYNcookies](https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_ZHJvaWRzYW5zZmFsbGJhY2s%252Cshadow_50%252Ctext_Q1NETiBASmFja2V5czAwNw%253D%253D%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png)
+![SYN Cookies](https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_ZHJvaWRzYW5zZmFsbGJhY2s%252Cshadow_50%252Ctext_Q1NETiBASmFja2V5czAwNw%253D%253D%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16.png)
 
-#### TCP四次挥手![img](https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16-20220828202309378.png)
+#### TCP四次挥手
+
+![四次挥手](https://raw.githubusercontent.com/noobmid/pics/main/watermark%252Ctype_d3F5LXplbmhlaQ%252Cshadow_50%252Ctext_Q1NETiBA5ZGL5ZaD5ZCW%252Csize_20%252Ccolor_FFFFFF%252Ct_70%252Cg_se%252Cx_16-20220828202309378.png)
 
 客户端状态：ESTABLISHED、FIN-WAIT-1、FIN-WAIT-2、TIME-WAIT、CLOSED
 
