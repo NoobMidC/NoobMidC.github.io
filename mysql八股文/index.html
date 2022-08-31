@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/mysql%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  20477 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  20454 ,
         "url": "https:\/\/noobmid.github.io\/mysql%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-28T12:49:28+08:00","dateModified": "2022-08-28T12:49:28+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,7 +109,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mysql八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;20477 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;20454 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;41 minutes&nbsp;<span id="/mysql%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Mysql八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
@@ -271,7 +271,7 @@
       </ul>
     </li>
     <li><a href="#walwrite-ahead-log预写日志">WAL(Write Ahead Log)预写日志</a></li>
-    <li><a href="#大表怎么优化分库分表了是怎么做的分表分库了有什么问题">大表怎么优化?分库分表了是怎么做的?分表分库了有什么问题?</a></li>
+    <li><a href="#大表怎么优化">大表怎么优化</a></li>
     <li><a href="#myisam-表类型将在哪里存储并且还提供其存储格式"><strong>MyISAM</strong> 表类型将在哪里存储，并且还提供其存储格式?</a></li>
     <li><a href="#百万级别或以上的数据如何删除">百万级别或以上的数据如何删除</a></li>
     <li><a href="#什么是临时表何时删除临时表">什么是临时表，何时删除临时表?</a></li>
@@ -1361,7 +1361,7 @@
 4. 如果数据没有提交（没有commit)，此时数据库挂了,就需要通过Undo来回滚了。
 </code></pre>
 <p>持久性: 通过Redo Log 和WAL实现的</p>
-<h2 id="大表怎么优化分库分表了是怎么做的分表分库了有什么问题">大表怎么优化?分库分表了是怎么做的?分表分库了有什么问题?</h2>
+<h2 id="大表怎么优化">大表怎么优化</h2>
 <p>​		当 MySQL 单表记录数过大时，数据库的 CRUD 性能会明显下降，一些常见的优化措施如下:</p>
 <ol>
 <li>限定数据的范围: 务必禁止不带任何限制数据范围条件的查询语句。比如:我们当用户在查询订单历史的时候，我们可以控制在一个月的范围内</li>
