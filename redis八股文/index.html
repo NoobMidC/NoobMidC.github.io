@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/redis%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  0 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  17371 ,
         "url": "https:\/\/noobmid.github.io\/redis%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-28T12:49:35+08:00","dateModified": "2022-08-28T12:49:35+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,8 +109,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redis八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;0 minutes&nbsp;<span id="/redis%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Redis八股文">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;17371 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;35 minutes&nbsp;<span id="/redis%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Redis八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -118,8 +118,1255 @@
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#redis-简介">Redis 简介</a>
+      <ul>
+        <li><a href="#为什么单线程能这么快">为什么单线程能这么快</a></li>
+        <li><a href="#缓存的分类">缓存的分类</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据类型">数据类型</a>
+      <ul>
+        <li><a href="#字符串string">字符串String</a></li>
+        <li><a href="#列表list">列表List</a></li>
+        <li><a href="#集合set">集合set</a></li>
+        <li><a href="#有序集合zset">有序集合zset</a>
+          <ul>
+            <li><a href="#跳跃表">跳跃表</a></li>
+          </ul>
+        </li>
+        <li><a href="#哈希hash">哈希(Hash)</a></li>
+        <li><a href="#bitmaps">Bitmaps</a></li>
+        <li><a href="#hyperloglog">HyperLogLog</a>
+          <ul>
+            <li><a href="#hyperloglog底层原理">HyperLogLog底层原理:</a></li>
+          </ul>
+        </li>
+        <li><a href="#geo">Geo</a>
+          <ul>
+            <li><a href="#geo底层原理">Geo底层原理</a></li>
+          </ul>
+        </li>
+        <li><a href="#module模块">Module(模块)</a>
+          <ul>
+            <li><a href="#bloomfilter布隆过滤器模块">BloomFilter(布隆过滤器)模块</a></li>
+            <li><a href="#bloomfilter的原理">BloomFilter的原理</a></li>
+            <li><a href="#bloomfilter的应用场景">BloomFilter的应用场景</a></li>
+            <li><a href="#redisearch模块">RediSearch模块</a></li>
+            <li><a href="#redis-ml模块">Redis-ML模块</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#发布和订阅">发布和订阅</a>
+      <ul>
+        <li><a href="#原理">原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#事务和锁">事务和锁</a>
+      <ul>
+        <li><a href="#事务">事务</a>
+          <ul>
+            <li><a href="#三大特性">三大特性</a></li>
+            <li><a href="#错误处理">错误处理</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#锁">锁</a>
+      <ul>
+        <li><a href="#watch">watch</a></li>
+        <li><a href="#秒杀案例">秒杀案例</a></li>
+      </ul>
+    </li>
+    <li><a href="#持久化">持久化</a>
+      <ul>
+        <li><a href="#rdbredis-database">RDB（Redis DataBase）</a>
+          <ul>
+            <li><a href="#备份是如何执行的">备份是如何执行的</a></li>
+            <li><a href="#rdb持久化流程">RDB持久化流程</a></li>
+            <li><a href="#rdb禁用">RDB禁用</a></li>
+            <li><a href="#rdb备份">RDB备份</a></li>
+            <li><a href="#rdb恢复">RDB恢复</a></li>
+            <li><a href="#rdb-优缺点">RDB 优缺点</a></li>
+          </ul>
+        </li>
+        <li><a href="#aof">AOF</a>
+          <ul>
+            <li><a href="#aof持久化流程">AOF持久化流程</a></li>
+            <li><a href="#aof开启">AOF开启</a></li>
+            <li><a href="#aof同步频率">AOF同步频率</a></li>
+            <li><a href="#aof恢复流程">AOF恢复流程</a></li>
+            <li><a href="#aof重写rewrite机制">AOF重写(Rewrite)机制</a>
+              <ul>
+                <li><a href="#重写原理">重写原理</a></li>
+                <li><a href="#触发重写机制">触发重写机制</a></li>
+                <li><a href="#重写流程">重写流程</a></li>
+                <li><a href="#aof优缺点">AOF优缺点</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#主从复制">主从复制</a>
+      <ul>
+        <li><a href="#作用">作用</a></li>
+        <li><a href="#薪火相传">薪火相传</a></li>
+        <li><a href="#反客为主">反客为主</a></li>
+        <li><a href="#主从复制原理">主从复制原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#哨兵模式">哨兵模式</a>
+      <ul>
+        <li><a href="#原理-1">原理</a></li>
+        <li><a href="#宕机检测">宕机检测</a></li>
+        <li><a href="#领头sentinel的选举">领头sentinel的选举</a></li>
+        <li><a href="#故障迁移">故障迁移</a>
+          <ul>
+            <li><a href="#选主过程">选主过程</a></li>
+          </ul>
+        </li>
+        <li><a href="#脑裂问题">脑裂问题</a>
+          <ul>
+            <li><a href="#解决办法">解决办法</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#集群模式">集群模式</a>
+      <ul>
+        <li><a href="#插槽slot">插槽slot</a></li>
+        <li><a href="#集群故障恢复">集群故障恢复</a></li>
+        <li><a href="#集群优缺点">集群优缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#分布式锁">分布式锁</a></li>
+    <li><a href="#60-新功能">6.0 新功能</a>
+      <ul>
+        <li><a href="#acl-访问控制列表">ACL （访问控制列表)</a></li>
+        <li><a href="#io多线程">IO多线程</a></li>
+      </ul>
+    </li>
+    <li><a href="#缓存问题">缓存问题</a>
+      <ul>
+        <li><a href="#缓存穿透">缓存穿透</a>
+          <ul>
+            <li><a href="#解决方案">解决方案</a></li>
+          </ul>
+        </li>
+        <li><a href="#缓存击穿">缓存击穿</a>
+          <ul>
+            <li><a href="#解决方案-1">解决方案</a></li>
+            <li><a href="#缓存雪崩">缓存雪崩</a></li>
+            <li><a href="#产生原因">产生原因</a></li>
+            <li><a href="#解决方案-2">解决方案</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#redis-使用场景">Redis 使用场景</a>
+      <ul>
+        <li><a href="#redis-做缓存的两种模式"><strong>Redis</strong> 做缓存的两种模式</a></li>
+      </ul>
+    </li>
+    <li><a href="#替换策略缓存满了怎么办">替换策略**(**缓存满了怎么办**)**</a></li>
+    <li><a href="#redis与memcache的区别"><strong>redis</strong>与<strong>memcache</strong>的区别</a>
+      <ul>
+        <li><a href="#存储内容">存储内容</a></li>
+        <li><a href="#数据安全">数据安全</a></li>
+        <li><a href="#应用场景">应用场景</a></li>
+        <li><a href="#基础架构">基础架构</a></li>
+      </ul>
+    </li>
+    <li><a href="#redis过期策略">Redis过期策略</a></li>
+    <li><a href="#redis-如何做内存优化"><strong>Redis</strong> 如何做内存优化?</a></li>
+    <li><a href="#redis-回收进程如何工作的">Redis 回收进程如何工作的?</a></li>
+    <li><a href="#redis如何做异步队列">Redis如何做异步队列</a></li>
+    <li><a href="#什么是缓存预热如何实现缓存预热">什么是缓存预热?如何实现缓存预热?</a></li>
+    <li><a href="#应用问题">应用问题</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="redis">Redis</h1>
+<h2 id="redis-简介">Redis 简介</h2>
+<p>Redis 是完全开源免费的，遵守 BSD 协议，是一个高性能的 key-value 数据库。</p>
+<p>特点:</p>
+<ol>
+<li>Redis 支持数据的持久化</li>
+<li>Redis 不仅仅支持简单的 key-value 类型的数据，同时还提供 list， set，zset，hash 等数据结构的存储。</li>
+<li>Redis 支持数据的备份，即 master-slave 模式的数据备份</li>
+</ol>
+<p>优势:</p>
+<ol>
+<li>性能极高– Redis 能读的速度是110000 次/s,写的速度是81000 次/s 。</li>
+<li>丰富的数据类型– Redis 支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作。</li>
+<li>原子性– Redis 的所有操作都是原子性的，意思就是要么成功执行要么失败完全不执行。单个操作是原子性的。 多个操作也支持事务，即原子性，通过 MULTI 和 EXEC 指令包起来。</li>
+<li>丰富的特性– Redis 还支持 publish/subscribe,通知, key 过期等等特性。</li>
+</ol>
+<h3 id="为什么单线程能这么快">为什么单线程能这么快</h3>
+<ol>
+<li>纯内存访问。</li>
+<li>非阻塞IO,Redis 使用epoll作为IO多路复用技术的实现。加上Redis自身的事件处理模型将epoll中的链接、读写、关闭都转换成时间，不在网络IO上浪费过多的时间。</li>
+<li>单线程避免了线程切换和静态产生的消耗</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image-20220902154131704.png"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image-20220902154131704.png, https://raw.githubusercontent.com/NoobMidC/pics/main/image-20220902154131704.png 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image-20220902154131704.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image-20220902154131704.png"
+        title="image-20220902154131704" /></p>
+<h3 id="缓存的分类">缓存的分类</h3>
+<p>类型：本地缓存、分布式缓存和多级缓存。</p>
+<ul>
+<li>
+<p>本地缓存：进程的内存中进行缓存。本地缓存是内存访问，没有远程交互开销，性能最好，但是受限于单机容量，一般缓存较小且无法扩展。</p>
+</li>
+<li>
+<p>分布式缓存：分布式缓存一般都具有良好的水平扩展能力，对较大数据量的场景也能应付自如。缺点就是需要进行远程请求，性能不如本地缓存。</p>
+</li>
+<li>
+<p>多级缓存：为了平衡这种情况，实际业务中一般采用多级缓存，本地缓存只保存访问频率最高的部分热点数据，其他的热点数据放在分布式缓存中。</p>
+</li>
+</ul>
+<h2 id="数据类型">数据类型</h2>
+<h3 id="字符串string">字符串String</h3>
+<blockquote>
+<p>特点:  String是Redis最基本的类型, 是<code>二进制安全的</code>。意味着Redis的string可以包含任何数据,比如jpg图片或者序列化的对象;  Redis中字符串value最多可以是<code>512M</code></p>
+</blockquote>
+<p>​		String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)是可以修改的字符串，内部结构实现上类似于golang的slice，采用预分配冗余空间的方式来减少内存的频繁分配.<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.412xvg9m4nw0.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.412xvg9m4nw0.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.412xvg9m4nw0.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.412xvg9m4nw0.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.412xvg9m4nw0.webp"
+        title="image" /></p>
+<blockquote>
+<p>扩容策略: 内部为当前字符串实际分配的空间capacity一般要高于实际字符串长度len。当字符串长度小于1M时，扩容都是加倍现有的空间，如果超过1M，扩容时一次只会多扩1M的空间.</p>
+</blockquote>
+<h3 id="列表list">列表List</h3>
+<blockquote>
+<p>特点:  单键多值;   简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
+</blockquote>
+<p>它的底层实际是个<code>双向链表</code>，对两端的操作性能很高，通过索引下标的操作中间的节点性能会较差。<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.axobasgm674.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.axobasgm674.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.axobasgm674.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.axobasgm674.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.axobasgm674.webp"
+        title="image" /></p>
+<p>其数据结构也是个快速列表quickList<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4ueo6wazv3e0.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4ueo6wazv3e0.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4ueo6wazv3e0.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4ueo6wazv3e0.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4ueo6wazv3e0.webp"
+        title="image" /></p>
+<blockquote>
+<p>在列表元素较少的情况下会使用一块连续的内存存储，这个结构是ziplist，也即是压缩列表;它将所有的元素紧挨着一起存储，分配的是一块连续的内存。</p>
+<p>数据量多的时候将ziplist连接起来,这样可以节省中间所有节点的prev和next的指针空间</p>
+</blockquote>
+<h3 id="集合set">集合set</h3>
+<blockquote>
+<p>特点:  功能与list类似，特殊之处在于set是可以<strong>自动排重</strong>的;set提供了判断某个成员是否在一个set集合内的重要接口</p>
+</blockquote>
+<p>​		Redis的Set是string类型的无序集合。它底层其实是一个value为同一个内部值的hash表，所以添加，删除，查找的<strong>复杂度都是</strong><code>O(1)</code>。</p>
+<h3 id="有序集合zset">有序集合zset</h3>
+<blockquote>
+<p>特点:  Redis有序集合zset与普通集合set非常相似，是一个<code>没有重复元素</code>的字符串集合。不同之处是有序集合的每个成员都关联了一个<code>评分（score）</code>,这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。<code>集合的成员是唯一的，但是评分可以是重复的</code> 。</p>
+</blockquote>
+<p>zset底层使用了两个数据结构:</p>
+<ul>
+<li>hash表, hash的作用就是关联元素value和权重score, 保障元素value的唯一性，可以通过元素value找到相应的score值。</li>
+<li>跳跃表，跳跃表的目的在于给元素value排序，根据score的范围获取元素列表。</li>
+</ul>
+<h4 id="跳跃表">跳跃表</h4>
+<blockquote>
+<p>​		有序集合在生活中比较常见，例如根据成绩对学生排名，根据得分对玩家排名等。对于有序集合的底层实现，可以用数组、平衡树、链表等。数组不便元素的插入、删除；平衡树或红黑树虽然效率高但结构复杂；链表查询需要遍历所有效率低。Redis采用的是跳跃表。跳跃表效率堪比红黑树，实现远比红黑树简单。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.67ivzlf1vio0.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.67ivzlf1vio0.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.67ivzlf1vio0.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.67ivzlf1vio0.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.67ivzlf1vio0.webp"
+        title="image" /></p>
+<p>要查找值为51的元素:</p>
+<ol>
+<li>从第2层开始，1节点比51节点小，向后比较。</li>
+<li>21节点比51节点小，继续向后比较，后面就是NULL了，所以从21节点向下到第1层</li>
+<li>在第1层，41节点比51节点小，继续向后，61节点比51节点大，所以从41向下</li>
+<li>在第0层，51节点为要查找的节点，节点被找到，共查找4次。</li>
+</ol>
+<p>从此可以看出跳跃表比有序链表效率要高</p>
+<h3 id="哈希hash">哈希(Hash)</h3>
+<blockquote>
+<p>​		Redis hash是一个string类型的<code>field</code>和<code>value</code>的映射表，hash特别适合用于存储对象</p>
+</blockquote>
+<h3 id="bitmaps">Bitmaps</h3>
+<blockquote>
+<p>Bitmaps就是通过一个 bit 位来表示某个元素对应的值或者状态，其中的 key 就是对应元素本身.</p>
+</blockquote>
+<p>Bitmaps 和set的对比</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/%E6%88%AA%E5%B1%8F2022-09-02%20%E4%B8%8A%E5%8D%8811.27.46.png"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/%E6%88%AA%E5%B1%8F2022-09-02%20%E4%B8%8A%E5%8D%8811.27.46.png, https://raw.githubusercontent.com/NoobMidC/pics/main/%E6%88%AA%E5%B1%8F2022-09-02%20%E4%B8%8A%E5%8D%8811.27.46.png 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/%E6%88%AA%E5%B1%8F2022-09-02%20%E4%B8%8A%E5%8D%8811.27.46.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/%E6%88%AA%E5%B1%8F2022-09-02%20%E4%B8%8A%E5%8D%8811.27.46.png"
+        title="截屏2022-09-02 上午11.27.46" /></p>
+<h3 id="hyperloglog">HyperLogLog</h3>
+<p>用来做基数统计的算法，提供了不精确的去重计数方案;  如统计UV（Unique Visitor，独立访客）,即每个用户访问次数</p>
+<p>特点:</p>
+<ul>
+<li>在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基 数;</li>
+<li>HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。(比如数据集 {1, 3, 5, 7, 5, 7, 8}， 那么这个数据集的基数集为 {1, 3, 5 ,7, 8}, 基数(不重复元素总数)为 5。 基数估计就是在误差可接受的范围内，快速计算基数。</li>
+</ul>
+<p><strong>总结就是去掉重复的元素，只存储不重复元素的个数，不会储存元素本身。</strong></p>
+<h4 id="hyperloglog底层原理">HyperLogLog底层原理:</h4>
+<p>​		它的主要精髓在于通过记录下低位连续零位的最大长度K（也就是上面我们说的kmax），来估算随机数的数量n。<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/7c4df8712da6a45e0c251124c4fcec1e.png"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/7c4df8712da6a45e0c251124c4fcec1e.png, https://raw.githubusercontent.com/NoobMidC/pics/main/7c4df8712da6a45e0c251124c4fcec1e.png 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/7c4df8712da6a45e0c251124c4fcec1e.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/7c4df8712da6a45e0c251124c4fcec1e.png"
+        title="HyperLogLog.png" /></p>
+<blockquote>
+<p>​		从这个bit串的低位开始计算，直到出现第一个1为止，这就好比上面的伯努利试验抛硬币，一直抛硬币直到出现第一个正面为止（只是这里是数字0和1，伯努利试验中使用的硬币的正与反，并没有区别）。而HyperLogLog估算的随机数的数量，比如我们统计的UV，就好比伯努利试验中试验的次数。</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>转为比特串</strong></p>
+<p>​		通过hash函数，将输入的数据装换为比特串，比特串中的0和1可以类比为硬币的正与反，这是实现估值统计的第一步</p>
+</li>
+<li>
+<p>分桶</p>
+<p>​		分桶就是上面估值优化中的分多轮，这样做的的好处可以使估值更加准确</p>
+<p>​		分桶通过一个单位是bit，长度为L的大数组S，将数组S平均分为m组，m的值就是多少轮，每组所占有的比特个数是相同的，设为 P。得出如下关系：</p>
+<ul>
+<li>L = S.length</li>
+<li>L = m * p</li>
+<li>数组S的内存 = L / 8 / 1024 (KB)</li>
+</ul>
+<blockquote>
+<p>在HyperLogLog中，我们都知道它需要12KB的内存来做基数统计，原因就是HyperLogLog中m=16834，p=6，L=16834 * 6，因此内存为=16834 * 6 / 8 / 1024 = 12 (KB)，这里为何是6位来存储kmax，因为6位可以存储的最大值为64，现在计算机都是64位或32位操作系统，因此6位最节省内存，又能满足需求。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/eff5b4b8dceceef5f5e13dd9f5a6d499.png"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/eff5b4b8dceceef5f5e13dd9f5a6d499.png, https://raw.githubusercontent.com/NoobMidC/pics/main/eff5b4b8dceceef5f5e13dd9f5a6d499.png 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/eff5b4b8dceceef5f5e13dd9f5a6d499.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/eff5b4b8dceceef5f5e13dd9f5a6d499.png"
+        title="HyperLogLog分桶.png" /></p>
+</li>
+<li>
+<p>桶分配</p>
+<p>​		假设不同的数值计算得到不同的hash值，相同的数值得到相同的hash值（这也是HyperLogLog能用来统计UV的一个关键点），此时我们需要计算值应该放到那个桶中</p>
+</li>
+</ol>
+<h3 id="geo">Geo</h3>
+<p>主要用于存储地理位置信息，并对存储的信息进行操作</p>
+<h4 id="geo底层原理">Geo底层原理</h4>
+<p>底层实现使用zset和geohash</p>
+<ol>
+<li>
+<p>其底层是使用<strong>zset</strong>进行实现的, 可以使用zset的指令对GEO进行操作</p>
+</li>
+<li>
+<p>对经纬度编码以后的值,  作为score可以快速实现对经纬度的索引</p>
+</li>
+<li>
+<p>geohash将二维的经纬度数据编码成一维数据，再使用B树索引快速查找出需要的数据</p>
+</li>
+</ol>
+<h3 id="module模块">Module(模块)</h3>
+<h4 id="bloomfilter布隆过滤器模块">BloomFilter(布隆过滤器)模块</h4>
+<p>​		布隆过滤器可以用于检索一个元素是否在一个集合中。它可以告诉你某种东西<strong>一定不存在</strong>或者<strong>可能存在</strong>。当布隆过滤器说，某种东西存在时，这种东西可能不存在；当布隆过滤器说，某种东西不存在时，那么这种东西一定不存在。</p>
+<p>​		优点:</p>
+<ol>
+<li>空间效率高，占用空间少</li>
+<li>查询时间短</li>
+<li>有一定的误判率</li>
+<li>元素不能删除</li>
+</ol>
+<h4 id="bloomfilter的原理">BloomFilter的原理</h4>
+<p>​		它实际上是由一个很长的二进制(0或1)向量和一系列随机映射函数组成。当一个元素加入集合时, 使用多个哈希函数对<strong>元素key (bloom中不存value)</strong> 进行哈希，算出一个整数索引值，然后对位数组长度进行取模运算得到一个位置，每个无偏哈希函数都会得到一个不同的位置，把它们置为1。</p>
+<p>​		检索时，我们只要看看这些点是不是都是1就（大约）知道集合中有没有它了：</p>
+<ol>
+<li>如果这些点有任何一个为0（如下图的e），则被检元素一定不在；</li>
+<li>如果都是1（如下图的d），并不能完全说明这个元素就一定存在其中，有可能这些位置为1是因为其他元素的存在，这就是布隆过滤器会出现误判的原因。</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/1031302-20201106204833000-564795432-20220902105025335.png"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/1031302-20201106204833000-564795432-20220902105025335.png, https://raw.githubusercontent.com/NoobMidC/pics/main/1031302-20201106204833000-564795432-20220902105025335.png 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/1031302-20201106204833000-564795432-20220902105025335.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/1031302-20201106204833000-564795432-20220902105025335.png"
+        title="img" /></p>
+<h4 id="bloomfilter的应用场景">BloomFilter的应用场景</h4>
+<ol>
+<li>解决缓存穿透</li>
+<li>黑名单校验</li>
+<li>web拦截器</li>
+</ol>
+<h4 id="redisearch模块">RediSearch模块</h4>
+<p>​		RediSearch 是一个高性能的全文搜索引擎</p>
+<h4 id="redis-ml模块">Redis-ML模块</h4>
+<p>​		实时机器学习的<strong>机器学习模型服务器</strong>,  基于Redis-ML的机器学习周期:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/21bd9febe71d4e1ea22d596b0c066243_th.jpg"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/21bd9febe71d4e1ea22d596b0c066243_th.jpg, https://raw.githubusercontent.com/NoobMidC/pics/main/21bd9febe71d4e1ea22d596b0c066243_th.jpg 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/21bd9febe71d4e1ea22d596b0c066243_th.jpg 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/21bd9febe71d4e1ea22d596b0c066243_th.jpg"
+        title="img" /></p>
+<h2 id="发布和订阅">发布和订阅</h2>
+<p>​		Redis 发布订阅 (pub/sub) 是一种消息通信模式：发送者 (pub) 发送消息，订阅者 (sub) 接收消息。</p>
+<p>​		Redis 客户端可以订阅任意数量的频道</p>
+<ul>
+<li>订阅/发布消息图：</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4sun96fpzk40.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4sun96fpzk40.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4sun96fpzk40.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4sun96fpzk40.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4sun96fpzk40.webp"
+        title="image" /></p>
+<ul>
+<li>新消息通过 PUBLISH 命令发送给频道 channel1 时， 这个消息就会被发送给订阅它的三个客户端</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4v6xis5dem00-20220902111248468.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4v6xis5dem00-20220902111248468.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4v6xis5dem00-20220902111248468.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4v6xis5dem00-20220902111248468.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4v6xis5dem00-20220902111248468.webp"
+        title="image" /></p>
+<h3 id="原理">原理</h3>
+<ol>
+<li>通过 SUBSCRIBE 命令订阅某频道后，redis-server 里维护了一个字典，字典的键就是一个个 channel ，而字典的值则是一个链表，链表中保存了所有订阅这个 channel 的客户端。SUBSCRIBE 命令的关键，就是将客户端添加到给定 channel 的订阅链表中。</li>
+<li>通过 PUBLISH 命令向订阅者发送消息，redis-server 会使用给定的频道作为键，在它所维护的 channel 字典中查找记录了订阅这个频道的所有客户端的链表，遍历这个链表，将消息发布给所有订阅者.</li>
+</ol>
+<blockquote>
+<p><strong>发布的消息没有持久化，如果在订阅的客户端收不到订阅前的消息，只能收到订阅后发布的消息。</strong></p>
+</blockquote>
+<p>使用场景：Redis 的 Pub/Sub 系统可以构建实时的消息系统，群聊等</p>
+<h2 id="事务和锁">事务和锁</h2>
+<h3 id="事务">事务</h3>
+<p>​		Redis 事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</p>
+<p>​		Redis事务三个阶段: 开始事务、命令入队、执行事务</p>
+<h4 id="三大特性">三大特性</h4>
+<ol>
+<li>
+<p>单独的隔离操作</p>
+<p>事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断</p>
+</li>
+<li>
+<p>没有隔离级别的概念(直接串行化)</p>
+<p>队列中的命令没有提交之前都不会实际被执行，因为事务提交前任何指令都不会被实际执行</p>
+</li>
+<li>
+<p>不保证原子性</p>
+<p>队列中如果有一条命令执行失败，其后的命令仍然会被执行，没有回滚</p>
+</li>
+</ol>
+<p>​</p>
+<blockquote>
+<p>三大指令: multi(开始事务)、 exec(执行事务)、discard(执行事务前(exec)，结束事务指令（理解为手动回滚）)</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.5c4bp1qu8z00.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.5c4bp1qu8z00.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.5c4bp1qu8z00.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.5c4bp1qu8z00.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.5c4bp1qu8z00.webp"
+        title="image" /></p>
+<h4 id="错误处理">错误处理</h4>
+<ul>
+<li>
+<p>组队中某个命令出现了报告错误(Multi 中)，执行时整个的所有队列都会被取消<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.70upunii4zs0.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.70upunii4zs0.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.70upunii4zs0.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.70upunii4zs0.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.70upunii4zs0.webp"
+        title="image" /></p>
+</li>
+<li>
+<p>如果执行阶段(exec)某个命令报出了错误，则只有报错的命令不会被执行，而其他的命令都会执行，不会回滚. <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3ry9ng5dc660.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3ry9ng5dc660.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.3ry9ng5dc660.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.3ry9ng5dc660.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3ry9ng5dc660.webp"
+        title="image" /></p>
+</li>
+</ul>
+<h2 id="锁">锁</h2>
+<p>​	redis使用的是乐观锁的 <code>check-and-set</code> 机制实现事务的。</p>
+<h3 id="watch">watch</h3>
+<p>一旦 watch 某个 key，则会一直监视这个 key，如果 key 发生了变化，就返回提示。</p>
+<ol>
+<li>
+<p>作用:</p>
+<p>​		在执行 multi 之前，先执行 <code>watch key1 [key2]</code>，可以监视一个(或多个) key ，如果在事务 <code>exec</code> 执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断</p>
+</li>
+<li>
+<p>使用场景:</p>
+<p>​		很多人同时对一个值进行操作，一旦这个值被修改，且被其他人监听，则其他人无法修改这个值</p>
+</li>
+</ol>
+<h3 id="秒杀案例">秒杀案例</h3>
+<ul>
+<li>
+<p>使用ab工具模拟并发</p>
+</li>
+<li>
+<p>超卖问题: 超卖即卖出的数量超过了 库存数量,可以用事务解决</p>
+</li>
+<li>
+<p>库存遗留问题: <strong>库存遗留问题</strong>即系统告诉用户已经秒光，可是还有库存。原因：就是乐观锁导致很多请求都失败，先点的没秒到，后点的可能秒到了</p>
+<p>​		<strong>通过 lua 脚本解决争抢问题，实际上是 Redis 利用其单线程的特性，用任务队列的方式解决多任务并发问题。</strong></p>
+</li>
+</ul>
+<h2 id="持久化">持久化</h2>
+<h3 id="rdbredis-database">RDB（Redis DataBase）</h3>
+<p>​		在指定的<code>时间间隔</code>内将内存中的数据集<code>快照</code>写入磁盘， 也就是行话讲的 Snapshot 快照，它恢复时是将快照文件直接读到内存里。</p>
+<h4 id="备份是如何执行的">备份是如何执行的</h4>
+<p>​		Redis 会单独创建（fork）一个子进程来进行持久化，会先将数据写入到一个临时文件 中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。</p>
+<p>​		整个过程中，主进程是不进行任何 IO 操作的，这就确保了极高的性能</p>
+<p>​		如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那 RDB 方式要比 AOF 方式更加的高效。</p>
+<p>​		RDB 的缺点 <strong>是最后一次持久化后的数据可能丢失</strong>。</p>
+<blockquote>
+<p>Fork 的作用是复制一个与当前进程一样的进程。新进程的所有数据（变量、环境变量、程序计数器等）数值都和原进程一致，但是是一个全新的进程，并作为原进程的子进程 。</p>
+<p>在 Linux 程序中，fork() 会产生一个和父进程完全相同的子进程，但子进程在此后多会 exec 系统调用，出于效率考虑，Linux 中引入了「写时复制技术」。</p>
+<p>一般情况父进程和子进程会共用同一段物理内存，只有进程空间的各段的内容要发生变化时，才会将父进程的内容复制一份给子进程</p>
+</blockquote>
+<h4 id="rdb持久化流程">RDB持久化流程</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.kgx5hx0cyv4.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.kgx5hx0cyv4.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.kgx5hx0cyv4.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.kgx5hx0cyv4.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.kgx5hx0cyv4.webp"
+        title="image" /></p>
+<p>文件名: 默认的 RDB 配置文件名为 dump.rdb</p>
+<p>文件路径: 默认为 Redis 启动时命令行所在的目录下</p>
+<p>备份策略:  RDB 是整个内存的压缩过的 Snapshot，RDB 的数据结构，可以配置复合的快照触发条件，默认:</p>
+<ul>
+<li>如果 1 个 key 发生改变（新增，删除，修改），则 1 个小时后备份一次</li>
+<li>如果 100 个 key 发生改变（新增，删除，修改），则 5 分钟后备份一次</li>
+<li>如果 10000 个 key 发生改变（新增，删除，修改），则 1 分钟后备份一次</li>
+</ul>
+<p>手动备份命令:</p>
+<ul>
+<li>save：save 时只管保存，其它不管，全部阻塞。手动保存。<strong>不建议</strong></li>
+<li>bgsave：Redis 会在后台异步进行快照操作，快照同时还可以响应客户端请求。<strong>推荐</strong></li>
+</ul>
+<blockquote>
+<p>通过 lastsave 命令获取最后一次成功执行快照的时间</p>
+</blockquote>
+<p>优化配置:</p>
+<ul>
+<li>flushall, 刷新缓存到文件中</li>
+<li>Stop-writes-on-bgsave-error：如果配置为 no，表示你不在乎数据不一致或者有其他的手段发现和控制，默认为 yes。</li>
+<li>rbdcompression：压缩文件。对于存储到磁盘中的快照，可以设置是否进行压缩存储。如果是的话，Redis 会采用 LZF 算法进行压缩，如果你不想消耗 CPU 来进行压缩的话，可以设置为关闭此功能。</li>
+<li>rdbchecksum：检查完整性。在存储快照后，还可以让 Redis 使用 CRC64 算法来进行数据校验，但是这样做会增加大约 10% 的性能消耗，如果希望获取到最大的性能提升，可以关闭此功能。默认为 yes。</li>
+</ul>
+<h4 id="rdb禁用">RDB禁用</h4>
+<p>如果想禁用 RDB 持久化的策略，有两种方式：</p>
+<ol>
+<li>
+<p>配置文件</p>
+<p>​		只要在配置文件不设置任何 save 指令，或者给 save 传入一个空字符串参数也可以。</p>
+</li>
+<li>
+<p>命令</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">redis-cli config <span class="nb">set</span> save <span class="s2">&#34;&#34;</span>    <span class="c1"># save 后给空值，表示禁用保存策略</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="rdb备份">RDB备份</h4>
+<p><code>config get dir</code> 查询 rdb 文件的目录, 然后将.rdb文件copy到别处即可</p>
+<h4 id="rdb恢复">RDB恢复</h4>
+<ul>
+<li>
+<p>关闭 Redis 服务</p>
+</li>
+<li>
+<p>把备份的文件拷贝到 Redis 工作 / 安装目录下,如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">cp /opt/dump.rdb /usr/local/bin/dump.rdb
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>重新启动 Redis，备份数据会直接加载</p>
+</li>
+</ul>
+<h4 id="rdb-优缺点">RDB 优缺点</h4>
+<ol>
+<li>优点:
+<ul>
+<li>RDB文件是紧凑的<a href="https://so.csdn.net/so/search?q=%e4%ba%8c%e8%bf%9b%e5%88%b6&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreffer ">二进制</a>文件，节省磁盘空间; 比较适合做冷备，全量复制的场景。</li>
+<li>RDB对Redis对外提供的读写服务，影响非常小</li>
+<li>相对于AOF持久化机制来说，直接基于RDB数据文件来重启和恢复Redis进程，更加快速；</li>
+</ul>
+</li>
+<li>缺点：</li>
+</ol>
+<ul>
+<li>Fork 的时候，内存中的数据被克隆了一份，大致 2 倍的膨胀性需要考虑</li>
+<li>虽然 Redis 在 fork 时使用了写时拷贝技术,但是如果数据庞大时还是比较消耗性能</li>
+<li>在备份周期在一定间隔时间做一次备份，所以如果 Redis 意外 down 掉的话， 就会丢失最后一次快照后的所有修改</li>
+</ul>
+<h3 id="aof">AOF</h3>
+<p>​		以日志的形式来记录每个写操作（增量保存），将 Redis 执行过的所有写指令记录下来(读操作不记录)，只许追加文件但不可以改写文件，Redis 启动之初会读取该文件重新构建数据，换言之，redis 重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作。</p>
+<h4 id="aof持久化流程">AOF持久化流程</h4>
+<ol>
+<li>客户端的请求写命令会被 append 追加到 AOF 缓冲区内；</li>
+<li>AOF 缓冲区根据 AOF 持久化策略[always,everysec,no]将操作 sync 同步到磁盘的 AOF 文件中；</li>
+<li>AOF 文件大小超过重写策略或手动重写时，会对 AOF 文件 rewrite 重写，压缩 AOF 文件容量；</li>
+<li>Redis 服务重启时，会重新 load 加载 AOF 文件中的写操作达到数据恢复的目的；</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.7dtmu6toxa80.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.7dtmu6toxa80.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.7dtmu6toxa80.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.7dtmu6toxa80.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.7dtmu6toxa80.webp"
+        title="image" /></p>
+<h4 id="aof开启">AOF开启</h4>
+<ul>
+<li>AOF默认不开启, 在 redis.conf 中配置文件里，将 <code>appendonly no</code> 改为 <code>appendonly yes</code>即可开启</li>
+<li>AOF 的默认配置文件名叫 appendonly.aof</li>
+<li>AOF 文件默认的保存路径，同 RDB 的路径一致</li>
+</ul>
+<blockquote>
+<p>AOF 和 RDB 同时开启，系统默认取 AOF 的数据（数据不会存在丢失）</p>
+</blockquote>
+<h4 id="aof同步频率">AOF同步频率</h4>
+<ol>
+<li>appendfsync always: 始终同步，每次 Redis 的写入都会立刻记入日志；性能较差但数据完整性比较好</li>
+<li>appendfsync everysec: 每秒同步，每秒记入日志一次，如果宕机，本秒的数据可能丢失。</li>
+<li>appendfsync no: redis 不主动进行同步，把同步时机交给操作系统。</li>
+</ol>
+<h4 id="aof恢复流程">AOF恢复流程</h4>
+<ol>
+<li>将有数据的 aof 文件复制一份保存到对应目录(查看目录：config get dir)</li>
+<li>如遇到 AOF 文件损坏，通过/usr/local/bin/redis-check-aof&ndash;fix appendonly.aof 进行恢复</li>
+<li>重启 redis，然后重新加载</li>
+</ol>
+<h4 id="aof重写rewrite机制">AOF重写(Rewrite)机制</h4>
+<p>​		AOF 采用文件追加方式，文件会越来越大为避免出现此种情况，新增了重写机制，当 AOF 文件的大小超过所设定的阈值时，Redis 就会启动 AOF 文件的内容压缩，只保留可以恢复数据的最小指令集，可以使用命令 <code>bgrewriteaof</code>。</p>
+<h5 id="重写原理">重写原理</h5>
+<p>​		AOF 文件持续增长而过大时，会 fork 出一条新进程来将文件重写(也是先写临时文件最后再 rename)，redis4.0 版本后的重写，是指把 rdb 的快照，以二级制的形式附在新的 aof 头部，作为已有的历史数据，替换掉原来的流水账操作。</p>
+<ul>
+<li>no-appendfsync-on-rewrite：yes时,代表不写入 AOF 文件，只写入缓存，用户请求不会阻塞，但是在这段时间如果宕机会丢失这段时间的缓存数据。（降低数据安全性，提高 性能）</li>
+<li>如果 <code>no-appendfsync-on-rewrite</code> 改为 no，还是会把数据往磁盘里刷，但是遇到重写操作，可能会发生阻塞。（数据安全，但是性能降低）</li>
+</ul>
+<h5 id="触发重写机制">触发重写机制</h5>
+<p>​		Redis 会记录上次重写时的 AOF 大小，默认配置是当 AOF 文件大小是上次 rewrite 后大小的一倍且文件大于 64M 时触发。重写虽然可以节约大量磁盘空间，减少恢复时间。但是每次重写还是有一定的负担的，因此设定 Redis 要满足一定条件才会进行重写。</p>
+<ul>
+<li><code>auto-aof-rewrite-percentage</code>：设置重写的基准值，文件达到 100% 时开始重写（文件是原来重写后文件的 2 倍时触发）</li>
+<li><code>auto-aof-rewrite-min-size</code>：设置重写的基准值，最小文件 64MB。达到这个值开始重写</li>
+</ul>
+<h5 id="重写流程">重写流程</h5>
+<ol>
+<li>bgrewriteaof 触发重写，判断是否当前有 bgsave 或 bgrewriteaof 在运行，如果有，则等待该命令结束后再继续执行</li>
+<li>主进程 fork 出子进程执行重写操作，保证主进程不会阻塞</li>
+<li>子进程遍历 redis 内存中数据写到临时文件，客户端的写请求同时写入 <code>aof_buf</code> 缓冲区和 <code>aof_rewrite_buf</code> 重写缓冲区保证原 AOF 文件完整以及新 AOF 文件生成期间的 新的数据修改动作不会丢失</li>
+<li>子进程写完新的 AOF 文件后，向主进程发信号，父进程更新统计信息</li>
+<li>主进程把 <code>aof_rewrite_buf</code> 中的数据写入到新的 AOF 文件</li>
+<li>使用新的 AOF 文件覆盖旧的 AOF 文件，完成 AOF 重写</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4lqce1ojkae0.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4lqce1ojkae0.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4lqce1ojkae0.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4lqce1ojkae0.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4lqce1ojkae0.webp"
+        title="image" /></p>
+<h5 id="aof优缺点">AOF优缺点</h5>
+<ol>
+<li>
+<p>优点:</p>
+<ul>
+<li>备份机制更稳健，丢失数据概率更低</li>
+<li>AOF日志文件以append-only模式写入，写入性能比较高</li>
+<li>AOF日志文件即使过大的时候，出现后台重写操作，也不会影响客户端的读写。</li>
+<li>适合做灾难性的误删除紧急恢复</li>
+</ul>
+</li>
+<li>
+<p>缺点</p>
+<ul>
+<li>对于同一份数据来说，AOF日志文件通常比RDB数据快照文件更大，恢复速度慢</li>
+<li>每次读写都同步的话，有一定的性能压力</li>
+<li>存在个别 Bug，造成恢复不能</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结">总结</h3>
+<blockquote>
+<p>官方推荐两个都启用。如果对数据不敏感，可以选单独用 RDB。不建议单独用 AOF，因为可能会出现 Bug。如果只是做纯内存缓存，可以都不用。</p>
+</blockquote>
+<ul>
+<li>
+<p>RDB 持久化方式能够在指定的时间间隔内对你的数据进行快照存储</p>
+</li>
+<li>
+<p>AOF 持久化方式记录每次对服务器写的操作，当服务器重启的时候会重新执行这些命令来恢复原始的数据，AOF 命令以 Redis 协议追加保存每次写的操作到文件末尾</p>
+</li>
+<li>
+<p>Redis 还能对 AOF 文件进行后台重写，使得 AOF 文件的体积不至于过大</p>
+</li>
+<li>
+<p>只做缓存，如果你只希望你的数据在服务器运行的时候存在，你也可以不使用任何持久化</p>
+</li>
+<li>
+<p>同时开启两种持久化方式</p>
+<ol>
+<li>在这种情况下，当 Redis 重启的时候会优先载入 AOF 文件来恢复原始的数据，因为在通常情况下 AOF 文件保存的数据集要比 RDB 文件保存的数据集要完整</li>
+<li>RDB 的数据不实时，同时使用两者时服务器重启也只会找 AOF 文件，那要不要只使用 AOF 呢？建议不要，因为 RDB 更适合用于备份数据库（AOF 在不断变化不好备份），快速重启，而且不会有 AOF 可能潜在的 Bug，留着作为一个万一的手段</li>
+</ol>
+</li>
+<li>
+<p>性能建议</p>
+<ol>
+<li>
+<p>因为 RDB 文件只用作后备用途，建议只在 Slave 上持久化 RDB 文件，而且只要 15 分钟备份一次就够 了，只保留 <code>save 900 1</code> 这条规则。</p>
+</li>
+<li>
+<p>如果使用 AOF ，好处是在最恶劣情况下也只会丢失不超过两秒数据，启动脚本较简单只 load 自己的 AOF 文件就可以了，代价：</p>
+<ul>
+<li>
+<p>一是带来了持续的 IO</p>
+</li>
+<li>
+<p>二是 AOF rewrite 的最后将 rewrite 过程中产生的新数据写到新文件造成的阻塞几乎是不可避免的</p>
+</li>
+</ul>
+</li>
+<li>
+<p>只要硬盘许可，应该尽量减少 AOF rewrite 的频率，AOF 重写的基础大小默认值 64M 太小了，可以设到 5G 以上，默认超过原大小 100% 大小重 写可以改到适当的数值</p>
+</li>
+<li>
+<p>如果不使用 AOF ，仅靠 <code>Master-Slave Repllcation</code> 实现高可用性也可以，能省掉一大笔 IO，也减少了 rewrite 时带来的系统波动。代价是如果 Master/Slave 同时倒掉，会丢失十几分钟的数据， 启动脚本也要比较两个 Master/Slave 中的 RDB 文件，载入较新的那个，微博就是这种架构</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="主从复制">主从复制</h2>
+<p>​		主从复制，是指将一台 Redis 服务器的数据，复制到其他的 Redis 服务器。前者称为主节点 (master/leader)，后者称为从节点(slave/follower)；数据的复制是单向的，只能由主节点到从节点。<strong>Master 以写为主，Slave 以读为主</strong>。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4mf4xesn8lw.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4mf4xesn8lw.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4mf4xesn8lw.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4mf4xesn8lw.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4mf4xesn8lw.webp"
+        title="image" /></p>
+<h3 id="作用">作用</h3>
+<ul>
+<li>数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式</li>
+<li>故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余</li>
+<li>负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务 （即写 Redis 数据时应用连接主节点，读 Redis 数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高 Redis 服务器的并发量</li>
+<li>高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是 Redis 高可用的基础</li>
+</ul>
+<h3 id="薪火相传">薪火相传</h3>
+<p>​		上一个 Slave 可以是下一个 Slave 的 Master，Slave 同样可以接收其他 Slaves 的连接和同步请求，那么该 Slave 作为了链条中下一个的 Master，可以有效减轻 Master 的写压力，去中心化降低风险<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3c8aowrzbpm0.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3c8aowrzbpm0.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.3c8aowrzbpm0.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.3c8aowrzbpm0.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3c8aowrzbpm0.webp"
+        title="image" /></p>
+<h3 id="反客为主">反客为主</h3>
+<p>​		当一个 master 宕机后，后面的 slave 可以立刻升为 master，其后面的 slave 不用做任何修改。</p>
+<p>有两种方式可以产生新的主机：</p>
+<ul>
+<li>从机手动执行命令 <code>slaveof no one</code>，这样执行以后从机会独立出来成为一个主机</li>
+<li>使用哨兵模式（自动选举）</li>
+</ul>
+<h3 id="主从复制原理">主从复制原理</h3>
+<ul>
+<li>Slave 启动成功连接到 Master 后会发送一个 sync 命令</li>
+<li>Master 接到命令，做一次 bgsave，同时收集所有接收到的用于修改数据集命令，在后台进程执行完毕之后，Master 将传送整个RDB数据文件到 Slave，并完成一次完全同步; 完全同步完成后，再通知主节点将期间修改的操作记录同步到复制节点进行重放就完成了同步过程。</li>
+<li>全量复制：而 Slave 服务在接收到数据库文件数据后，将其存盘并加载到内存中</li>
+<li>增量复制：Master 继续将新的所有收集到的修改命令依次传给 Slave，完成同步</li>
+<li>但是只要是重新连接 Master，一次完全同步（全量复制）将被自动执行</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.5eivho3kll00.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.5eivho3kll00.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.5eivho3kll00.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.5eivho3kll00.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.5eivho3kll00.webp"
+        title="image" /></p>
+<h2 id="哨兵模式">哨兵模式</h2>
+<p>​		主从切换:  当主服务器宕机后，需要手动把一台从服务器切换为主服务器，这就需要人工干预，费事费力，还会造成一段时间内服务不可用。</p>
+<p>​		哨兵模式是一种特殊的模式，首先 Redis 提供了哨兵的命令，哨兵是一个独立的进程，作为进程，它会独立运行。其原理是 <strong>哨兵通过发送命令，等待 Redis 服务器响应，从而监控运行的多个 Redis 实例</strong>	<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4drtau9vige0.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4drtau9vige0.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4drtau9vige0.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.4drtau9vige0.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.4drtau9vige0.webp"
+        title="image" /></p>
+<h3 id="原理-1">原理</h3>
+<ol>
+<li>第一个定时任务： 每个sentinel节点每隔1s向所有的master、slaver、别的sentinel节点发送一个PING命令，作用：<strong>心跳检测</strong></li>
+<li>第二个定时任务： 每个sentinel每隔2s都会向master的__sentinel__:hello这个channel中发送自己掌握的集群信息和自己的一些信息（比如host,ip,run id），这个是利用redis的pub/sub功能，每个sentinel节点都会订阅这个channel，也就是说，每个sentinel节点都可以知道别的sentinel节点掌握的集群信息，作用：**信息交换，了解别的sentinel的信息和他们对于主节点的判断**</li>
+<li>第三个定时任务： 每个sentinel节点每隔10s都会向master和slaver发送INFO命令，作用：发现最新的集群拓扑结构</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3lsffl4hg0e0.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3lsffl4hg0e0.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.3lsffl4hg0e0.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.3lsffl4hg0e0.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.3lsffl4hg0e0.webp"
+        title="image" /></p>
+<h3 id="宕机检测">宕机检测</h3>
+<ul>
+<li><strong>主观下线</strong></li>
+</ul>
+<p>这是第一个线程做的事情: 当sentinel节点向master发送一个PING命令，如果超过own-after-milliseconds（默认是30s，这个在sentinel的配置文件中可以自己配置）时间都没有收到有效回复，不好意思，我就认为你挂了，就是说为的主观下线（SDOWN），修改其flags状态为SRI_S_DOWN</p>
+<ul>
+<li>客观下线
+<ol>
+<li>每个主观下线的sentinel节点都会向其他sentinel节点发送信息来询问其它sentinel是否同意服务下线。</li>
+<li>每个收到信息的sentinel则会判断是否下线, 如果下线了则回复</li>
+<li>sentinel收到回复之后，根据quorum的值，判断达到这个值，如果大于或等于，就认为这个master客观下线</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>quorum：如果要认为master客观下线，最少需要主观下线的sentinel节点个数</p>
+<p>majority：如果确定了master客观下线了，就要把其中一个slaver切换成master，做这个事情的并不是整个sentinel集群，而是sentinel集群会选出来一个sentinel节点来做;有一个原则就是需要大多数节点都同意这个sentinel来做故障转移才可以，这个大多数节点就是这个参数; 注意：如果sentinel节点个数5，quorum=2，majority=3，那就是3个节点同意就可以，如果quorum=5，majority=3，这时候majority=3就不管用了，需要5个节点都同意才可以。</p>
+</blockquote>
+<h3 id="领头sentinel的选举">领头sentinel的选举</h3>
+<p>​			已经知道了master客观下线，那就需要一个sentinel来负责故障转移，那到底是哪个sentinel节点来做这件事呢？需要通过选举实现，具体的选举过程如下：</p>
+<ol>
+<li>判断客观下线的sentinel节点向其他节点发送客观下线通知</li>
+<li>目标sentinel回复，由于这个选择领头sentinel的过程符合先到先得的原则(举例：sentinel1判断了客观下线，向sentinel2发送了第一步中的命令，sentinel2回复了sentinel1，说选你为领头，这时候sentinel3也向sentinel2发送第一步的命令，sentinel2会直接拒绝回复)</li>
+<li>当sentinel发现选自己的节点个数超过majority（注意上面写的一种特殊情况quorum&gt;majority）的个数的时候，自己就是领头节点</li>
+<li>如果没有一个sentinel达到了majority的数量，等一段时间，重新选举</li>
+</ol>
+<h3 id="故障迁移">故障迁移</h3>
+<p>​		在进行选择之前需要先剔除掉一些不满足条件的slaver，这些slaver不会作为变成master的备选</p>
+<ul>
+<li>剔除列表中已经下线的从服务</li>
+<li>剔除有5s没有回复sentinel的info命令的slaver</li>
+<li>剔除与已经下线的主服务连接断开时间超过一定宕机时长的slaver</li>
+</ul>
+<h4 id="选主过程">选主过程</h4>
+<ol>
+<li>选择优先级最高的节点，通过sentinel配置文件中的replica-priority配置项，这个参数越小，表示优先级越高</li>
+<li>如果第一步中的优先级相同，选择offset最大的，offset表示主节点向从节点同步数据的偏移量，越大表示同步的数据越多</li>
+<li>如果第二步offset也相同，选择run id较小的</li>
+<li>领头sentinel向别的slaver发送slaveof命令，告诉他们新的master是谁谁谁，你们向这个master复制数据</li>
+<li>如果之前的master重新上线时，领头sentinel同样会给起发送slaveof命令，将其变成从节点</li>
+</ol>
+<h3 id="脑裂问题">脑裂问题</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/1407685-20200619093846485-1621131792.png"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/1407685-20200619093846485-1621131792.png, https://raw.githubusercontent.com/NoobMidC/pics/main/1407685-20200619093846485-1621131792.png 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/1407685-20200619093846485-1621131792.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/1407685-20200619093846485-1621131792.png"
+        title="img" /></p>
+<p>​		当集群中的master的网络出现了问题，和集群中的slaver和sentinel通信出现问题，但是本身并没有挂，由于sentinel连接不上master，就会重新选择一个新的slaver变成master，这时候如果client还么有来得及切换，就会把数据写入到原来的那个master中，一旦网络恢复，原来的master就会被变成slaver，从新的master上复制数据，那client向原来的master上写的数据就丢失了。</p>
+<h4 id="解决办法">解决办法</h4>
+<p>配置项:</p>
+<ul>
+<li>min-slavers-to-write 1</li>
+<li>min-slavers-max-lag 10</li>
+</ul>
+<p>​		这两个配置项组合在一起配置的意思就是至少有一个slaver和master数据同步延迟不超过10s,如果所有的slaver都超过10s，那master就会拒绝接收请求，为什么加了这两个参数就可以解决问题呢？如果发生脑裂，如果client向旧的master写数据，旧的master不能向别的slaver同步数据，所以client最多只能写10s的数据。这里有些萌新可能就会有问题了，如果发生脑裂的时候，之前集群中的master和一个slaver都与别的slaver和sentinel无法通信了，但是这两个哥们还可以通信，那这个slaver不就可以正常从master同步数据吗，不就满足了上面的两个条件了吗，对，确实会这样^_^，所以你可以把min-slavers-to-write配置大一点</p>
+<h2 id="集群模式">集群模式</h2>
+<p>​		Redis 集群实现了对 Redis 的水平扩容，即启动 N 个 redis 节点，将整个数据库分布存储在这 N 个节点中，每个节点存储总数据的 1/N。这样就做到了去中心化.</p>
+<p>​		Redis 集群通过分区（partition）来提供一定程度的可用性（availability）：即使集群中有一部分节点失效或者无法进行通讯，集群也可以继续处理命令请求。</p>
+<h3 id="插槽slot">插槽slot</h3>
+<p>​		<strong>插槽数量固定为16384</strong>, 尽管crc16能得到65535个值; 因为16384的消息只占用了2k，而65535则需要8k;  传输大量心跳包的时候, 正常的心跳包携带节点的完整配置, 这样就会导致大量的数据在网路中,导致堵塞.</p>
+<p>​		每个节点负责一部分插槽。即 16384 个插槽分成N份给N个节点。集群使用公式 <code>CRC16(key) % 16384</code> 来计算键 key 属于哪个槽， 其中 CRC16(key) 语句用于计算键 key 的 CRC16 校验和.</p>
+<p>缺点:</p>
+<ul>
+<li>
+<p>客户端每次录入、查询键值是都会计算出该 key 应该送往的插槽, 如果不在对应服务器则会重定向;</p>
+</li>
+<li>
+<p>不在一个 slot 下的键值，是不能使用 mget、mset 等多键操作</p>
+<blockquote>
+<p>可以通过 {} 来定义组的概念，从而使 key 中 {} 内相同内容的键值对放到一个 slot 中去</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="集群故障恢复">集群故障恢复</h3>
+<p><strong>如果主节点下线？从节点能否自动升为主节点？</strong></p>
+<p>​		15秒超时后, 从节点自动变成主节点, 即使后面主节点重启,也会是从节点.</p>
+<p><strong>如果所有某一段插槽的主从节点都宕掉，Redis 服务是否还能继续？</strong></p>
+<ul>
+<li>如果某一段插槽的主从都挂掉，而 <code>cluster-require-full-coverage</code> 为 yes ，那么 ，整个集群都挂掉</li>
+<li>如果某一段插槽的主从都挂掉，而 <code>cluster-require-full-coverage</code> 为 no ，那么，该插槽数据全都不能使用，也无法存储; 可以通过充分配插槽的方式,来让这些插槽转移;</li>
+</ul>
+<h3 id="集群优缺点">集群优缺点</h3>
+<p>优点：</p>
+<ul>
+<li>实现扩容</li>
+<li>分摊压力</li>
+<li>无中心配置相对简单</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li>多键操作是不被支持的</li>
+<li>多键的 Redis 事务是不被支持的。lua 脚本不被支持</li>
+<li>由于集群方案出现较晚，很多公司已经采用了其他的集群方案，而代理或者客户端分片的方案想要迁移至 redis cluster，需要整体迁移而不是逐步过渡，复杂度较大</li>
+</ul>
+<h2 id="分布式锁">分布式锁</h2>
+<p>​	分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制锁策略失效;</p>
+<p>分布式锁主流的实现方案</p>
+<ul>
+<li>基于数据库实现分布式锁</li>
+<li>基于缓存（Redis 等）</li>
+<li>基于 Zookeeper</li>
+</ul>
+<p>每一种分布式锁解决方案都有各自的优缺点：</p>
+<ul>
+<li>性能：Redis 最高</li>
+<li>可靠性：zookeeper 最高</li>
+</ul>
+<p>分布式锁代码实现逻辑:</p>
+<ol>
+<li>
+<p>加锁（setnx 指令),添加过期时间（setnx 指令加时间）</p>
+<blockquote>
+<p>第一步可以用下面命令原子性解决:</p>
+<p>set key value [EX seconds] [PX milliseconds] [NX|XX]
+EX seconds：设置失效时长，单位秒
+PX milliseconds：设置失效时长，单位毫秒
+NX：key不存在时设置value，成功返回OK，失败返回(nil)
+XX：key存在时设置value，成功返回OK，失败返回(nil)</p>
+</blockquote>
+</li>
+<li>
+<p>添加唯一标识如：uuid（将 uuid 放入 Reids，然后操作时获取 uuid，添加 if 判断）,防止误删</p>
+</li>
+<li>
+<p>添加原子性，用 LUA 脚本实现</p>
+</li>
+</ol>
+<h2 id="60-新功能">6.0 新功能</h2>
+<h3 id="acl-访问控制列表">ACL （访问控制列表)</h3>
+<h3 id="io多线程">IO多线程</h3>
+<p>​		IO多线程其实指<strong>客户端交互部分</strong>的<strong>网络IO</strong>交互处理模块<strong>多线程</strong>，而非<strong>执行命令多线程</strong>。Redis6执行命令依然是单线程。</p>
+<p>​		。Redis 的多线程部分只是用来处理网络数据的读写和协议解析，执行命令仍然是单线程。之所以这么设计是不想因为多线程而变得复杂，需要去控制 key、lua、事务，LPUSH/LPOP等等的并发问题。整体的设计大体如下:<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.62yuife2nb40.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.62yuife2nb40.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.62yuife2nb40.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.62yuife2nb40.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.62yuife2nb40.webp"
+        title="image" /></p>
+<h2 id="缓存问题">缓存问题</h2>
+<h3 id="缓存穿透">缓存穿透</h3>
+<p>​		产生这个问题的原因可能是外部的恶意攻击，例如，对用户信息进行了缓存，但恶意攻击者使用不存在的用户id频繁请求接口，导致查询缓存不命中，然后穿透 DB 查询依然不命中。这时会有大量请求穿透缓存访问到 DB。网络安全中也有人恶意使用这种手段进行攻击被称为洪水攻击。</p>
+<h4 id="解决方案">解决方案</h4>
+<ol>
+<li>
+<p>布隆过滤器(Bloom Filter)</p>
+<p>​		布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都远远超过一般的算法，缺点是有一定的误识别率和删除困难。</p>
+<p>​		对所有可能查询的参数以 Hash 的形式存储，以便快速确定是否存在这个值，在控制层先进行拦截校验，校验不通过直接打回，减轻了存储系统的压力。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.59npgmymwi40.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.59npgmymwi40.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.59npgmymwi40.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.59npgmymwi40.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.59npgmymwi40.webp"
+        title="image" /></p>
+</li>
+<li>
+<p>缓存空值</p>
+<p>​         如果一个查询返回的数据为空（不管是数据是否不存在），我们仍然把这个空结果（null）进行缓存，用于处理后续这个请求，设置空结果的过期时间会很短，最长不超过五分钟。</p>
+<blockquote>
+<p>这样做有一个缺陷：存储空对象也需要空间，大量的空对象会耗费一定的空间，存储效率并不高。解决这个缺陷的方式就是设置较短过期时间</p>
+<p>即使对空值设置了过期时间，还是会存在缓存层和存储层的数据会有一段时间窗口的不一致，这对于需要保持一致性的业务会有影响。</p>
+</blockquote>
+</li>
+<li>
+<p>访问白名单</p>
+<p>​		使用 bitmaps 类型定义一个可以访问的名单，名单 id 作为 bitmaps 的偏移量，每次访问和 bitmap 里面的 id 进行比较，如果访问 id 不在 bitmaps 里面，进行拦截，不允许访问。</p>
+</li>
+<li>
+<p>进行实时监控</p>
+<p>​		当发现 Redis 的命中率开始急速降低，需要排查访问对象和访问的数据，和运维人员配合，可以设置黑名单限制服务。</p>
+</li>
+</ol>
+<h3 id="缓存击穿">缓存击穿</h3>
+<p>​		相较于缓存穿透，缓存击穿的目的性更强，一个存在的 key，在缓存过期的一刻，同时有大量的请求，这些请求都会击穿到 DB，造成瞬时 DB 请求量大、压力骤增。这就是缓存被击穿，只是针对其中某个 key 的缓存不可用而导致击穿，但是其他的 key 依然可以使用缓存响应。</p>
+<h4 id="解决方案-1">解决方案</h4>
+<ol>
+<li>
+<p>设置热点数据永不过期</p>
+<p>​		在 redis 高峰访问之前，把一些热门数据提前存入到 redis 里面，加大这些热门数据 key 的时长，这样就不会出现热点数据过期的情况，但是当Redis内存空间满的时候也会清理部分数据，而且此种方案会占用空间，一旦热点数据多了起来，就会占用部分空间。</p>
+</li>
+<li>
+<p>加互斥锁(分布式锁)</p>
+<ul>
+<li>在缓存失效的时候（判断拿出来的值为空），不是立即去 load db</li>
+<li>先使用缓存工具的某些带成功操作返回值的操作（比如 Redis 的 SETNX）去 set 一个 mutex key</li>
+<li>当操作返回成功时，再进行 load db 的操作，并回设缓存，最后删除 mutex key</li>
+<li>当操作返回失败，证明有线程在 load db，当前线程睡眠一段时间再重试整个 get 缓存的方法</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/image.6mzwdoxfni00.webp"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/image.6mzwdoxfni00.webp, https://raw.githubusercontent.com/NoobMidC/pics/main/image.6mzwdoxfni00.webp 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/image.6mzwdoxfni00.webp 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/image.6mzwdoxfni00.webp"
+        title="image" /></p>
+</li>
+</ol>
+<h4 id="缓存雪崩">缓存雪崩</h4>
+<p>​		大量的 key 设置了相同的过期时间，导致在缓存在同一时刻全部失效，此时若有大量并发请求过来，立即造成瞬时 DB 请求量大、压力骤增，引起雪崩。</p>
+<p>​		缓存雪崩与缓存击穿的区别在于这里针对很多 key 缓存，前者则是某一个 key</p>
+<h4 id="产生原因">产生原因</h4>
+<ol>
+<li>大量key的集中过期</li>
+<li>缓存集群服务器某个节点宕机或断网(此情况压力不可预估, 危害更大)</li>
+</ol>
+<h4 id="解决方案-2">解决方案</h4>
+<ol>
+<li>
+<p>构建多级缓存架构</p>
+<p>​		nginx 缓存 + redis 缓存 +其他缓存（ehcache 等）。或者多增设几台 Redis，这样一台挂掉之后其他的还可以继续工作，其实就是搭建的集群。</p>
+</li>
+<li>
+<p>使用锁或队列</p>
+<p>​		用加锁或者队列的方式保证来保证不会有大量的线程对数据库一次性进行读写，从而避免失效时大量的并发请求落到底层存储系统上。不适用高并发情况。</p>
+</li>
+<li>
+<p>设置过期标志更新缓存</p>
+<p>​		记录缓存数据是否过期（设置提前量），如果过期会触发通知另外的线程在后台去更新实际 key 的缓存。</p>
+</li>
+<li>
+<p>将缓存失效时间分散开</p>
+<p>​		比如我们可以在原有的失效时间基础上增加一个随机值，比如 1-5 分钟随 机，这样每一个缓存的过期时间的重复率就会降低，就很难引发集体失效的事件。</p>
+</li>
+<li>
+<p>限流降级</p>
+<p>​		在缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个 key 只允许一个线程查询数据和写缓存，其他线程等待。</p>
+</li>
+<li>
+<p>数据预热</p>
+<p>​	就是在正式部署之前，我先把可能的数据先预先访问一遍，这样部分可能大量访问的数据就会加载到缓存中。在即将发生大并发访问前手动触发加载缓存不同的key，设置不同的过期时间，让缓存失效的时间点尽量均匀</p>
+</li>
+</ol>
+<h2 id="redis-使用场景">Redis 使用场景</h2>
+<ul>
+<li>热点数据的缓存;</li>
+<li>限时业务的运用</li>
+<li>排行榜/计数器相关问题：：许多系统都会使用Redis作为系统的实时计数器，可以快速实现计数和查询的功能。</li>
+<li>分布式锁</li>
+<li>会话缓存(<strong>Session Cache</strong>)、共享用户Session</li>
+<li>队列:Reids 在内存存储引擎领域的一大优点是提供 list 和 set 操作，这使得 Redis 能作为一个很好的消息队列平台来使 用。</li>
+</ul>
+<h3 id="redis-做缓存的两种模式"><strong>Redis</strong> 做缓存的两种模式</h3>
+<p>​	什么情况下使用索引</p>
+<ol>
+<li>不需要实时更新又极其消耗数据库的数据</li>
+<li>需要实时更新，但更新的频率不高</li>
+</ol>
+<p>​		简单来说，就是需要在应用程序中新增缓存逻辑处理的代码。Redis就是旁路缓存，因为需要应用程序调用它。电脑内存里的磁盘文件就不是旁路缓存，因为是自动调用的，对应用程序透明。</p>
+<ol>
+<li>
+<p>模式一: 只读缓存</p>
+<p>​		加强读请求性能。查询数据时，缓存缺失需要从DB加载。更新数据时到DB更新，Redis上的老数据直接删除。</p>
+</li>
+<li>
+<p>模式二: 读写缓存</p>
+<p>​		读操作和只读缓存一样。写操作分为同步直写和异步写回两种模式，根据实际的业务场景需求来进行选择:</p>
+<ol>
+<li>同步直写模式: Redis和DB同时删改写回。侧重于保证数据可靠性。</li>
+<li>异步写回模式: 只写Redis，数据要被淘汰时再写回DB。侧重于提供低延迟访问。</li>
+</ol>
+</li>
+</ol>
+<h2 id="替换策略缓存满了怎么办">替换策略**(**缓存满了怎么办**)**</h2>
+<p>Redis总共有<strong>6</strong>种淘汰策略:</p>
+<ol>
+<li>不进行数据淘汰的策略， noeviction:默认禁止驱逐数据。内存不够使用时，对申请内存的命令报错。</li>
+<li>会进行数据淘汰的策略:
+<ol>
+<li>在设置了过期时间的数据中进行淘汰
+<ol>
+<li>volatile-lru:从已设置过期时间的数据集中，挑选最近最少使用的数据淘汰</li>
+<li>volatile-ttl:从已设置过期时间的数据集中，选择将要过期的数据进行淘汰</li>
+<li>volatile-random:从已设置过期时间的数据集中，随机选择数据进行淘汰</li>
+</ol>
+</li>
+<li>所有数据范围内进行淘汰
+<ol>
+<li>allkeys-lru:从数据集中，挑选最近最少使用的数据淘汰</li>
+<li>allkeys-random:从数据集中，随机选择数据进行淘汰</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>如果数据呈现幂律分布，也就是一部分数据访问频率高，一部分数据访问频 率 低， 则使用 allkeys-lru。如果数据呈现平等分布， 也就是所有的数据访问频率都相同， 则使用 allkeys-random。</p>
+</blockquote>
+<p>传统的LRU算法，需要维护一个大链表，随着数据访问，更新数据在链表中的位置。Redis 中对 LRU 算法进行了简化，简单来说就是增加了一个随机选取候选集合的操作;</p>
+<h2 id="redis与memcache的区别"><strong>redis</strong>与<strong>memcache</strong>的区别</h2>
+<h3 id="存储内容">存储内容</h3>
+<ol>
+<li>redis 支持更为丰富的数据类</li>
+<li>memcache所有的值均是简单的字符串</li>
+</ol>
+<h3 id="数据安全">数据安全</h3>
+<ol>
+<li>redis可以持久化</li>
+<li>memcache不能持久化</li>
+</ol>
+<h3 id="应用场景">应用场景</h3>
+<ol>
+<li>
+<p>redis不仅仅能作为NoSQL数据库使用，还能用途消息队列、数据堆栈、数据缓存等</p>
+</li>
+<li>
+<p>memcache适合缓存sql语句，数据集，用户临时数据等</p>
+</li>
+</ol>
+<h3 id="基础架构">基础架构</h3>
+<ol>
+<li>redis处理网络请求采用单线程模型，</li>
+<li>memcache采用多线程异步IO的方式</li>
+</ol>
+<h2 id="redis过期策略">Redis过期策略</h2>
+<ol>
+<li>定时删除，redis默认是每100ms就随机抽取一些设置了过期时间的key，并检查其是否过期，如果过期就删除。因此该删除策略并不会删除所有的过期key。</li>
+<li>惰性删除，在客户端需要获取某个key时，redis将首先进行检查，若该key设置了过期时间并已经过 期就会删除。</li>
+<li>定期删除:每隔一段时间程序就对数据库进行一次检查，删除里面的过期键。至于要删除多少过期键，以及 要检查多少个数据库，则由算法决定。</li>
+</ol>
+<p>实际上redis结合上述两种手段结合起来，保证删除过期的key。</p>
+<h2 id="redis-如何做内存优化"><strong>Redis</strong> 如何做内存优化?</h2>
+<p>​		尽可能使用哈希表(hash)，哈希表(是说散列表里面存储的数少)使用的内存非常小，所以你应该尽可能的将你的数据模型抽象到一个散列表里面。比如你的 web 系统中有一个用户对象，不要为这个用户的名称，姓氏，邮 箱，密码设置单独的 key,而是应该把这个用户的所有信息存储到一张哈希表里面。</p>
+<h2 id="redis-回收进程如何工作的">Redis 回收进程如何工作的?</h2>
+<ol>
+<li>一个客户端运行了新的命令，添加了新的数据</li>
+<li>Redi 检查内存使用情况，如果大于 maxmemory 的限制,则根据设 定好的策略进行回收(如果设置为noeviction则报错)</li>
+</ol>
+<h2 id="redis如何做异步队列">Redis如何做异步队列</h2>
+<p>​			一般使用 list 结构作为队列，rpush 生产消息，lpop 消费消息。当 lpop 没有消息的时候，要适当 sleep 一会再重试。</p>
+<ol>
+<li>
+<p>如果不用 sleep 呢?</p>
+<p>​		list 还有个指令叫 blpop，在没有消息的时候，它会阻塞住直到消息到来。</p>
+<pre><code>  2. 如果对方追问能不能生产一次消费多次呢?
+</code></pre>
+<p>​		使用 pub/sub 主题订阅者模式，可以实现1:N 的消息队列。</p>
+<pre><code>  3.  pub/sub 有什么缺点?
+</code></pre>
+<p>​		在消费者下线的情况下，生产的消息会丢失，得使用专业的消息队列如 RabbitMQ 等。</p>
+<pre><code>  4. redis 如何实现延时队列?
+</code></pre>
+<p>​		使用 sortedset，拿时间戳作为 score，消息内容作为 key 调用 zadd 来生产消息，消费者用 range by score 指令获取 N 秒之前的数据轮询进行处理</p>
+</li>
+</ol>
+<h2 id="什么是缓存预热如何实现缓存预热">什么是缓存预热?如何实现缓存预热?</h2>
+<p>缓存预热</p>
+<p>​		在刚启动的缓存系统中，如果缓存中没有任何数据，如果依靠用户请求的方式重建缓存数据，那么对数据库的压力非常大，而且系统的性能开销也是巨大的。</p>
+<p>​		此时，最好的策略是启动时就把热点数据加载好。这样，用户请求时，直接读取的就是缓存的数据，而无需去读取 DB 重建缓存数据。举个例子，热门的或者推荐的商品，需要提前预热到缓存中。</p>
+<p>如何实现</p>
+<p>一般来说，有如下几种方式来实现:</p>
+<ol>
+<li>数据量不大时，项目启动时，自动进行初始化。</li>
+<li>写个修复数据脚本，手动执行该脚本。</li>
+<li>写个管理界面，可以手动点击，预热对应的数据到缓存中。</li>
+</ol>
+<h2 id="应用问题">应用问题</h2>
+<ol>
+<li>
+<p>MySQL 里有<strong>2000w</strong> 数据，<strong>Redis</strong> 中只存<strong>20w</strong> 的数据，如何保证 <strong>redis</strong> 中 的数据都是热点数据?</p>
+<p>​		Redis 内存数据集大小上升到一定大小的时候，就 会施行数据淘汰策略。</p>
+</li>
+<li>
+<p>假如 <strong>Redis</strong> 里面有<strong>1</strong> 亿个 <strong>key</strong>，其中有<strong>10w</strong> 个 <strong>key</strong> 是以某个固定的已知的 前缀开头的，如果将它们全部找出来?</p>
+<p>​         使用 keys 指令可以扫出指定模式的 key 列表。</p>
+<blockquote>
+<p>如果这个 redis 正在给线上的业务提供服务，那使用 keys 指令会有什么问题?</p>
+<p>​              redis 的单线程的。keys 指令会导致线程阻塞一段时间，线上服务会停 顿，直到指令执行完毕，服务才能恢复。这个时候可以使用 scan 指令，scan 指令可以无阻塞的提取出指定模式的 key 列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用 keys指令长。</p>
+</blockquote>
+<p>​</p>
+<ol start="3">
+<li>
+<p>数据库和缓存如何同步?</p>
+<p>延迟双删策略</p>
+<ol>
+<li>先删除缓存</li>
+<li>更新数据库数据</li>
+<li>在更新数据库过程中如果发生了读,则缓存中有旧数据, 则需要再次删除, 至于过了多久再删,需要评估;</li>
+</ol>
+<p>如果第二次删除失败了怎么解决?</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/70.png"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/70.png, https://raw.githubusercontent.com/NoobMidC/pics/main/70.png 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/70.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/70.png"
+        title="img" /></p>
+<ol>
+<li>删除缓存、更新数据库数据</li>
+<li>数据库会将操作信息写入binlog日志当中</li>
+<li>订阅程序提取出所需要的数据以及key</li>
+<li>另起一段非业务代码，获得该信息</li>
+<li>尝试删除缓存操作，发现删除失败</li>
+<li>将这些信息发送至消息队列</li>
+<li>重新从消息队列中获得该数据，重试操作,直到成功。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
