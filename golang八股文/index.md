@@ -1342,3 +1342,20 @@ func main() {
 
 ![截屏2022-08-27 下午4.21.07](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png)
 
+
+
+
+
+
+
+
+
+## gin 框架的好处是什么？
+
+- 快速：基于 Radix 树的路由,性能非常强大。
+- 支持中间件：内置许多中间件，如 Logger,Gzip,Authorization 等。
+- 崩溃恢复：可以捕捉 panic 引发的程序崩溃，使 Web 服务可以一直运行。
+- JSON 验证：可以验证请求中 JSON 数据格式。
+- 多种数据渲染方式：支持 HTML、JSON、YAML、XML 等数据格式的响应。
+- 扩展性：非常简单扩展中间件。
+
