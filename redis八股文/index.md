@@ -56,6 +56,8 @@ Redis 是完全开源免费的，遵守 BSD 协议，是一个高性能的 key-v
 
 > 特点:  String是Redis最基本的类型, 是`二进制安全的`。意味着Redis的string可以包含任何数据,比如jpg图片或者序列化的对象;  Redis中字符串value最多可以是`512M`
 
+​		常用命令:  set,get,decr,incr,mget 等。
+
 ​		String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)是可以修改的字符串，内部结构实现上类似于golang的slice，采用预分配冗余空间的方式来减少内存的频繁分配.![image](https://raw.githubusercontent.com/NoobMidC/pics/main/image.412xvg9m4nw0.webp)
 
 > 扩容策略: 内部为当前字符串实际分配的空间capacity一般要高于实际字符串长度len。当字符串长度小于1M时，扩容都是加倍现有的空间，如果超过1M，扩容时一次只会多扩1M的空间.
@@ -65,6 +67,8 @@ Redis 是完全开源免费的，遵守 BSD 协议，是一个高性能的 key-v
 ### 列表List
 
 > 特点:  单键多值;   简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）
+
+**常用命令：**lpush,rpush,lpop,rpop,lrange等。
 
 它的底层实际是个`双向链表`，对两端的操作性能很高，通过索引下标的操作中间的节点性能会较差。![image](https://raw.githubusercontent.com/NoobMidC/pics/main/image.axobasgm674.webp)
 
@@ -80,6 +84,8 @@ Redis 是完全开源免费的，遵守 BSD 协议，是一个高性能的 key-v
 
 > 特点:  功能与list类似，特殊之处在于set是可以**自动排重**的;set提供了判断某个成员是否在一个set集合内的重要接口
 
+​		**常用命令：** sadd,spop,smembers,sunion 等。
+
 ​		Redis的Set是string类型的无序集合。它底层其实是一个value为同一个内部值的hash表，所以添加，删除，查找的**复杂度都是**`O(1)`。
 
 
@@ -87,6 +93,8 @@ Redis 是完全开源免费的，遵守 BSD 协议，是一个高性能的 key-v
 ### 有序集合zset
 
 > 特点:  Redis有序集合zset与普通集合set非常相似，是一个`没有重复元素`的字符串集合。不同之处是有序集合的每个成员都关联了一个`评分（score）`,这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。`集合的成员是唯一的，但是评分可以是重复的` 。
+
+**常用命令：** zadd,zrange,zrem,zcard等
 
 zset底层使用了两个数据结构:
 
@@ -119,6 +127,8 @@ zset底层使用了两个数据结构:
 ### Bitmaps
 
 > Bitmaps就是通过一个 bit 位来表示某个元素对应的值或者状态，其中的 key 就是对应元素本身. 
+
+**常用命令：**hget,hset,hgetall 等。
 
 Bitmaps 和set的对比
 

@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/redis%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  17371 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  17484 ,
         "url": "https:\/\/noobmid.github.io\/redis%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-28T12:49:35+08:00","dateModified": "2022-08-28T12:49:35+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,7 +109,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redis八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;17371 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;17484 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;35 minutes&nbsp;<span id="/redis%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Redis八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
@@ -337,6 +337,7 @@
 <blockquote>
 <p>特点:  String是Redis最基本的类型, 是<code>二进制安全的</code>。意味着Redis的string可以包含任何数据,比如jpg图片或者序列化的对象;  Redis中字符串value最多可以是<code>512M</code></p>
 </blockquote>
+<p>​		常用命令:  set,get,decr,incr,mget 等。</p>
 <p>​		String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)是可以修改的字符串，内部结构实现上类似于golang的slice，采用预分配冗余空间的方式来减少内存的频繁分配.<img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -352,6 +353,7 @@
 <blockquote>
 <p>特点:  单键多值;   简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
 </blockquote>
+<p>**常用命令：**lpush,rpush,lpop,rpop,lrange等。</p>
 <p>它的底层实际是个<code>双向链表</code>，对两端的操作性能很高，通过索引下标的操作中间的节点性能会较差。<img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -376,11 +378,13 @@
 <blockquote>
 <p>特点:  功能与list类似，特殊之处在于set是可以<strong>自动排重</strong>的;set提供了判断某个成员是否在一个set集合内的重要接口</p>
 </blockquote>
+<p>​		<strong>常用命令：</strong> sadd,spop,smembers,sunion 等。</p>
 <p>​		Redis的Set是string类型的无序集合。它底层其实是一个value为同一个内部值的hash表，所以添加，删除，查找的<strong>复杂度都是</strong><code>O(1)</code>。</p>
 <h3 id="有序集合zset">有序集合zset</h3>
 <blockquote>
 <p>特点:  Redis有序集合zset与普通集合set非常相似，是一个<code>没有重复元素</code>的字符串集合。不同之处是有序集合的每个成员都关联了一个<code>评分（score）</code>,这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。<code>集合的成员是唯一的，但是评分可以是重复的</code> 。</p>
 </blockquote>
+<p><strong>常用命令：</strong> zadd,zrange,zrem,zcard等</p>
 <p>zset底层使用了两个数据结构:</p>
 <ul>
 <li>hash表, hash的作用就是关联元素value和权重score, 保障元素value的唯一性，可以通过元素value找到相应的score值。</li>
@@ -414,6 +418,7 @@
 <blockquote>
 <p>Bitmaps就是通过一个 bit 位来表示某个元素对应的值或者状态，其中的 key 就是对应元素本身.</p>
 </blockquote>
+<p>**常用命令：**hget,hset,hgetall 等。</p>
 <p>Bitmaps 和set的对比</p>
 <p><img
         class="lazyload"
