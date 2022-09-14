@@ -49,7 +49,7 @@ type StringHeader struct {  // 16 字节
 }
 ```
 
-![string底层结构](https://raw.githubusercontent.com/noobmid/pics/main/string%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84.png)
+![string底层结构](https://raw.githubusercontent.com/noobmidc/pics/main/string%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84.png)
 
 本质为byte类型的数组
 
@@ -125,9 +125,9 @@ type bmap struct {
 }
 ```
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg)
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg)
 
 ​																				hmap结构图
 
@@ -214,7 +214,7 @@ type hchan struct {
 
 > channel本身是一个**环形缓冲区**，数据存放到堆上面，channel的同步是通过锁实现的，并不是想象中的lock-free的方式，channel中有两个队列，一个是发送阻塞队列，一个是接收阻塞队列。当向一个已满的channel发送数据会被阻塞，此时发送协程会被添加到sendq中，同理，当向一个空的channel接收数据时，接收协程也会被阻塞，被置入recvq中。
 
-​					 		![ringbuf 实现](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png)
+​					 		![ringbuf 实现](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png)
 
 
 
@@ -232,14 +232,14 @@ type hchan struct {
       > 3. 关闭一个 nil channel 将会发生 panic
       > 4. 给一个已经关闭的 channel 发送数据，引起 panic
 
-      ![图片](https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png)
+      ![图片](https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180223858.png)
 
       - 当 `c.closed != 0` 则为通道关闭，此时执行写，源码提示直接 panic，输出的内容就是上面提到的 `"send on closed channel"`。
 
       
    > 5. 从一个已经关闭的 channel 接收数据，如果缓冲区中为空，则返回一个零值
    
-   ![图片](https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png)
+   ![图片](https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180427191.png)
    
    - `c.closed != 0 && c.qcount == 0` 指通道已经关闭，且缓存为空的情况下（已经读完了之前写到通道里的值）
       - 如果接收值的地址 `ep` 不为空
@@ -418,7 +418,7 @@ func typeJudge(x interface{})  {
 - 同一个包的init执行顺序，golang没有明确定义，编程时要注意程序不要依赖这个执行顺序
 - 不同包的init函数按照包导入的依赖关系决定执行顺序
 
-![image-20220824111732112](https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png)
+![image-20220824111732112](https://raw.githubusercontent.com/noobmidc/pics/main/image-20220824111732112.png)
 
 
 
@@ -584,11 +584,11 @@ exit status 2
 - M的最大限制是10000个，但是内核很难支持这么多的线程数，所以这个限制可以忽略; 一般为CPU数
 - 在P没有足够的M绑定运行时,则会创建一个M;每次创建一个M都会同步创建一个G0，它负责调度其它的G，每个M都有一个G0
 
-![截屏2022-08-24 下午6.18.32](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png)
+![截屏2022-08-24 下午6.18.32](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png)
 
-![截屏2022-08-24 下午6.18.54](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png)
+![截屏2022-08-24 下午6.18.54](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png)
 
-![截屏2022-08-24 下午6.24.44](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png)
+![截屏2022-08-24 下午6.24.44](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png)
 
 - 每个 P有个局部队列，局部队列保存待执行的 goroutine(流程2)，当 M绑定的 P的的局部队列已经满了之后就 会把 goroutine 放到全局队列(流程2-1)
 -  每个 P和一个 M绑定，M是真正的执行 P中 goroutine 的实体(流程3)，M 从绑定的 P中的局部队列获取 G来 执行
@@ -672,25 +672,25 @@ exit status 2
 
  Go 以 STW 为界限，可以将 GC 划分为五个阶段：：**栈扫描**（开始时STW）;**第一次标记**（并发）;**第二次标记**（STW）;**清除**（并发）,归还
 
-![截屏2022-08-24 下午7.11.32](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png)
+![截屏2022-08-24 下午7.11.32](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png)
 
 ##### 三色标记清扫法
 
 white，grep，black;白色为需要清理的数据，黑色则不要清理。从根对象（全局变量、执行栈、寄存器(主要是指针)）开始循环，能访问到的标记为灰色，然后从灰色队列开始遍历，自身变成黑色。后续没有访问到的直接清理掉。
 
-![test](https://raw.githubusercontent.com/noobmid/pics/main/test.gif)
+![test](https://raw.githubusercontent.com/noobmidc/pics/main/test.gif)
 
 ##### 没有STW的三色标记法
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
 - 条件1: 一个白色对象被黑色对象引用 **(白色被挂在黑色下)**
 - 条件2: 灰色对象与它之间的可达关系的白色对象遭到破坏 **(灰色同时丢了该白色)**
@@ -705,7 +705,7 @@ white，grep，black;白色为需要清理的数据，黑色则不要清理。�
 
 1. 插入写屏障
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
 ​		垃圾收集器将根对象指向 A 对象标记成黑色并将 A 对象指向的对象 B 标记成灰色；用户程序修改 A 对象的指针，将原本指向 B 对象的指针指向 C 对象，这时触发写屏障将 C 对象标记成灰色；一种相对保守的屏障技术，它会将有存活可能的对象都标记成灰色以满足强三色不变性.
 
@@ -713,7 +713,7 @@ white，grep，black;白色为需要清理的数据，黑色则不要清理。�
 
 2. 删除写屏障
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
 ​		垃圾收集器将根对象指向 A 对象标记成黑色并将 A 对象指向的对象 B 标记成灰色；用户程序将 A 对象原本指向 B 的指针指向 C，触发删除写屏障，但是因为 B 对象已经是灰色的，所以不做改变；用户程序将 B 对象原本指向 C 的指针删除，触发删除写屏障，白色的 C 对象被涂成灰色；
 
@@ -935,7 +935,7 @@ func main() {
 
 > **一个非空结构体包含有尾部size为0的变量(字段)，如果不给它分配内存，那么该变量(字段)的指针地址将指向一个超出该结构体内存范围的内存空间。这可能会导致内存泄漏，或者在内存垃圾回收过程中，程序crash掉。**
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg)
 
 - 为什么对齐?
 
@@ -1025,7 +1025,7 @@ go install -race mypkg // 安装程序
 func CompareAndSwapUint32(addr *uint32, old, new uint32) (swapped bool)
 ```
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg)
 
 缺陷: 
 
@@ -1263,17 +1263,38 @@ type poolLocal struct {
 
 ##### sync.cond
 
+​		`sync.Cond` 经常用在多个 goroutine 等待，一个 goroutine 通知（事件发生）的场景。如果是一个通知，一个等待，使用互斥锁或 channel 就能搞定了。
 
+```go
+// Each Cond has an associated Locker L (often a *Mutex or *RWMutex),
+// which must be held when changing the condition and
+// when calling the Wait method.
+// A Cond must not be copied after first use.
+type Cond struct {
+        noCopy noCopy
+        // L is held while observing or changing the condition
+        L Locker
+        notify  notifyList
+        checker copyChecker
+}
+```
 
+​		每个 Cond 实例都会关联一个锁 L（互斥锁 *Mutex，或读写锁 *RWMutex），当修改条件或者调用 Wait 方法时，必须加锁。
 
-
-
-
-
-
-
-
-
+```go
+func NewCond(l Locker) *Cond //创建实例,创建 Cond 实例时，需要关联一个锁
+// Broadcast wakes all goroutines waiting on c.
+//
+// It is allowed but not required for the caller to hold c.L
+// during the call.
+func (c *Cond) Broadcast()//广播唤醒所有,Broadcast 唤醒所有等待条件变量 c 的 goroutine，无需锁保护。
+// Signal wakes one goroutine waiting on c, if there is any.
+//
+// It is allowed but not required for the caller to hold c.L
+// during the call.
+func (c *Cond) Signal() // 唤醒一个协程,Signal 只唤醒任意 1 个等待条件变量 c 的 goroutine，无需锁保护。
+func (c *Cond) Wait() // 调用 Wait 会自动释放锁 c.L，并挂起调用者所在的 goroutine，因此当前协程会阻塞在 Wait 方法调用的地方。如果其他协程调用了 Signal 或 Broadcast 唤醒了该协程，那么 Wait 方法在结束阻塞时，会重新给 c.L 加锁，并且继续执行 Wait 后面的代码
+```
 
 
 
@@ -1340,9 +1361,7 @@ func main() {
    4. 利用寄存器与高速缓存，我们都知道 cpu 从寄存器取是最快的，从高速缓存取次之。这里会进行充分的利用
 6. 机器码生产： 先生成汇编代码，其汇编器使用GOARCH参数进行初始化，然后调用对应架构便携的特定方法来生成机器码，从而跨平台。
 
-![截屏2022-08-27 下午4.21.07](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png)
-
-
+![截屏2022-08-27 下午4.21.07](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png)
 
 
 
