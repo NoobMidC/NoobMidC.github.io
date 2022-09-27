@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/mysql%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  20454 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  20807 ,
         "url": "https:\/\/noobmid.github.io\/mysql%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-28T12:49:28+08:00","dateModified": "2022-08-28T12:49:28+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,8 +109,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mysql八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;20454 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;41 minutes&nbsp;<span id="/mysql%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Mysql八股文">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;20807 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;42 minutes&nbsp;<span id="/mysql%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Mysql八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -168,7 +168,11 @@
         <li><a href="#索引不会包含null值的列">索引不会包含NULL值的列</a></li>
         <li><a href="#排序的索引问题">排序的索引问题</a></li>
         <li><a href="#mysql索引失效的几种情况">Mysql索引失效的几种情况</a></li>
-        <li><a href="#explain-关键字">Explain 关键字</a></li>
+        <li><a href="#explain-关键字">Explain 关键字</a>
+          <ul>
+            <li><a href="#type类型">type类型</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#事务">事务</a>
@@ -282,10 +286,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png"
-        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png"
+        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png"
+        alt="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png"
         title="截屏2022-08-29 上午10.21.50" /></p>
 <p><img
         class="lazyload"
@@ -609,6 +613,16 @@
 <blockquote>
 <p>explain关键字可以模拟MySQL优化器执行SQL语句，可以很好的分析SQL语句或表结构的性能瓶颈。</p>
 </blockquote>
+<h4 id="type类型">type类型</h4>
+<ol>
+<li>ALL : <strong>全表扫描(Full Table Scan)</strong>， MySQL将遍历全表以找到匹配的行。</li>
+<li>index: <strong>全索引扫描(Full Index Scan)</strong>， index 与 ALL 区别为 index 类型只遍历索引树。MYSQL 遍历整个索引来查找匹配的行。</li>
+<li>range: 索引范围扫描， 常见于 &lsquo;&lt;'， &lsquo;&lt;='， &lsquo;&gt;'， &lsquo;&gt;='， &lsquo;between&rsquo; 等操作符</li>
+<li>ref: 使用<strong>非唯一性索引或者唯一索引的前缀</strong>扫描， 返回匹配某个单独值的记录行。</li>
+<li>Eq_ref : 类似ref， 区别就在使用的索引是<strong>唯一索引</strong>。在联表查询中使用 primary key 或者 unique key 作为关联条件。</li>
+<li>Const/system: 当 MySQL 对查询某部分进行优化， 并<strong>转换为一个常量</strong>时， 使用这些类型访问。如将主键置于 where 列表中， MySQL 就能将该查询转换为一个常量， system 是 const 类型的特例， 当查询的表只有一行的情况下使用 system。</li>
+<li>NULL: MySQL 不用访问表或者索引就直接能到结果。</li>
+</ol>
 <h2 id="事务">事务</h2>
 <blockquote>
 <p>MySQL 中只有 Innodb 引擎才支持事务; 事务是一个不可分割的数据库操作序列，也是数据库并发控制的基本单位，其执行的结果必须使数据库从一种一致性状态变到另一种一致性状态。事务是逻辑上的一组操作，要么都执行，要么都不执行。</p>

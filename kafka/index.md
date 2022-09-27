@@ -836,3 +836,38 @@ offset存储在broker的consumer_offset主题中
 
 ​		连续、实时、并发和以逐记录方式处理数据的类型，我们称之为 Kafka 流处理。
 
+
+
+### 14. 延迟队列实现
+
+#### Redis ZSet
+
+​		我们知道 Redis 有一个有序集合的数据结构 ZSet，ZSet 中每个元素都有一个对应 Score，ZSet 中所有元素是按照其 Score 进行排序的。
+
+  1. 入队操作：`ZADD KEY timestamp task`, 我们将需要处理的任务，按其需要延迟处理时间作为 `Score` 加入到 `ZSet` 中。Redis 的 `ZAdd` 的时间复杂度是`O(logN)`，N是 ZSet 中元素个数，因此我们能相对比较高效的进行入队操作。
+
+  2. 起一个进程定时（比如每隔一秒）通过`ZREANGEBYSCORE`方法查询 ZSet 中 `Score` 最小的元素，具体操作为：`ZRANGEBYSCORE KEY -inf +inf limit 0 1 WITHSCORES`。查询结果有两种情况：
+
+     1. 查询出的分数小于等于当前时间戳，说明到这个任务需要执行的时间了，则去异步处理该任务；
+     2. 查询出的分数大于当前时间戳，由于刚刚的查询操作取出来的是分数最小的元素，所以说明 ZSet 中所有的任务都还没有到需要执行的时间，则休眠一秒后继续查询；
+
+     (`ZRANGEBYSCORE`操作的时间复杂度为`O(logN + M)`，其中N为 `ZSet` 中元素个数，M为查询的元素个数，因此我们定时查询操作也是比较高效的。)
+
+
+
+​		Redis 实现延迟队列的后端架构，其在原来 Redis 的 ZSet 实现上进行了一系列的优化，使得整个系统更稳定、更健壮，能够应对高并发场景，并且具有更好的可扩展性
+
+![在这里插入图片描述](https://raw.githubusercontent.com/NoobMidC/pics/main/watermark%252Ctype_ZmFuZ3poZW5naGVpdGk%252Cshadow_10%252Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTM0NzQ0MzY%253D%252Csize_16%252Ccolor_FFFFFF%252Ct_70.png)
+
+1. 将延迟的消息任务通过 hash 算法路由至不同的 Redis Key 上，这样做有两大好处：
+   1. 避免了当一个 KEY 在存储了较多的延时消息后，入队操作以及查询操作速度变慢的问题（两个操作的时间复杂度均为`O(logN)）`。
+   2. 系统具有了更好的横向可扩展性，当数据量激增时，我们可以通过增加 Redis Key 的数量来快速的扩展整个系统，来抗住数据量的增长。
+2. 每个 Redis Key 都对应建立一个处理进程，称为 Event 进程，通过上述步骤 2 中所述的 ZRANGEBYSCORE 方法轮询 Key，查询是否有待处理的延迟消息。
+3. 所有的 Event 进程只负责分发消息，具体的业务逻辑通过一个额外的消息队列异步处理，这么做的好处也是显而易见的：
+   1. 一方面，Event 进程只负责分发消息，那么其处理消息的速度就会非常快，就不太会出现因为业务逻辑复杂而导致消息堆积的情况。
+   2. 另一方面，采用一个额外的消息队列后，消息处理的可扩展性也会更好，我们可以通过增加消费者进程数量来扩展整个系统的消息处理能力。
+4. Event 进程采用 Zookeeper 选主单进程部署的方式，避免 Event 进程宕机后，Redis Key 中消息堆积的情况。一旦 Zookeeper 的 leader 主机宕机，Zookeeper 会自动选择新的 leader 主机来处理 Redis Key 中的消息。
+
+#### Rabbitmq
+
+

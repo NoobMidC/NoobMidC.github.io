@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/redis%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  17484 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  17654 ,
         "url": "https:\/\/noobmid.github.io\/redis%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-28T12:49:35+08:00","dateModified": "2022-08-28T12:49:35+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,8 +109,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redis八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;17484 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;35 minutes&nbsp;<span id="/redis%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Redis八股文">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;17654 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;36 minutes&nbsp;<span id="/redis%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Redis八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -414,6 +414,16 @@
 <blockquote>
 <p>​		Redis hash是一个string类型的<code>field</code>和<code>value</code>的映射表，hash特别适合用于存储对象</p>
 </blockquote>
+<p>常用命令: HDEL、HEXISTS、HGET、HGETALL、HINCRBY、HKEYS、HMGET、HSCAN、HVALS</p>
+<p>​		Hash类型是Redis中非常重要的复合型结构，通过(K,V)来实现，采用链地址法来处理哈希冲突，整体数据结构与Java中的HashMap极为相似，都是采用数组+链表(Redis中不会将链表改为红黑树)的结构来实现</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/v2-f1e0cd31ba020fe572423a1d54f419f5_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/v2-f1e0cd31ba020fe572423a1d54f419f5_1440w.jpg, https://raw.githubusercontent.com/NoobMidC/pics/main/v2-f1e0cd31ba020fe572423a1d54f419f5_1440w.jpg 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/v2-f1e0cd31ba020fe572423a1d54f419f5_1440w.jpg 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/v2-f1e0cd31ba020fe572423a1d54f419f5_1440w.jpg"
+        title="img" /></p>
 <h3 id="bitmaps">Bitmaps</h3>
 <blockquote>
 <p>Bitmaps就是通过一个 bit 位来表示某个元素对应的值或者状态，其中的 key 就是对应元素本身.</p>

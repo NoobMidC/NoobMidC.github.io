@@ -125,9 +125,9 @@ type bmap struct {
 }
 ```
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg)
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg)
 
 ​																				hmap结构图
 
@@ -214,7 +214,7 @@ type hchan struct {
 
 > channel本身是一个**环形缓冲区**，数据存放到堆上面，channel的同步是通过锁实现的，并不是想象中的lock-free的方式，channel中有两个队列，一个是发送阻塞队列，一个是接收阻塞队列。当向一个已满的channel发送数据会被阻塞，此时发送协程会被添加到sendq中，同理，当向一个空的channel接收数据时，接收协程也会被阻塞，被置入recvq中。
 
-​					 		![ringbuf 实现](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png)
+![ringbuf 实现](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png)
 
 
 
@@ -232,14 +232,14 @@ type hchan struct {
       > 3. 关闭一个 nil channel 将会发生 panic
       > 4. 给一个已经关闭的 channel 发送数据，引起 panic
 
-      ![图片](https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180223858.png)
+      ![图片](https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png)
 
       - 当 `c.closed != 0` 则为通道关闭，此时执行写，源码提示直接 panic，输出的内容就是上面提到的 `"send on closed channel"`。
 
       
    > 5. 从一个已经关闭的 channel 接收数据，如果缓冲区中为空，则返回一个零值
    
-   ![图片](https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180427191.png)
+   ![图片](https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png)
    
    - `c.closed != 0 && c.qcount == 0` 指通道已经关闭，且缓存为空的情况下（已经读完了之前写到通道里的值）
       - 如果接收值的地址 `ep` 不为空
@@ -349,7 +349,7 @@ func typeJudge(x interface{})  {
 
 ### 8. new 和make的区别
 
-- new(T) 返回的是 T 的指针：new(T) 为一个 T 类型新值分配空间并将此空间初始化为 T 的零值，返回的是新值的地址，也就是 T 类型的指针 *T，该指针指向 T 的新分配的零值。
+- new(T) 返回的是 T 的指针：new(T) 为一个 T 类型新值分配空间并将此空间初始化为 T类型的零值，返回的是新值的地址，也就是 T 类型的指针 *T，该指针指向 T 的新分配的零值。
 
 - make 只能用于 slice,map,channel，返回值是经过初始化之后的 T 的引用
 - make 分配空间后，会进行初始化
@@ -418,7 +418,7 @@ func typeJudge(x interface{})  {
 - 同一个包的init执行顺序，golang没有明确定义，编程时要注意程序不要依赖这个执行顺序
 - 不同包的init函数按照包导入的依赖关系决定执行顺序
 
-![image-20220824111732112](https://raw.githubusercontent.com/noobmidc/pics/main/image-20220824111732112.png)
+![image-20220824111732112](https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png)
 
 
 
@@ -514,6 +514,8 @@ for {
 
 ​	panic的作用是制造一次宕机，宕机就代表程序运行终止，但是已经“生效”的(当前 Goroutine )延迟函数仍会执行（即已经压入栈的defer延迟函数，panic之前的）。
 
+> 先调用panic对应的gopanic函数, 由gopanic函数去执行延迟函数，所以“先触发panic函数的执行，然后调用延迟函数”是正确的。
+
 ```go
 // 嵌套崩溃
 func main() {
@@ -584,11 +586,11 @@ exit status 2
 - M的最大限制是10000个，但是内核很难支持这么多的线程数，所以这个限制可以忽略; 一般为CPU数
 - 在P没有足够的M绑定运行时,则会创建一个M;每次创建一个M都会同步创建一个G0，它负责调度其它的G，每个M都有一个G0
 
-![截屏2022-08-24 下午6.18.32](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png)
+![截屏2022-08-24 下午6.18.32](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png)
 
-![截屏2022-08-24 下午6.18.54](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png)
+![截屏2022-08-24 下午6.18.54](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png)
 
-![截屏2022-08-24 下午6.24.44](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png)
+![截屏2022-08-24 下午6.24.44](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png)
 
 - 每个 P有个局部队列，局部队列保存待执行的 goroutine(流程2)，当 M绑定的 P的的局部队列已经满了之后就 会把 goroutine 放到全局队列(流程2-1)
 -  每个 P和一个 M绑定，M是真正的执行 P中 goroutine 的实体(流程3)，M 从绑定的 P中的局部队列获取 G来 执行
@@ -630,13 +632,11 @@ exit status 2
 
 
 
-
-
 ### 2. 垃圾回收(GC)
 
 #### 垃圾回收常用方法
 
-	1. 引用计数(reference counting) 
+​		1. 引用计数(reference counting) 
 
 ​			如C++中的智能指针:shard_ptr; 
 
@@ -672,25 +672,25 @@ exit status 2
 
  Go 以 STW 为界限，可以将 GC 划分为五个阶段：：**栈扫描**（开始时STW）;**第一次标记**（并发）;**第二次标记**（STW）;**清除**（并发）,归还
 
-![截屏2022-08-24 下午7.11.32](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png)
+![截屏2022-08-24 下午7.11.32](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png)
 
 ##### 三色标记清扫法
 
 white，grep，black;白色为需要清理的数据，黑色则不要清理。从根对象（全局变量、执行栈、寄存器(主要是指针)）开始循环，能访问到的标记为灰色，然后从灰色队列开始遍历，自身变成黑色。后续没有访问到的直接清理掉。
 
-![test](https://raw.githubusercontent.com/noobmidc/pics/main/test.gif)
+![test](https://raw.githubusercontent.com/noobmid/pics/main/test.gif)
 
 ##### 没有STW的三色标记法
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
 - 条件1: 一个白色对象被黑色对象引用 **(白色被挂在黑色下)**
 - 条件2: 灰色对象与它之间的可达关系的白色对象遭到破坏 **(灰色同时丢了该白色)**
@@ -705,7 +705,7 @@ white，grep，black;白色为需要清理的数据，黑色则不要清理。�
 
 1. 插入写屏障
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
 ​		垃圾收集器将根对象指向 A 对象标记成黑色并将 A 对象指向的对象 B 标记成灰色；用户程序修改 A 对象的指针，将原本指向 B 对象的指针指向 C 对象，这时触发写屏障将 C 对象标记成灰色；一种相对保守的屏障技术，它会将有存活可能的对象都标记成灰色以满足强三色不变性.
 
@@ -713,7 +713,7 @@ white，grep，black;白色为需要清理的数据，黑色则不要清理。�
 
 2. 删除写屏障
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp)
 
 ​		垃圾收集器将根对象指向 A 对象标记成黑色并将 A 对象指向的对象 B 标记成灰色；用户程序将 A 对象原本指向 B 的指针指向 C，触发删除写屏障，但是因为 B 对象已经是灰色的，所以不做改变；用户程序将 B 对象原本指向 C 的指针删除，触发删除写屏障，白色的 C 对象被涂成灰色；
 
@@ -837,8 +837,7 @@ white，grep，black;白色为需要清理的数据，黑色则不要清理。�
 ​		当检测到函数需要更多栈时，分配一块新栈，旧栈和新栈使用指针连接起来，函数返回就释放。
 
 1. 每个Go函数的开头都有一小段检测代码。这段代码会检查我们是否已经用完了分配的栈空 间。如果是的话，它会调用 morestack 函数。 morestack 函数分配一块新的内存作为栈空间，并且在这块栈空间 的底部填入各种信息(包括之前的那块栈地址)。在分配了这块新的栈空间之后，它会重试刚才造成栈空间不足的函数。这个过程叫做栈分裂(stack split).
-
-		2.	在新分配的栈底有个lessstack的函数指针; 当我们从那个函数返回时，它会跳转到 lessstack 。 lessstack 函 数会查看在栈底部存放的数据结构里的信息，然后调整栈指针(stack pointer)。这样就完成了从新的栈块到老的 栈块的跳转。接下来，新分配的这个块栈空间就可以被释放掉了。
+2. 在新分配的栈底有个lessstack的函数指针; 当我们从那个函数返回时，它会跳转到 lessstack 。 lessstack 函 数会查看在栈底部存放的数据结构里的信息，然后调整栈指针(stack pointer)。这样就完成了从新的栈块到老的 栈块的跳转。接下来，新分配的这个块栈空间就可以被释放掉了。
 
 问题:
 
@@ -849,11 +848,11 @@ white，grep，black;白色为需要清理的数据，黑色则不要清理。�
 
 连续栈的实现方式：当检测到需要更多栈时，分配一块比原来大一倍的栈，把旧栈数据copy到新栈，释放旧栈
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/dGeih5.png)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/dGeih5.png)
 
 1. 栈的扩缩容何时触发?
 
-   goroutine运行并用完栈空间的时候，与之前的方法一样，栈溢出检查会被 触发
+   goroutine运行并用完栈空间的时候，与之前的方法一样，栈溢出检查会被触发
 
    
 
@@ -935,7 +934,7 @@ func main() {
 
 > **一个非空结构体包含有尾部size为0的变量(字段)，如果不给它分配内存，那么该变量(字段)的指针地址将指向一个超出该结构体内存范围的内存空间。这可能会导致内存泄漏，或者在内存垃圾回收过程中，程序crash掉。**
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg)
 
 - 为什么对齐?
 
@@ -948,7 +947,7 @@ func main() {
 对齐规则:
 
 - 对于任意类型的变量 x ，unsafe.Alignof(x) 至少为 1。
-- 对于 struct 结构体类型的变量 x，计算 x 每一个字段 f 的 unsafe.Alignof(x.f)，unsafe.Alignof(x) 等于其中的最大值。
+- 对于 struct 结构体类型的变量 x，计算 x 每一个字段 f 的 unsafe.Alignof(x.f)，unsafe.Alignof(x) 等于其中的最大值的倍数。
 - 对于 array 数组类型的变量 x，unsafe.Alignof(x) 等于构成数组的元素类型的对齐倍数。
 - 没有任何字段的空 struct{} 和没有任何元素的 array 占据的内存空间大小为 0，不同的大小为 0 的变量可能指向同一块地址。
 
@@ -1025,7 +1024,7 @@ go install -race mypkg // 安装程序
 func CompareAndSwapUint32(addr *uint32, old, new uint32) (swapped bool)
 ```
 
-![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg)
 
 缺陷: 
 
@@ -1130,7 +1129,7 @@ func (rw *RWMutex) Unlock()
 
 golang中的sync.Map是并发安全的，其实也就是sync包中golang自定义的一个名叫Map的结构体。它通过空间换时间的方式，使用 read 和 dirty 两个 map 来进行读写分离，降低锁时间来提高效率。
 
-![img](https://raw.githubusercontent.com/noobmid/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg)
+![img](https://raw.githubusercontent.com/noobmidc/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg)
 
 ```go
 type Map struct {
@@ -1298,6 +1297,331 @@ func (c *Cond) Wait() // 调用 Wait 会自动释放锁 c.L，并挂起调用者
 
 
 
+#### Context包
+
+​		Context 包提供上下文机制在 goroutine 之间传递 deadline、取消信号（cancellation signals）或者其他请求相关的信息;
+
+##### Context的使用
+
+1. 创建context
+
+`context`包主要提供了两种方式创建`context`:
+
+- `context.Backgroud()`
+- `context.TODO()`
+
+> 这两个函数其实只是互为别名，没有差别，官方给的定义是：
+>
+> - `context.Background` 是上下文的默认值，所有其他的上下文都应该从它衍生（Derived）出来。
+> - `context.TODO` 应该只在不确定应该使用哪种上下文时使用；
+
+上面的两种方式是创建根`context`，不具备任何功能，具体实践还是要依靠`context`包提供的`With`系列函数来进行派生：
+
+```go
+func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
+func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
+func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
+func WithValue(parent Context, key, val interface{}) Context
+```
+
+这四个函数都要基于父`Context`衍生，通过这些函数，就创建了一颗Context树，树的每个节点都可以有任意多个子节点，节点层级可以有任意多个，如图：
+
+![img](https://raw.githubusercontent.com/NoobMidC/pics/main/1460000040917754.png)
+
+- WithValue携带数据
+
+> 我们日常在业务开发中都希望能有一个`trace_id`能串联所有的日志,在`Go`语言中我们就可以使用`Context`来传递，通过使用`WithValue`来创建一个携带`trace_id`的`context`，然后不断透传下去，打印日志时输出即可
+
+- 超时控制
+
+> 本质`withTimout`内部也是调用的`WithDeadline`;   `withTimeout`、`WithDeadline`不同在于`WithTimeout`将持续时间作为参数输入而不是时间对象，这两个方法使用哪个都是一样的，看业务场景和个人习惯了;
+>
+> ​	既可以超时自动取消，又可以手动控制取消。这里大家要记的一个坑，就是我们往从请求入口透传的调用链路中的`context`是携带超时时间的，如果我们想在其中单独开一个goroutine去处理其他的事情并且不会随着请求结束后而被取消的话，那么传递的`context`要基于`context.Background`或者`context.TODO`重新衍生一个传递，否决就会和预期不符合了;
+
+- withcancel取消控制
+
+> 日常业务开发中我们往往为了完成一个复杂的需求会开多个`gouroutine`去做一些事情，这就导致我们会在一次请求中开了多个`goroutine`确无法控制他们，这时我们就可以使用`withCancel`来衍生一个`context`传递到不同的`goroutine`中，当我想让这些`goroutine`停止运行，就可以调用`cancel`来进行取消。
+
+- 自定义context
+
+> 因为`Context`本质是一个接口，所以我们可以通过实现`Context`达到自定义`Context`的目的，一般在实现`Web`框架或`RPC`框架往往采用这种形式，比如`gin`框架的`Context`就是自己有封装了一层;
+
+
+
+##### 源码解析
+
+Context其实就是一个接口，定义了四个方法：
+
+```go
+type Context interface {
+ Deadline() (deadline time.Time, ok bool)
+ Done() <-chan struct{}
+ Err() error
+ Value(key interface{}) interface{}
+}
+```
+
+- `Deadlne`方法：当`Context`自动取消或者到了取消时间被取消后返回
+- `Done`方法：当`Context`被取消或者到了`deadline`返回一个被关闭的`channel`
+- `Err`方法：当`Context`被取消或者关闭后，返回`context`取消的原因
+- `Value`方法：获取设置的`key`对应的值
+
+这个接口主要被三个类继承实现，分别是`emptyCtx`、`ValueCtx`、`cancelCtx`，采用匿名接口的写法，这样可以对任意实现了该接口的类型进行重写。
+
+###### 创建根Context
+
+在我们调用`context.Background`、`context.TODO`时创建的对象就是`emptyCtx`：
+
+```go
+var (
+    background = new(emptyCtx)
+    todo       = new(emptyCtx)
+)
+
+func Background() Context {
+    return background
+}
+
+func TODO() Context {
+    return todo
+}
+```
+
+> `Background`和`TODO`还是一模一样的，官方说：`background`它通常由主函数、初始化和测试使用，并作为传入请求的顶级上下文；`TODO`是当不清楚要使用哪个 Context 或尚不可用时，代码应使用 context.TODO，后续在在进行替换掉，归根结底就是语义不同而已。
+
+###### emptyCtx类
+
+`emptyCtx`主要是给我们创建根`Context`时使用的，其实现方法也是一个空结构，实际源代码长这样:
+
+```go
+type emptyCtx int
+
+func (*emptyCtx) Deadline() (deadline time.Time, ok bool) {
+    return
+}
+
+func (*emptyCtx) Done() <-chan struct{} {
+    return nil
+}
+
+func (*emptyCtx) Err() error {
+    return nil
+}
+
+func (*emptyCtx) Value(key interface{}) interface{} {
+    return nil
+}
+
+func (e *emptyCtx) String() string {
+    switch e {
+    case background:
+        return "context.Background"
+    case todo:
+        return "context.TODO"
+    }
+    return "unknown empty Context"
+}
+```
+
+###### WithValue的实现
+
+`withValue`内部主要就是调用`valueCtx`类：
+
+```go
+func WithValue(parent Context, key, val interface{}) Context {
+    if parent == nil {
+        panic("cannot create context from nil parent")
+    }
+    if key == nil {
+        panic("nil key")
+    }
+    if !reflectlite.TypeOf(key).Comparable() {
+        panic("key is not comparable")
+    }
+    return &valueCtx{parent, key, val}
+}
+```
+
+###### valueCtx类
+
+`valueCtx`目的就是为`Context`携带键值对，因为它采用匿名接口的继承实现方式，他会继承父`Context`，也就相当于嵌入`Context`当中了
+
+```go
+type valueCtx struct {
+    Context
+    key, val interface{}
+}
+```
+
+实现了`String`方法输出`Context`和携带的键值对信息：
+
+```go
+func (c *valueCtx) String() string {
+    return contextName(c.Context) + ".WithValue(type " +
+        reflectlite.TypeOf(c.key).String() +
+        ", val " + stringify(c.val) + ")"
+}
+```
+
+实现`Value`方法来存储键值对：
+
+```go
+func (c *valueCtx) Value(key interface{}) interface{} {
+    if c.key == key {
+        return c.val
+    }
+    return c.Context.Value(key)
+}
+```
+
+###### `WithCancel`的实现
+
+入口函数源代码:
+
+```go
+func WithCancel(parent Context) (ctx Context, cancel CancelFunc) {
+    if parent == nil {
+        panic("cannot create context from nil parent")
+    }
+    c := newCancelCtx(parent)
+    propagateCancel(parent, &c)
+    return &c, func() { c.cancel(true, Canceled) }
+}
+```
+
+这个函数执行步骤如下：
+
+- 创建一个`cancelCtx`对象，作为子`context`
+- 然后调用`propagateCancel`构建父子`context`之间的关联关系，这样当父`context`被取消时，子`context`也会被取消。
+- 返回子`context`对象和子树取消函数
+
+```go
+//propagateCancel方法
+func propagateCancel(parent Context, child canceler) {
+  // 如果返回nil，说明当前父`context`从来不会被取消，是一个空节点，直接返回即可。
+    done := parent.Done()
+    if done == nil {
+        return // parent is never canceled
+    }
+
+  // 提前判断一个父context是否被取消，如果取消了也不需要构建关联了，
+  // 把当前子节点取消掉并返回
+    select {
+    case <-done:
+        // parent is already canceled
+        child.cancel(false, parent.Err())
+        return
+    default:
+    }
+
+  // 这里目的就是找到可以“挂”、“取消”的context
+    if p, ok := parentCancelCtx(parent); ok {
+        p.mu.Lock()
+    // 找到了可以“挂”、“取消”的context，但是已经被取消了，那么这个子节点也不需要
+    // 继续挂靠了，取消即可
+        if p.err != nil {
+            child.cancel(false, p.err)
+        } else {
+      // 将当前节点挂到父节点的childrn map中，外面调用cancel时可以层层取消
+            if p.children == nil {
+        // 这里因为childer节点也会变成父节点，所以需要初始化map结构
+                p.children = make(map[canceler]struct{})
+            }
+            p.children[child] = struct{}{}
+        }
+        p.mu.Unlock()
+    } else {
+    // 没有找到可“挂”，“取消”的父节点挂载，那么就开一个goroutine
+        atomic.AddInt32(&goroutines, +1)
+        go func() {
+            select {
+            case <-parent.Done():
+                child.cancel(false, parent.Err())
+            case <-child.Done():
+            }
+        }()
+    }
+}
+```
+
+```go
+//cancel方法: 这个方法会关闭上下文中的 Channel 并向所有的子上下文同步取消信号
+func (c *cancelCtx) cancel(removeFromParent bool, err error) {
+  // 取消时传入的error信息不能为nil, context定义了默认error:var Canceled = errors.New("context canceled")
+    if err == nil {
+        panic("context: internal error: missing cancel error")
+    }
+  // 已经有错误信息了，说明当前节点已经被取消过了
+    c.mu.Lock()
+    if c.err != nil {
+        c.mu.Unlock()
+        return // already canceled
+    }
+  
+    c.err = err
+  // 用来关闭channel，通知其他协程
+    d, _ := c.done.Load().(chan struct{})
+    if d == nil {
+        c.done.Store(closedchan)
+    } else {
+        close(d)
+    }
+  // 当前节点向下取消，遍历它的所有子节点，然后取消
+    for child := range c.children {
+        // NOTE: acquiring the child's lock while holding parent's lock.
+        child.cancel(false, err)
+    }
+  // 节点置空
+    c.children = nil
+    c.mu.Unlock()
+  // 把当前节点从父节点中移除，只有在外部父节点调用时才会传true
+  // 其他都是传false，内部调用都会因为c.children = nil被剔除出去
+    if removeFromParent {
+        removeChild(c.Context, c)
+    }
+}
+```
+
+###### `cancelCtx`类
+
+`cancelCtx`继承了`Context`，也实现了接口`canceler`:
+
+```go
+type cancelCtx struct {
+    Context
+    mu       sync.Mutex            // protects following fields
+    done     atomic.Value          // of chan struct{}, created lazily, closed by first cancel call
+    children map[canceler]struct{} // set to nil by the first cancel call
+    err      error                 // set to non-nil by the first cancel call
+}
+```
+
+- `mu`：就是一个互斥锁，保证并发安全的，所以`context`是并发安全的
+- `done`：用来做`context`的取消通知信号，之前的版本使用的是`chan struct{}`类型，现在用`atomic.Value`做锁优化
+- `children`：`key`是接口类型`canceler`，目的就是存储实现当前`canceler`接口的子节点，当根节点发生取消时，遍历子节点发送取消信号
+- `error`：当`context`取消时存储取消信息
+
+这里实现了`Done`方法，返回的是一个只读的`channel`，目的就是我们在外部可以通过这个阻塞的`channel`等待通知信号。
+
+
+
+##### 缺点:
+
+- 影响代码美观，现在基本所有`web`框架、`RPC`框架都是实现了`context`，这就导致我们的代码中每一个函数的一个参数都是`context`，即使不用也要带着这个参数透传下去，个人觉得有点丑陋。
+- `context`可以携带值，但是没有任何限制，类型和大小都没有限制，也就是没有任何约束，这样很容易导致滥用，程序的健壮很难保证；还有一个问题就是通过`context`携带值不如显式传值舒服，可读性变差了。
+- 可以自定义`context`，这样风险不可控，更加会导致滥用。
+- `context`取消和自动取消的错误返回不够友好，无法自定义错误，出现难以排查的问题时不好排查。
+- 创建衍生节点实际是创建一个个链表节点，其时间复杂度为O(n)，节点多了会掉支效率变低。
+
+##### 优点:
+
+- 使用`context`可以更好的做并发控制，能更好的管理`goroutine`滥用。
+- `context`的携带者功能没有任何限制，这样我我们传递任何的数据，可以说这是一把双刃剑
+
+
+
+
+
 #### 协程同步问题: 主协程如何等其余协程完再操作?
 
 1. channel同步: 利用引用计数
@@ -1361,7 +1685,7 @@ func main() {
    4. 利用寄存器与高速缓存，我们都知道 cpu 从寄存器取是最快的，从高速缓存取次之。这里会进行充分的利用
 6. 机器码生产： 先生成汇编代码，其汇编器使用GOARCH参数进行初始化，然后调用对应架构便携的特定方法来生成机器码，从而跨平台。
 
-![截屏2022-08-27 下午4.21.07](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png)
+![截屏2022-08-27 下午4.21.07](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png)
 
 
 

@@ -2,19 +2,19 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://noobmid.github.io/</loc><lastmod>2022-09-13T17:35:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://noobmid.github.io/posts/</loc><lastmod>2022-09-13T17:35:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://noobmid.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc><lastmod>2022-09-13T17:35:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://noobmid.github.io/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/</loc><lastmod>2022-08-28T12:50:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/grpc/</loc><lastmod>2022-08-28T12:50:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/kafka/</loc><lastmod>2022-08-28T12:50:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/elasticsearch/</loc><lastmod>2022-08-28T12:50:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/redis%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-28T12:49:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/mysql%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-28T12:49:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-28T12:49:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-26T13:52:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-26T10:01:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://noobmid.github.io/golang%E4%BD%93%E7%B3%BB/</loc><lastmod>2022-08-22T22:34:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-21T00:38:10&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://noobmid.github.io/</loc><lastmod>2022-09-13T17:35:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://noobmid.github.io/posts/</loc><lastmod>2022-09-13T17:35:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://noobmid.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc><lastmod>2022-09-13T17:35:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://noobmid.github.io/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/</loc><lastmod>2022-08-28T12:50:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/grpc/</loc><lastmod>2022-08-28T12:50:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/kafka/</loc><lastmod>2022-08-28T12:50:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/elasticsearch/</loc><lastmod>2022-08-28T12:50:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/redis%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-28T12:49:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/mysql%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-28T12:49:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-28T12:49:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-26T13:52:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/linux%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-26T10:01:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://noobmid.github.io/golang%E4%BD%93%E7%B3%BB/</loc><lastmod>2022-08-22T22:34:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://noobmid.github.io/golang%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-08-21T00:38:10&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://noobmid.github.io/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://noobmid.github.io/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

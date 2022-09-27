@@ -122,6 +122,12 @@ zset底层使用了两个数据结构:
 
 > ​		Redis hash是一个string类型的`field`和`value`的映射表，hash特别适合用于存储对象
 
+常用命令: HDEL、HEXISTS、HGET、HGETALL、HINCRBY、HKEYS、HMGET、HSCAN、HVALS
+
+​		Hash类型是Redis中非常重要的复合型结构，通过(K,V)来实现，采用链地址法来处理哈希冲突，整体数据结构与Java中的HashMap极为相似，都是采用数组+链表(Redis中不会将链表改为红黑树)的结构来实现
+
+![img](https://raw.githubusercontent.com/NoobMidC/pics/main/v2-f1e0cd31ba020fe572423a1d54f419f5_1440w.jpg)
+
 
 
 ### Bitmaps

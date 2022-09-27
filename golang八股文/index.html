@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/golang%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  18858 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  22669 ,
         "url": "https:\/\/noobmid.github.io\/golang%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-21T00:38:10+08:00","dateModified": "2022-08-21T00:38:10+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,8 +109,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-21">2022-08-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;18858 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;38 minutes&nbsp;<span id="/golang%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Golang八股文">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-21">2022-08-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;22669 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;46 minutes&nbsp;<span id="/golang%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Golang八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -215,6 +215,23 @@
                 <li><a href="#synconce">sync.Once</a></li>
                 <li><a href="#syncpool">sync.Pool</a></li>
                 <li><a href="#synccond">sync.cond</a></li>
+              </ul>
+            </li>
+            <li><a href="#context包">Context包</a>
+              <ul>
+                <li><a href="#context的使用">Context的使用</a></li>
+                <li><a href="#源码解析">源码解析</a>
+                  <ul>
+                    <li><a href="#创建根context">创建根Context</a></li>
+                    <li><a href="#emptyctx类">emptyCtx类</a></li>
+                    <li><a href="#withvalue的实现">WithValue的实现</a></li>
+                    <li><a href="#valuectx类">valueCtx类</a></li>
+                    <li><a href="#withcancel的实现"><code>WithCancel</code>的实现</a></li>
+                    <li><a href="#cancelctx类"><code>cancelCtx</code>类</a></li>
+                  </ul>
+                </li>
+                <li><a href="#缺点">缺点:</a></li>
+                <li><a href="#优点">优点:</a></li>
               </ul>
             </li>
             <li><a href="#协程同步问题-主协程如何等其余协程完再操作">协程同步问题: 主协程如何等其余协程完再操作?</a></li>
@@ -428,18 +445,18 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg, https://raw.githubusercontent.com/noobmidc/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg, https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/v2-5e4be7641d03d56c2dc68db1563cb6c9_1440w.jpg"
         title="img" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg, https://raw.githubusercontent.com/noobmidc/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg, https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/v2-fe7664a42e47d3faeadf4f2663718cb2_1440w.jpg"
         title="img" /></p>
 <p>​																				hmap结构图</p>
 <ul>
@@ -557,13 +574,13 @@
 </div><blockquote>
 <p>channel本身是一个<strong>环形缓冲区</strong>，数据存放到堆上面，channel的同步是通过锁实现的，并不是想象中的lock-free的方式，channel中有两个队列，一个是发送阻塞队列，一个是接收阻塞队列。当向一个已满的channel发送数据会被阻塞，此时发送协程会被添加到sendq中，同理，当向一个空的channel接收数据时，接收协程也会被阻塞，被置入recvq中。</p>
 </blockquote>
-<p>​					 		<img
+<p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%885.24.22.png"
         title="ringbuf 实现" /></p>
 <ol>
 <li>
@@ -592,10 +609,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180223858.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180223858.png, https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180223858.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180223858.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180223858.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180223858.png"
         title="图片" /></p>
 <ul>
 <li>当 <code>c.closed != 0</code> 则为通道关闭，此时执行写，源码提示直接 panic，输出的内容就是上面提到的 <code>&quot;send on closed channel&quot;</code>。</li>
@@ -610,10 +627,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180427191.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180427191.png, https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180427191.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180427191.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/640-20220824180427191.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/640-20220824180427191.png"
         title="图片" /></p>
 <ul>
 <li><code>c.closed != 0 &amp;&amp; c.qcount == 0</code> 指通道已经关闭，且缓存为空的情况下（已经读完了之前写到通道里的值）
@@ -818,7 +835,7 @@
 </div><h3 id="8-new-和make的区别">8. new 和make的区别</h3>
 <ul>
 <li>
-<p>new(T) 返回的是 T 的指针：new(T) 为一个 T 类型新值分配空间并将此空间初始化为 T 的零值，返回的是新值的地址，也就是 T 类型的指针 *T，该指针指向 T 的新分配的零值。</p>
+<p>new(T) 返回的是 T 的指针：new(T) 为一个 T 类型新值分配空间并将此空间初始化为 T类型的零值，返回的是新值的地址，也就是 T 类型的指针 *T，该指针指向 T 的新分配的零值。</p>
 </li>
 <li>
 <p>make 只能用于 slice,map,channel，返回值是经过初始化之后的 T 的引用</p>
@@ -898,10 +915,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/image-20220824111732112.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/image-20220824111732112.png, https://raw.githubusercontent.com/noobmidc/pics/main/image-20220824111732112.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/image-20220824111732112.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png, https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/image-20220824111732112.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/image-20220824111732112.png"
         title="image-20220824111732112" /></p>
 <h3 id="12包的循环引用">12.包的循环引用</h3>
 <ul>
@@ -1041,6 +1058,9 @@
 </div><h3 id="15-panic和recover">15. Panic和Recover</h3>
 <h4 id="panic">panic</h4>
 <p>​	panic的作用是制造一次宕机，宕机就代表程序运行终止，但是已经“生效”的(当前 Goroutine )延迟函数仍会执行（即已经压入栈的defer延迟函数，panic之前的）。</p>
+<blockquote>
+<p>先调用panic对应的gopanic函数, 由gopanic函数去执行延迟函数，所以“先触发panic函数的执行，然后调用延迟函数”是正确的。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1130,26 +1150,26 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.32.png"
         title="截屏2022-08-24 下午6.18.32" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.18.54.png"
         title="截屏2022-08-24 下午6.18.54" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%886.24.44.png"
         title="截屏2022-08-24 下午6.24.44" /></p>
 <ul>
 <li>
@@ -1202,8 +1222,7 @@
 </ol>
 <h3 id="2-垃圾回收gc">2. 垃圾回收(GC)</h3>
 <h4 id="垃圾回收常用方法">垃圾回收常用方法</h4>
-<pre><code>1. 引用计数(reference counting) 
-</code></pre>
+<p>​		1. 引用计数(reference counting)</p>
 <p>​			如C++中的智能指针:shard_ptr;</p>
 <ul>
 <li>
@@ -1247,61 +1266,61 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-24%20%E4%B8%8B%E5%8D%887.11.32.png"
         title="截屏2022-08-24 下午7.11.32" /></p>
 <h5 id="三色标记清扫法">三色标记清扫法</h5>
 <p>white，grep，black;白色为需要清理的数据，黑色则不要清理。从根对象（全局变量、执行栈、寄存器(主要是指针)）开始循环，能访问到的标记为灰色，然后从灰色队列开始遍历，自身变成黑色。后续没有访问到的直接清理掉。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/test.gif"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/test.gif, https://raw.githubusercontent.com/noobmidc/pics/main/test.gif 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/test.gif 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/test.gif"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/test.gif, https://raw.githubusercontent.com/noobmid/pics/main/test.gif 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/test.gif 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/test.gif"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/test.gif"
         title="test" /></p>
 <h5 id="没有stw的三色标记法">没有STW的三色标记法</h5>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmidc/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/afb1d9bb3a9d4cf785e65f163a73d933%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
         title="img" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmidc/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/a24467e8a92745939cba73b40656930c%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
         title="img" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmidc/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/554354937b6a49f18a422db41817c13f%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
         title="img" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmidc/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/7057f2f4ffb345a4926c10221ea68d62%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
         title="img" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmidc/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/29df20ca665340b68c6e63a51bc6223d%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
         title="img" /></p>
 <ul>
 <li>条件1: 一个白色对象被黑色对象引用 <strong>(白色被挂在黑色下)</strong></li>
@@ -1316,10 +1335,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmidc/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/5ca502f0c5b1467585f9c40c0d29ab82%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
         title="img" /></p>
 <p>​		垃圾收集器将根对象指向 A 对象标记成黑色并将 A 对象指向的对象 B 标记成灰色；用户程序修改 A 对象的指针，将原本指向 B 对象的指针指向 C 对象，这时触发写屏障将 C 对象标记成灰色；一种相对保守的屏障技术，它会将有存活可能的对象都标记成灰色以满足强三色不变性.</p>
 <p>​		写屏障只会针对堆进行限制.</p>
@@ -1329,10 +1348,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmidc/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp, https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/b8d26a88219d40d897cf0e7f86b43f42%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A3024%3A0%3A0%3A0.awebp"
         title="img" /></p>
 <p>​		垃圾收集器将根对象指向 A 对象标记成黑色并将 A 对象指向的对象 B 标记成灰色；用户程序将 A 对象原本指向 B 的指针指向 C，触发删除写屏障，但是因为 B 对象已经是灰色的，所以不做改变；用户程序将 B 对象原本指向 C 的指针删除，触发删除写屏障，白色的 C 对象被涂成灰色；</p>
 <p>​		缺点是开始收集器时需要STW快照全局对象</p>
@@ -1461,11 +1480,8 @@
 <h5 id="分段栈">分段栈</h5>
 <p>​		当检测到函数需要更多栈时，分配一块新栈，旧栈和新栈使用指针连接起来，函数返回就释放。</p>
 <ol>
-<li>
-<p>每个Go函数的开头都有一小段检测代码。这段代码会检查我们是否已经用完了分配的栈空 间。如果是的话，它会调用 morestack 函数。 morestack 函数分配一块新的内存作为栈空间，并且在这块栈空间 的底部填入各种信息(包括之前的那块栈地址)。在分配了这块新的栈空间之后，它会重试刚才造成栈空间不足的函数。这个过程叫做栈分裂(stack split).</p>
-<pre><code> 2.	在新分配的栈底有个lessstack的函数指针; 当我们从那个函数返回时，它会跳转到 lessstack 。 lessstack 函 数会查看在栈底部存放的数据结构里的信息，然后调整栈指针(stack pointer)。这样就完成了从新的栈块到老的 栈块的跳转。接下来，新分配的这个块栈空间就可以被释放掉了。
-</code></pre>
-</li>
+<li>每个Go函数的开头都有一小段检测代码。这段代码会检查我们是否已经用完了分配的栈空 间。如果是的话，它会调用 morestack 函数。 morestack 函数分配一块新的内存作为栈空间，并且在这块栈空间 的底部填入各种信息(包括之前的那块栈地址)。在分配了这块新的栈空间之后，它会重试刚才造成栈空间不足的函数。这个过程叫做栈分裂(stack split).</li>
+<li>在新分配的栈底有个lessstack的函数指针; 当我们从那个函数返回时，它会跳转到 lessstack 。 lessstack 函 数会查看在栈底部存放的数据结构里的信息，然后调整栈指针(stack pointer)。这样就完成了从新的栈块到老的 栈块的跳转。接下来，新分配的这个块栈空间就可以被释放掉了。</li>
 </ol>
 <p>问题:</p>
 <ul>
@@ -1477,15 +1493,15 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmid/pics/main/dGeih5.png"
-        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/dGeih5.png, https://raw.githubusercontent.com/noobmid/pics/main/dGeih5.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/dGeih5.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/dGeih5.png"
+        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/dGeih5.png, https://raw.githubusercontent.com/noobmidc/pics/main/dGeih5.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/dGeih5.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmid/pics/main/dGeih5.png"
+        alt="https://raw.githubusercontent.com/noobmidc/pics/main/dGeih5.png"
         title="img" /></p>
 <ol>
 <li>
 <p>栈的扩缩容何时触发?</p>
-<p>goroutine运行并用完栈空间的时候，与之前的方法一样，栈溢出检查会被 触发</p>
+<p>goroutine运行并用完栈空间的时候，与之前的方法一样，栈溢出检查会被触发</p>
 </li>
 <li>
 <p>栈的扩缩容大小</p>
@@ -1563,10 +1579,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg, https://raw.githubusercontent.com/noobmidc/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg, https://raw.githubusercontent.com/noobmid/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/v2-97a135f5b4ab1a0a7db2998f2e518918_1440w.jpg"
         title="img" /></p>
 <ul>
 <li>
@@ -1586,7 +1602,7 @@
 <p>对齐规则:</p>
 <ul>
 <li>对于任意类型的变量 x ，unsafe.Alignof(x) 至少为 1。</li>
-<li>对于 struct 结构体类型的变量 x，计算 x 每一个字段 f 的 unsafe.Alignof(x.f)，unsafe.Alignof(x) 等于其中的最大值。</li>
+<li>对于 struct 结构体类型的变量 x，计算 x 每一个字段 f 的 unsafe.Alignof(x.f)，unsafe.Alignof(x) 等于其中的最大值的倍数。</li>
 <li>对于 array 数组类型的变量 x，unsafe.Alignof(x) 等于构成数组的元素类型的对齐倍数。</li>
 <li>没有任何字段的空 struct{} 和没有任何元素的 array 占据的内存空间大小为 0，不同的大小为 0 的变量可能指向同一块地址。</li>
 </ul>
@@ -1686,10 +1702,10 @@ c. 	Wait(), 执行后会堵塞主线程，直到WaitGroup 里的值减至0.</p>
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg, https://raw.githubusercontent.com/noobmidc/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg, https://raw.githubusercontent.com/noobmid/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/v2-99995e2de042f2cf723c731f65c369db_1440w.jpg"
         title="img" /></p>
 <p>缺陷:</p>
 <ol>
@@ -1834,10 +1850,10 @@ P1被唤醒，比较后发现数值A没有变化，程序继续执行。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmid/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg"
-        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg, https://raw.githubusercontent.com/noobmid/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg 2x"
+        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg, https://raw.githubusercontent.com/noobmidc/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmid/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg"
+        alt="https://raw.githubusercontent.com/noobmidc/pics/main/v2-e96c8332e9451c5fc701fc914e2bf238_1440w.jpg"
         title="img" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2094,7 +2110,528 @@ P1被唤醒，比较后发现数值A没有变化，程序继续执行。</p>
 </span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Cond</span><span class="p">)</span> <span class="nf">Wait</span><span class="p">()</span> <span class="c1">// 调用 Wait 会自动释放锁 c.L，并挂起调用者所在的 goroutine，因此当前协程会阻塞在 Wait 方法调用的地方。如果其他协程调用了 Signal 或 Broadcast 唤醒了该协程，那么 Wait 方法在结束阻塞时，会重新给 c.L 加锁，并且继续执行 Wait 后面的代码
 </span></code></pre></td></tr></table>
 </div>
-</div><h4 id="协程同步问题-主协程如何等其余协程完再操作">协程同步问题: 主协程如何等其余协程完再操作?</h4>
+</div><h4 id="context包">Context包</h4>
+<p>​		Context 包提供上下文机制在 goroutine 之间传递 deadline、取消信号（cancellation signals）或者其他请求相关的信息;</p>
+<h5 id="context的使用">Context的使用</h5>
+<ol>
+<li>创建context</li>
+</ol>
+<p><code>context</code>包主要提供了两种方式创建<code>context</code>:</p>
+<ul>
+<li><code>context.Backgroud()</code></li>
+<li><code>context.TODO()</code></li>
+</ul>
+<blockquote>
+<p>这两个函数其实只是互为别名，没有差别，官方给的定义是：</p>
+<ul>
+<li><code>context.Background</code> 是上下文的默认值，所有其他的上下文都应该从它衍生（Derived）出来。</li>
+<li><code>context.TODO</code> 应该只在不确定应该使用哪种上下文时使用；</li>
+</ul>
+</blockquote>
+<p>上面的两种方式是创建根<code>context</code>，不具备任何功能，具体实践还是要依靠<code>context</code>包提供的<code>With</code>系列函数来进行派生：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">WithCancel</span><span class="p">(</span><span class="nx">parent</span> <span class="nx">Context</span><span class="p">)</span> <span class="p">(</span><span class="nx">ctx</span> <span class="nx">Context</span><span class="p">,</span> <span class="nx">cancel</span> <span class="nx">CancelFunc</span><span class="p">)</span>
+<span class="kd">func</span> <span class="nf">WithDeadline</span><span class="p">(</span><span class="nx">parent</span> <span class="nx">Context</span><span class="p">,</span> <span class="nx">deadline</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">)</span> <span class="p">(</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">CancelFunc</span><span class="p">)</span>
+<span class="kd">func</span> <span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">parent</span> <span class="nx">Context</span><span class="p">,</span> <span class="nx">timeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="p">)</span> <span class="p">(</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">CancelFunc</span><span class="p">)</span>
+<span class="kd">func</span> <span class="nf">WithValue</span><span class="p">(</span><span class="nx">parent</span> <span class="nx">Context</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span> <span class="kd">interface</span><span class="p">{})</span> <span class="nx">Context</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这四个函数都要基于父<code>Context</code>衍生，通过这些函数，就创建了一颗Context树，树的每个节点都可以有任意多个子节点，节点层级可以有任意多个，如图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/1460000040917754.png"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/1460000040917754.png, https://raw.githubusercontent.com/NoobMidC/pics/main/1460000040917754.png 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/1460000040917754.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/1460000040917754.png"
+        title="img" /></p>
+<ul>
+<li>WithValue携带数据</li>
+</ul>
+<blockquote>
+<p>我们日常在业务开发中都希望能有一个<code>trace_id</code>能串联所有的日志,在<code>Go</code>语言中我们就可以使用<code>Context</code>来传递，通过使用<code>WithValue</code>来创建一个携带<code>trace_id</code>的<code>context</code>，然后不断透传下去，打印日志时输出即可</p>
+</blockquote>
+<ul>
+<li>超时控制</li>
+</ul>
+<blockquote>
+<p>本质<code>withTimout</code>内部也是调用的<code>WithDeadline</code>;   <code>withTimeout</code>、<code>WithDeadline</code>不同在于<code>WithTimeout</code>将持续时间作为参数输入而不是时间对象，这两个方法使用哪个都是一样的，看业务场景和个人习惯了;</p>
+<p>​	既可以超时自动取消，又可以手动控制取消。这里大家要记的一个坑，就是我们往从请求入口透传的调用链路中的<code>context</code>是携带超时时间的，如果我们想在其中单独开一个goroutine去处理其他的事情并且不会随着请求结束后而被取消的话，那么传递的<code>context</code>要基于<code>context.Background</code>或者<code>context.TODO</code>重新衍生一个传递，否决就会和预期不符合了;</p>
+</blockquote>
+<ul>
+<li>withcancel取消控制</li>
+</ul>
+<blockquote>
+<p>日常业务开发中我们往往为了完成一个复杂的需求会开多个<code>gouroutine</code>去做一些事情，这就导致我们会在一次请求中开了多个<code>goroutine</code>确无法控制他们，这时我们就可以使用<code>withCancel</code>来衍生一个<code>context</code>传递到不同的<code>goroutine</code>中，当我想让这些<code>goroutine</code>停止运行，就可以调用<code>cancel</code>来进行取消。</p>
+</blockquote>
+<ul>
+<li>自定义context</li>
+</ul>
+<blockquote>
+<p>因为<code>Context</code>本质是一个接口，所以我们可以通过实现<code>Context</code>达到自定义<code>Context</code>的目的，一般在实现<code>Web</code>框架或<code>RPC</code>框架往往采用这种形式，比如<code>gin</code>框架的<code>Context</code>就是自己有封装了一层;</p>
+</blockquote>
+<h5 id="源码解析">源码解析</h5>
+<p>Context其实就是一个接口，定义了四个方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Context</span> <span class="kd">interface</span> <span class="p">{</span>
+ <span class="nf">Deadline</span><span class="p">()</span> <span class="p">(</span><span class="nx">deadline</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">,</span> <span class="nx">ok</span> <span class="kt">bool</span><span class="p">)</span>
+ <span class="nf">Done</span><span class="p">()</span> <span class="o">&lt;-</span><span class="kd">chan</span> <span class="kd">struct</span><span class="p">{}</span>
+ <span class="nf">Err</span><span class="p">()</span> <span class="kt">error</span>
+ <span class="nf">Value</span><span class="p">(</span><span class="nx">key</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kd">interface</span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>Deadlne</code>方法：当<code>Context</code>自动取消或者到了取消时间被取消后返回</li>
+<li><code>Done</code>方法：当<code>Context</code>被取消或者到了<code>deadline</code>返回一个被关闭的<code>channel</code></li>
+<li><code>Err</code>方法：当<code>Context</code>被取消或者关闭后，返回<code>context</code>取消的原因</li>
+<li><code>Value</code>方法：获取设置的<code>key</code>对应的值</li>
+</ul>
+<p>这个接口主要被三个类继承实现，分别是<code>emptyCtx</code>、<code>ValueCtx</code>、<code>cancelCtx</code>，采用匿名接口的写法，这样可以对任意实现了该接口的类型进行重写。</p>
+<h6 id="创建根context">创建根Context</h6>
+<p>在我们调用<code>context.Background</code>、<code>context.TODO</code>时创建的对象就是<code>emptyCtx</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">background</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">emptyCtx</span><span class="p">)</span>
+    <span class="nx">todo</span>       <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">emptyCtx</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">Background</span><span class="p">()</span> <span class="nx">Context</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">background</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">TODO</span><span class="p">()</span> <span class="nx">Context</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">todo</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><code>Background</code>和<code>TODO</code>还是一模一样的，官方说：<code>background</code>它通常由主函数、初始化和测试使用，并作为传入请求的顶级上下文；<code>TODO</code>是当不清楚要使用哪个 Context 或尚不可用时，代码应使用 context.TODO，后续在在进行替换掉，归根结底就是语义不同而已。</p>
+</blockquote>
+<h6 id="emptyctx类">emptyCtx类</h6>
+<p><code>emptyCtx</code>主要是给我们创建根<code>Context</code>时使用的，其实现方法也是一个空结构，实际源代码长这样:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">emptyCtx</span> <span class="kt">int</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">emptyCtx</span><span class="p">)</span> <span class="nf">Deadline</span><span class="p">()</span> <span class="p">(</span><span class="nx">deadline</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">,</span> <span class="nx">ok</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">emptyCtx</span><span class="p">)</span> <span class="nf">Done</span><span class="p">()</span> <span class="o">&lt;-</span><span class="kd">chan</span> <span class="kd">struct</span><span class="p">{}</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">emptyCtx</span><span class="p">)</span> <span class="nf">Err</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">emptyCtx</span><span class="p">)</span> <span class="nf">Value</span><span class="p">(</span><span class="nx">key</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">emptyCtx</span><span class="p">)</span> <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="nx">e</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">background</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#34;context.Background&#34;</span>
+    <span class="k">case</span> <span class="nx">todo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#34;context.TODO&#34;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="s">&#34;unknown empty Context&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="withvalue的实现">WithValue的实现</h6>
+<p><code>withValue</code>内部主要就是调用<code>valueCtx</code>类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">WithValue</span><span class="p">(</span><span class="nx">parent</span> <span class="nx">Context</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span> <span class="kd">interface</span><span class="p">{})</span> <span class="nx">Context</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">parent</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;cannot create context from nil parent&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nx">key</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;nil key&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">!</span><span class="nx">reflectlite</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nf">Comparable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;key is not comparable&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">valueCtx</span><span class="p">{</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="valuectx类">valueCtx类</h6>
+<p><code>valueCtx</code>目的就是为<code>Context</code>携带键值对，因为它采用匿名接口的继承实现方式，他会继承父<code>Context</code>，也就相当于嵌入<code>Context</code>当中了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">valueCtx</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Context</span>
+    <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span> <span class="kd">interface</span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>实现了<code>String</code>方法输出<code>Context</code>和携带的键值对信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">valueCtx</span><span class="p">)</span> <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">contextName</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;.WithValue(type &#34;</span> <span class="o">+</span>
+        <span class="nx">reflectlite</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">key</span><span class="p">).</span><span class="nf">String</span><span class="p">()</span> <span class="o">+</span>
+        <span class="s">&#34;, val &#34;</span> <span class="o">+</span> <span class="nf">stringify</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">val</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;)&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>实现<code>Value</code>方法来存储键值对：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">valueCtx</span><span class="p">)</span> <span class="nf">Value</span><span class="p">(</span><span class="nx">key</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nx">key</span> <span class="o">==</span> <span class="nx">key</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">val</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Context</span><span class="p">.</span><span class="nf">Value</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="withcancel的实现"><code>WithCancel</code>的实现</h6>
+<p>入口函数源代码:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">WithCancel</span><span class="p">(</span><span class="nx">parent</span> <span class="nx">Context</span><span class="p">)</span> <span class="p">(</span><span class="nx">ctx</span> <span class="nx">Context</span><span class="p">,</span> <span class="nx">cancel</span> <span class="nx">CancelFunc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">parent</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;cannot create context from nil parent&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">c</span> <span class="o">:=</span> <span class="nf">newCancelCtx</span><span class="p">(</span><span class="nx">parent</span><span class="p">)</span>
+    <span class="nf">propagateCancel</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">c</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span> <span class="nx">c</span><span class="p">.</span><span class="nf">cancel</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nx">Canceled</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个函数执行步骤如下：</p>
+<ul>
+<li>创建一个<code>cancelCtx</code>对象，作为子<code>context</code></li>
+<li>然后调用<code>propagateCancel</code>构建父子<code>context</code>之间的关联关系，这样当父<code>context</code>被取消时，子<code>context</code>也会被取消。</li>
+<li>返回子<code>context</code>对象和子树取消函数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//propagateCancel方法
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">propagateCancel</span><span class="p">(</span><span class="nx">parent</span> <span class="nx">Context</span><span class="p">,</span> <span class="nx">child</span> <span class="nx">canceler</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 如果返回nil，说明当前父`context`从来不会被取消，是一个空节点，直接返回即可。
+</span><span class="c1"></span>    <span class="nx">done</span> <span class="o">:=</span> <span class="nx">parent</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">done</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="c1">// parent is never canceled
+</span><span class="c1"></span>    <span class="p">}</span>
+
+  <span class="c1">// 提前判断一个父context是否被取消，如果取消了也不需要构建关联了，
+</span><span class="c1"></span>  <span class="c1">// 把当前子节点取消掉并返回
+</span><span class="c1"></span>    <span class="k">select</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">done</span><span class="p">:</span>
+        <span class="c1">// parent is already canceled
+</span><span class="c1"></span>        <span class="nx">child</span><span class="p">.</span><span class="nf">cancel</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nx">parent</span><span class="p">.</span><span class="nf">Err</span><span class="p">())</span>
+        <span class="k">return</span>
+    <span class="k">default</span><span class="p">:</span>
+    <span class="p">}</span>
+
+  <span class="c1">// 这里目的就是找到可以“挂”、“取消”的context
+</span><span class="c1"></span>    <span class="k">if</span> <span class="nx">p</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nf">parentCancelCtx</span><span class="p">(</span><span class="nx">parent</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+        <span class="nx">p</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+    <span class="c1">// 找到了可以“挂”、“取消”的context，但是已经被取消了，那么这个子节点也不需要
+</span><span class="c1"></span>    <span class="c1">// 继续挂靠了，取消即可
+</span><span class="c1"></span>        <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+            <span class="nx">child</span><span class="p">.</span><span class="nf">cancel</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">err</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// 将当前节点挂到父节点的childrn map中，外面调用cancel时可以层层取消
+</span><span class="c1"></span>            <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">children</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="c1">// 这里因为childer节点也会变成父节点，所以需要初始化map结构
+</span><span class="c1"></span>                <span class="nx">p</span><span class="p">.</span><span class="nx">children</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="nx">canceler</span><span class="p">]</span><span class="kd">struct</span><span class="p">{})</span>
+            <span class="p">}</span>
+            <span class="nx">p</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="nx">child</span><span class="p">]</span> <span class="p">=</span> <span class="kd">struct</span><span class="p">{}{}</span>
+        <span class="p">}</span>
+        <span class="nx">p</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// 没有找到可“挂”，“取消”的父节点挂载，那么就开一个goroutine
+</span><span class="c1"></span>        <span class="nx">atomic</span><span class="p">.</span><span class="nf">AddInt32</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">goroutines</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">select</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">parent</span><span class="p">.</span><span class="nf">Done</span><span class="p">():</span>
+                <span class="nx">child</span><span class="p">.</span><span class="nf">cancel</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nx">parent</span><span class="p">.</span><span class="nf">Err</span><span class="p">())</span>
+            <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">child</span><span class="p">.</span><span class="nf">Done</span><span class="p">():</span>
+            <span class="p">}</span>
+        <span class="p">}()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//cancel方法: 这个方法会关闭上下文中的 Channel 并向所有的子上下文同步取消信号
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">cancelCtx</span><span class="p">)</span> <span class="nf">cancel</span><span class="p">(</span><span class="nx">removeFromParent</span> <span class="kt">bool</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 取消时传入的error信息不能为nil, context定义了默认error:var Canceled = errors.New(&#34;context canceled&#34;)
+</span><span class="c1"></span>    <span class="k">if</span> <span class="nx">err</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;context: internal error: missing cancel error&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="c1">// 已经有错误信息了，说明当前节点已经被取消过了
+</span><span class="c1"></span>    <span class="nx">c</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+        <span class="k">return</span> <span class="c1">// already canceled
+</span><span class="c1"></span>    <span class="p">}</span>
+  
+    <span class="nx">c</span><span class="p">.</span><span class="nx">err</span> <span class="p">=</span> <span class="nx">err</span>
+  <span class="c1">// 用来关闭channel，通知其他协程
+</span><span class="c1"></span>    <span class="nx">d</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">done</span><span class="p">.</span><span class="nf">Load</span><span class="p">().(</span><span class="kd">chan</span> <span class="kd">struct</span><span class="p">{})</span>
+    <span class="k">if</span> <span class="nx">d</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nx">done</span><span class="p">.</span><span class="nf">Store</span><span class="p">(</span><span class="nx">closedchan</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nb">close</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="c1">// 当前节点向下取消，遍历它的所有子节点，然后取消
+</span><span class="c1"></span>    <span class="k">for</span> <span class="nx">child</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">c</span><span class="p">.</span><span class="nx">children</span> <span class="p">{</span>
+        <span class="c1">// NOTE: acquiring the child&#39;s lock while holding parent&#39;s lock.
+</span><span class="c1"></span>        <span class="nx">child</span><span class="p">.</span><span class="nf">cancel</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="c1">// 节点置空
+</span><span class="c1"></span>    <span class="nx">c</span><span class="p">.</span><span class="nx">children</span> <span class="p">=</span> <span class="kc">nil</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+  <span class="c1">// 把当前节点从父节点中移除，只有在外部父节点调用时才会传true
+</span><span class="c1"></span>  <span class="c1">// 其他都是传false，内部调用都会因为c.children = nil被剔除出去
+</span><span class="c1"></span>    <span class="k">if</span> <span class="nx">removeFromParent</span> <span class="p">{</span>
+        <span class="nf">removeChild</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="cancelctx类"><code>cancelCtx</code>类</h6>
+<p><code>cancelCtx</code>继承了<code>Context</code>，也实现了接口<code>canceler</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">cancelCtx</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Context</span>
+    <span class="nx">mu</span>       <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>            <span class="c1">// protects following fields
+</span><span class="c1"></span>    <span class="nx">done</span>     <span class="nx">atomic</span><span class="p">.</span><span class="nx">Value</span>          <span class="c1">// of chan struct{}, created lazily, closed by first cancel call
+</span><span class="c1"></span>    <span class="nx">children</span> <span class="kd">map</span><span class="p">[</span><span class="nx">canceler</span><span class="p">]</span><span class="kd">struct</span><span class="p">{}</span> <span class="c1">// set to nil by the first cancel call
+</span><span class="c1"></span>    <span class="nx">err</span>      <span class="kt">error</span>                 <span class="c1">// set to non-nil by the first cancel call
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>mu</code>：就是一个互斥锁，保证并发安全的，所以<code>context</code>是并发安全的</li>
+<li><code>done</code>：用来做<code>context</code>的取消通知信号，之前的版本使用的是<code>chan struct{}</code>类型，现在用<code>atomic.Value</code>做锁优化</li>
+<li><code>children</code>：<code>key</code>是接口类型<code>canceler</code>，目的就是存储实现当前<code>canceler</code>接口的子节点，当根节点发生取消时，遍历子节点发送取消信号</li>
+<li><code>error</code>：当<code>context</code>取消时存储取消信息</li>
+</ul>
+<p>这里实现了<code>Done</code>方法，返回的是一个只读的<code>channel</code>，目的就是我们在外部可以通过这个阻塞的<code>channel</code>等待通知信号。</p>
+<h5 id="缺点">缺点:</h5>
+<ul>
+<li>影响代码美观，现在基本所有<code>web</code>框架、<code>RPC</code>框架都是实现了<code>context</code>，这就导致我们的代码中每一个函数的一个参数都是<code>context</code>，即使不用也要带着这个参数透传下去，个人觉得有点丑陋。</li>
+<li><code>context</code>可以携带值，但是没有任何限制，类型和大小都没有限制，也就是没有任何约束，这样很容易导致滥用，程序的健壮很难保证；还有一个问题就是通过<code>context</code>携带值不如显式传值舒服，可读性变差了。</li>
+<li>可以自定义<code>context</code>，这样风险不可控，更加会导致滥用。</li>
+<li><code>context</code>取消和自动取消的错误返回不够友好，无法自定义错误，出现难以排查的问题时不好排查。</li>
+<li>创建衍生节点实际是创建一个个链表节点，其时间复杂度为O(n)，节点多了会掉支效率变低。</li>
+</ul>
+<h5 id="优点">优点:</h5>
+<ul>
+<li>使用<code>context</code>可以更好的做并发控制，能更好的管理<code>goroutine</code>滥用。</li>
+<li><code>context</code>的携带者功能没有任何限制，这样我我们传递任何的数据，可以说这是一把双刃剑</li>
+</ul>
+<h4 id="协程同步问题-主协程如何等其余协程完再操作">协程同步问题: 主协程如何等其余协程完再操作?</h4>
 <ol>
 <li>channel同步: 利用引用计数</li>
 </ol>
@@ -2197,10 +2734,10 @@ P1被唤醒，比较后发现数值A没有变化，程序继续执行。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png"
-        data-srcset="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png 1.5x, https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png 2x"
+        data-src="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png"
+        data-srcset="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png 1.5x, https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png 2x"
         data-sizes="auto"
-        alt="https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png"
+        alt="https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-27%20%E4%B8%8B%E5%8D%884.21.07.png"
         title="截屏2022-08-27 下午4.21.07" /></p>
 <h2 id="gin-框架的好处是什么">gin 框架的好处是什么？</h2>
 <ul>

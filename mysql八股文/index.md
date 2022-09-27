@@ -7,7 +7,7 @@
 
 ## 逻辑架构
 
-![截屏2022-08-29 上午10.21.50](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png)
+![截屏2022-08-29 上午10.21.50](https://raw.githubusercontent.com/noobmidc/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.21.50.png)
 
 ![截屏2022-08-29 上午10.22.13](https://raw.githubusercontent.com/noobmid/pics/main/%E6%88%AA%E5%B1%8F2022-08-29%20%E4%B8%8A%E5%8D%8810.22.13.png)
 
@@ -332,7 +332,15 @@ MySQL基架大致包括如下几大模块组件:
 
 > explain关键字可以模拟MySQL优化器执行SQL语句，可以很好的分析SQL语句或表结构的性能瓶颈。
 
+#### type类型
 
+1. ALL : **全表扫描(Full Table Scan)**， MySQL将遍历全表以找到匹配的行。
+2. index: **全索引扫描(Full Index Scan)**， index 与 ALL 区别为 index 类型只遍历索引树。MYSQL 遍历整个索引来查找匹配的行。
+3. range: 索引范围扫描， 常见于 '<'， '<='， '>'， '>='， 'between' 等操作符
+4. ref: 使用**非唯一性索引或者唯一索引的前缀**扫描， 返回匹配某个单独值的记录行。
+5. Eq_ref : 类似ref， 区别就在使用的索引是**唯一索引**。在联表查询中使用 primary key 或者 unique key 作为关联条件。
+6. Const/system: 当 MySQL 对查询某部分进行优化， 并**转换为一个常量**时， 使用这些类型访问。如将主键置于 where 列表中， MySQL 就能将该查询转换为一个常量， system 是 const 类型的特例， 当查询的表只有一行的情况下使用 system。
+7. NULL: MySQL 不用访问表或者索引就直接能到结果。
 
 ## 事务
 

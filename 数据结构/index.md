@@ -265,47 +265,84 @@ func sortArray(nums []int) []int {
 	}
 	return sort(nums)
 }
+
+
+// 非递归实现归并算法
+func sortArray(nums []int) []int {
+	if len(nums) <= 1 {return nums}
+	merge := func(left, right []int) []int {
+		res := make([]int, len(left)+len(right))
+		var l,r,i int
+		// 通过遍历完成比较填入res中
+		for l < len(left) && r < len(right) {
+			if left[l] <= right[r] {
+				res[i] = left[l]
+				l++
+			} else {
+				res[i] = right[r]
+				r++
+			}
+			i++
+		}
+		// 如果left或者right还有剩余元素，添加到结果集的尾部
+		copy(res[i:], left[l:])
+		copy(res[i+len(left)-l:], right[r:])
+		return res
+	}
+	i := 1 //子序列大小初始1
+	res := make([]int, 0)
+	// i控制每次划分的序列长度
+	for i < len(nums) {
+		// j根据i值执行具体的合并
+		j := 0
+		// 按顺序两两合并，j用来定位起始点
+		// 随着序列翻倍，每次两两合并的数组大小也翻倍
+		for j < len(nums) {
+			if j+2*i > len(nums) {
+				res = merge(nums[j:j+i], nums[j+i:])
+			} else {
+				res = merge(nums[j:j+i], nums[j+i:j+2*i])
+			}
+			// 通过index控制每次将合并的数据填入nums中
+			// 重填入的次数和合并及二叉树的高度相关
+			index := j
+			for _, v := range res {
+				nums[index] = v
+				index++
+			}
+			j = j + 2*i
+		}
+		i *= 2
+	}
+	return nums
+}
 ```
 
 - 快速排序(不稳定)
 
 ```go
-func sortArray(nums []int) []int {
-    // 快速排序，基于比较，不稳定算法，时间平均O(nlogn)，最坏O(n^2)，空间O(logn)
-	// 分治思想，选主元，依次将剩余元素的小于主元放其左侧，大的放右侧
-	// 然后取主元的前半部分和后半部分进行同样处理，直至各子序列剩余一个元素结束，排序完成
-	// 注意：
-	// 小规模数据(n<100)，由于快排用到递归，性能不如插排
-	// 进行排序时，可定义阈值，小规模数据用插排，往后用快排
-	// golang的sort包用到了快排
-	// (小数，主元，大数)
-	var quick func(nums []int, left, right int) []int
-	quick = func(nums []int, left, right int) []int {
-		// 递归终止条件
-		if left > right {
-			return nil
-		}
-		// 左右指针及主元
-		i, j, pivot := left, right, nums[left]
-		for i < j {
-			// 寻找小于主元的右边元素
-			for i < j && nums[j] >= pivot {
-				j--
-			}
-			// 寻找大于主元的左边元素
-			for i < j && nums[i] <= pivot {
-				i++
-			}
-			// 交换i/j下标元素
-			nums[i], nums[j] = nums[j], nums[i]
-		}
-		// 交换元素
-		nums[i], nums[left] = nums[left], nums[i]
-		quick(nums, left, i-1)
-		quick(nums, i+1, right)
-		return nums
-	}
-	return quick(nums, 0, len(nums)-1)
+func quickSort(nums []int, head, tail int) {
+    if head >= tail {
+        return 
+    }
+    l, r := head, tail
+    mid := (r + l) / 2 
+    pivot := nums[mid]
+    for l <= r {
+        for l <= r && nums[l] < pivot {
+            l ++
+        }
+        for l <= r && nums[r] > pivot {
+            r --
+        }
+        if l <= r {
+            nums[l], nums[r] = nums[r], nums[l]
+            l++
+            r--
+        }
+    }
+    quickSort(nums, head, r)
+    quickSort(nums, l, tail)
 }
 ```
 
@@ -324,7 +361,7 @@ func sortArray(nums []int) []int {
 	var heapify func(nums []int, root, end int)
 	heapify = func(nums []int, root, end int) {
 		// 大顶堆堆化，堆顶值小一直下沉
-		for {
+		for {	
 			// 左孩子节点索引
 			child := root*2 + 1
 			// 越界跳出
@@ -363,60 +400,34 @@ func sortArray(nums []int) []int {
 - 桶排序
 
 ```go
-func sortArray(nums []int) []int {
-    // 桶排序，基于哈希思想的外排稳定算法，空间换时间，时间O(n+k)
-	// 相当于计数排序的改进版，服从均匀分布，先将数据分到有限数量的桶中，
-	// 每个桶分别排序，最后将非空桶的数据拼接起来
-	var bucket func(nums []int, bucketSize int) []int
-	bucket = func(nums []int, bucketSize int) []int {
-		if len(nums) < 2 {
-			return nums
-		}
-		// 获取最大最小值
-		minAndMax := func(nums []int) (min, max int) {
-			minNum := math.MaxInt32
-			maxNum := math.MinInt32
-			for i:=0;i<len(nums);i++ {
-				if nums[i] < minNum {
-					minNum = nums[i]
-				}
-				if nums[i] > maxNum {
-					maxNum = nums[i]
-				}
-			}
-			return minNum, maxNum
-		}
-		min_, max_ := minAndMax(nums)
-		// 定义桶
-		// 构建计数桶
-		bucketCount := (max_-min_)/bucketSize + 1
-		buckets := make([][]int, bucketCount)
-		for i:=0;i<bucketCount;i++ {
-			buckets[i] = make([]int, 0)
-		}
-		// 装桶-排序过程
-		for i:=0;i<len(nums);i++ {
-			// 桶序号
-			bucketNum := (nums[i]-min_) / bucketSize
-			buckets[bucketNum] = append(buckets[bucketNum], nums[i])
-		}
-		// 桶中排序
-		// 上述装桶完成，出桶填入元素组
-		index := 0
-		for _, bucket := range buckets {
-			sort.Slice(bucket, func(i, j int) bool {
-				return bucket[i] < bucket[j]
-			})
-			for _, num := range bucket {
-				nums[index] = num
-				index++
-			}
-		}
-		return nums
-	}
-	// 定义桶中的数量
-	var bucketSize int = 2
-	return bucket(nums, bucketSize)
+func bin_sort(li []int, bin_num int) {
+    min_num, max_num := li[0], li[0]
+    for i := 0; i < len(li); i++ {
+        if min_num > li[i] {
+            min_num = li[i]
+        }
+        if max_num < li[i] {
+            max_num = li[i]
+        }
+    }
+    bin := make([][]int, bin_num)
+    for j := 0; j < len(li); j++ {
+        n := (li[j] - min_num) / ((max_num - min_num + 1) / bin_num)
+        bin[n] = append(bin[n], li[j])
+        k := len(bin[n]) - 2
+        for k >= 0 && li[j] < bin[n][k] {
+            bin[n][k+1] = bin[n][k]
+            k--
+        }
+        bin[n][k+1] = li[j]
+    }
+    o := 0
+    for p, q := range bin {
+        for t := 0; t < len(q); t++ {
+            li[o] = bin[p][t]
+            o++
+        }
+    }
 }
 ```
 
