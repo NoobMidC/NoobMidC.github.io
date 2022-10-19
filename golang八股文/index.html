@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/golang%E5%85%AB%E8%82%A1%E6%96%87\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  22669 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  22734 ,
         "url": "https:\/\/noobmid.github.io\/golang%E5%85%AB%E8%82%A1%E6%96%87\/","datePublished": "2022-08-21T00:38:10+08:00","dateModified": "2022-08-21T00:38:10+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,7 +109,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang八股文</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-21">2022-08-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;22669 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-21">2022-08-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;22734 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;46 minutes&nbsp;<span id="/golang%E5%85%AB%E8%82%A1%E6%96%87/" class="leancloud_visitors" data-flag-title="Golang八股文">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
@@ -215,6 +215,7 @@
                 <li><a href="#synconce">sync.Once</a></li>
                 <li><a href="#syncpool">sync.Pool</a></li>
                 <li><a href="#synccond">sync.cond</a></li>
+                <li><a href="#锁的实现">锁的实现</a></li>
               </ul>
             </li>
             <li><a href="#context包">Context包</a>
@@ -2108,6 +2109,45 @@ P1被唤醒，比较后发现数值A没有变化，程序继续执行。</p>
 </span><span class="c1">// during the call.
 </span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Cond</span><span class="p">)</span> <span class="nf">Signal</span><span class="p">()</span> <span class="c1">// 唤醒一个协程,Signal 只唤醒任意 1 个等待条件变量 c 的 goroutine，无需锁保护。
 </span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Cond</span><span class="p">)</span> <span class="nf">Wait</span><span class="p">()</span> <span class="c1">// 调用 Wait 会自动释放锁 c.L，并挂起调用者所在的 goroutine，因此当前协程会阻塞在 Wait 方法调用的地方。如果其他协程调用了 Signal 或 Broadcast 唤醒了该协程，那么 Wait 方法在结束阻塞时，会重新给 c.L 加锁，并且继续执行 Wait 后面的代码
+</span></code></pre></td></tr></table>
+</div>
+</div><h5 id="锁的实现">锁的实现</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 自旋锁的实现
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">spinLock</span> <span class="kt">uint32</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">sl</span> <span class="o">*</span><span class="nx">spinLock</span><span class="p">)</span> <span class="nf">Lock</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">for</span> <span class="p">!</span><span class="nx">atomic</span><span class="p">.</span><span class="nf">CompareAndSwapUint32</span><span class="p">((</span><span class="o">*</span><span class="kt">uint32</span><span class="p">)(</span><span class="nx">sl</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">runtime</span><span class="p">.</span><span class="nf">Gosched</span><span class="p">()</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">sl</span> <span class="o">*</span><span class="nx">spinLock</span><span class="p">)</span> <span class="nf">Unlock</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">atomic</span><span class="p">.</span><span class="nf">StoreUint32</span><span class="p">((</span><span class="o">*</span><span class="kt">uint32</span><span class="p">)(</span><span class="nx">sl</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">NewSpinLock</span><span class="p">()</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Locker</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">lock</span> <span class="nx">spinLock</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">lock</span>
+<span class="p">}</span>
+
+<span class="c1">//TODO 互斥锁
 </span></code></pre></td></tr></table>
 </div>
 </div><h4 id="context包">Context包</h4>

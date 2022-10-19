@@ -1297,6 +1297,29 @@ func (c *Cond) Wait() // 调用 Wait 会自动释放锁 c.L，并挂起调用者
 
 
 
+##### 锁的实现
+
+```go
+// 自旋锁的实现
+type spinLock uint32
+func (sl *spinLock) Lock() {
+	for !atomic.CompareAndSwapUint32((*uint32)(sl), 0, 1) {
+		runtime.Gosched()
+	}
+}
+func (sl *spinLock) Unlock() {
+	atomic.StoreUint32((*uint32)(sl), 0)
+}
+func NewSpinLock() sync.Locker {
+	var lock spinLock
+	return &lock
+}
+
+//TODO 互斥锁
+```
+
+
+
 #### Context包
 
 ​		Context 包提供上下文机制在 goroutine 之间传递 deadline、取消信号（cancellation signals）或者其他请求相关的信息;

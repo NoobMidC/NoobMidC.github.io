@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/noobmid.github.io\/kafka\/"
-        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  16630 ,
+        },"image": ["https:\/\/noobmid.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  17276 ,
         "url": "https:\/\/noobmid.github.io\/kafka\/","datePublished": "2022-08-28T12:50:11+08:00","dateModified": "2022-08-28T12:50:11+08:00","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -109,8 +109,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kafka</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/noobmid" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cx玄烨0</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;16630 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;34 minutes&nbsp;<span id="/kafka/" class="leancloud_visitors" data-flag-title="Kafka">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-28">2022-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;17276 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;35 minutes&nbsp;<span id="/kafka/" class="leancloud_visitors" data-flag-title="Kafka">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -244,6 +244,7 @@
           <ul>
             <li><a href="#redis-zset">Redis ZSet</a></li>
             <li><a href="#rabbitmq">Rabbitmq</a></li>
+            <li><a href="#kafkarocketmqrabbitmqactivemq比较">Kafka、RocketMQ、RabbitMQ、ActiveMQ比较</a></li>
           </ul>
         </li>
       </ul>
@@ -1218,7 +1219,52 @@ coordinator节点选择 = groupid的hashcode值 % 50(consumer_offsets的分区�
 </li>
 <li>Event 进程采用 Zookeeper 选主单进程部署的方式，避免 Event 进程宕机后，Redis Key 中消息堆积的情况。一旦 Zookeeper 的 leader 主机宕机，Zookeeper 会自动选择新的 leader 主机来处理 Redis Key 中的消息。</li>
 </ol>
-<h4 id="rabbitmq">Rabbitmq</h4></div><div class="post-footer" id="post-footer">
+<h4 id="rabbitmq">Rabbitmq</h4>
+<h4 id="kafkarocketmqrabbitmqactivemq比较">Kafka、RocketMQ、RabbitMQ、ActiveMQ比较</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/NoobMidC/pics/main/v2-87643ff65973d1860f1ab6919f4b0aa4_1440w.jpg"
+        data-srcset="https://raw.githubusercontent.com/NoobMidC/pics/main/v2-87643ff65973d1860f1ab6919f4b0aa4_1440w.jpg, https://raw.githubusercontent.com/NoobMidC/pics/main/v2-87643ff65973d1860f1ab6919f4b0aa4_1440w.jpg 1.5x, https://raw.githubusercontent.com/NoobMidC/pics/main/v2-87643ff65973d1860f1ab6919f4b0aa4_1440w.jpg 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/NoobMidC/pics/main/v2-87643ff65973d1860f1ab6919f4b0aa4_1440w.jpg"
+        title="img" /></p>
+<ol>
+<li>ActiveMQ</li>
+</ol>
+<p>​	<strong>优点</strong></p>
+<ul>
+<li>单机吞吐量：万级</li>
+<li>topic数量都吞吐量的影响：</li>
+<li>时效性：ms级</li>
+<li>可用性：高，基于主从架构实现高可用性</li>
+<li>消息可靠性：有较低的概率丢失数据</li>
+<li>功能支持：MQ领域的功能极其完备</li>
+</ul>
+<p>​	**缺点:**官方社区现在对ActiveMQ 5.x维护越来越少，较少在大规模吞吐的场景中使用。</p>
+<ol start="2">
+<li>Kafka</li>
+</ol>
+<p>​		号称大数据的杀手锏，谈到大数据领域内的消息传输，则绕不开Kafka，这款为大数据而生的消息中间件，以其百万级TPS的吞吐量名声大噪，迅速成为大数据领域的宠儿，在数据采集、传输、存储的过程中发挥着举足轻重的作用。</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>性能卓越，单机写入TPS约在百万条/秒，最大的优点，就是吞吐量高。</li>
+<li>时效性：ms级</li>
+<li>可用性：非常高，kafka是分布式的，一个数据多个副本，少数机器宕机，不会丢失数据，不会导致不可用</li>
+<li>消费者采用Pull方式获取消息, 消息有序, 通过控制能够保证所有消息被消费且仅被消费一次;</li>
+<li>有优秀的第三方Kafka Web管理界面Kafka-Manager；</li>
+<li>在日志领域比较成熟，被多家公司和多个开源项目使用；</li>
+<li>功能支持：功能较为简单，主要支持简单的MQ功能，在大数据领域的实时计算以及日志采集被大规模使用</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>Kafka单机超过64个队列/分区，Load会发生明显的飙高现象，队列越多，load越高，发送消息响应时间变长</li>
+<li>使用短轮询方式，实时性取决于轮询间隔时间；</li>
+<li>消费失败不支持重试；</li>
+<li>支持消息顺序，但是一台代理宕机后，就会产生消息乱序；</li>
+<li>社区更新较慢；</li>
+</ol>
+<p>更多消息队列对比点<a href="https://zhuanlan.zhihu.com/p/60288391" target="_blank" rel="noopener noreffer ">这里</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
