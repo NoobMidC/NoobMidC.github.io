@@ -301,7 +301,7 @@ type imethod struct {
 
 > 非空interface与eface不同的，所有空interface的结构是一样的，而非空interface每个都不一样，因为彼此定义的方法可以不一样的，所以相对eface，iface的定义复杂多。
 
-
+具体的可以参考: https://www.jianshu.com/p/30e5cb755529
 
 ### 7. reflect
 
