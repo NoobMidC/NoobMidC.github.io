@@ -391,6 +391,12 @@ docker run -dP -v /my/nginx:/etc/nginx nginx
 
 
 
+## K8S组件
+
+
+
+
+
 ## OCI标准
 
 OCI即Open Container Initiative(轻量级开放式管理项目),OCI（Open Container Initiative）规范是事实上的容器标准，已经被大部分容器实现以及容器编排系统所采用。任何实现了OCI规范的工具都可以打镜像
